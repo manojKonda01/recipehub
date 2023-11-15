@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const username = encodeURIComponent("mkonda");
