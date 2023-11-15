@@ -41,7 +41,7 @@ async function createUserDB(){
             age: { type: 'number' },
             birthDate: { type: 'date' },
             userPreferences: {type: 'array'},
-            saved: { type: 'array' },
+            savedRecipes: { type: 'array' },
             createdAt: { type: 'date', default: new Date() },
         };
     }

@@ -1,6 +1,20 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+const username = encodeURIComponent("mkonda");
+const password = encodeURIComponent("Bmma@9979");
+const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mongodb.net/?retryWrites=true&w=majority`;
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 
 const app = express();
 const port = process.env.PORT || 3000;
