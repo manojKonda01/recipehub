@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="media/image/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="media/image/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="media/image/favicon/favicon-16x16.png">
+  <link rel="manifest" href="media/image/favicon/site.webmanifest">
+  <!-- Title -->
+  <title>Recipe Hub | Explore, Cook & Savor </title>
+  <!-- HomePage CSS -->
+  <link rel="stylesheet" href="assets/styles/homepage.css">
+  <link rel="stylesheet" href="assets/styles/common.css">
+  <link rel="stylesheet" href="assets/styles/responsive.css">
+  <link rel="stylesheet" href="assets/styles/footer.css">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Avro & Amatic Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allison&family=Amatic+SC:wght@400;700&family=Arvo&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+
+  <!-- Begin: Header and Background Video -->
+  <section id="video_wrap" class="text-white position-relative">
+    <!-- Begin: Background Video -->
+    <section id="videoloop">
+      <video id="bg_video" playsinline autoplay muted loop poster="media/image/poster.jpeg" width="100%" height="100%">
+        <source src="media/video/recipe_hub_bg_video.mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <video id="bg_poster" poster="media/image/poster.jpeg" width="100%" height="100%">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+    <!-- End: Background Video -->
+
+    <div class="overlay"></div>
+    <!-- Begin: Header -->
+    <header id='website_header' class="rh-header padding-y-1">
+
+      <!-- Begin: Menu Bar -->
+      <nav id="rh-navbar_down" class="header-item rh-navbar">
+        <div id="container" class="position-relative">
+
+          <!-- Begin: Close Button -->
+          <div class="close-element display-flex position-absolute" id="close_navbar">
+            <figure class="margin-0 display-flex">
+              <img src="media/image/close_white.svg" alt="close-icon">
+            </figure>
+          </div>
+          <!-- End: Close Button -->
+
+          <div id="menu_list" class="rh-menu">
+            <div id="menu_wrapper" class="text-white display-flex">
+              <!-- Recipe Menu -->
+              <div class="rh-submenu margin-x-2">
+                <h1 class="rh-submenu-title">Recipes</h1>
+                <ul class="nested-submenu">
+                  <li class="nested-submenu-item" data-url="allrecipes">All</li>
+                  <li class="nested-submenu-item" data-url="breakfast">Breakfast</li>
+                  <li class="nested-submenu-item" data-url="lunch">Lunch</li>
+                  <li class="nested-submenu-item" data-url="dinner">Dinner</li>
+                  <li class="nested-submenu-item" data-url="desserts">Desserts</li>
+                  <li class="nested-submenu-item" data-url="timely">Recipes by Time</li>
+                  <li class="nested-submenu-item" data-url="bydiet">Recipes by Diet</li>
+                  <li class="nested-submenu-item" data-url="cusine">Recipes by Cusine</li>
+                  <li class="nested-submenu-item" data-url="ingredients">Recipes by Ingredients</li>
+                </ul>
+              </div>
+              <!-- Quick Bites Menu -->
+              <div class="rh-submenu  margin-x-2">
+                <h1 class="rh-submenu-title">Quick Bites</h1>
+                <ul class="nested-submenu">
+                  <li class="nested-submenu-item" data-url="snacks">Snacks & Drinks</li>
+                  <li class="nested-submenu-item" data-url="salads">Salads</li>
+                  <li class="nested-submenu-item" data-url="fastfood">Fast Food</li>
+                  <li class="nested-submenu-item" data-url="...">...</li>
+                </ul>
+              </div>
+
+              <div class="rh-submenu  margin-x-2">
+                <h1 class="rh-submenu-title">Recipe Hub</h1>
+                <ul class="nested-submenu">
+                  <li class="nested-submenu-item" data-url="about_us">About Us</li>
+                  <li class="nested-submenu-item" data-url="contact_us">Contact Us</li>
+                  <li class="nested-submenu-item" data-url="contact_us">Career</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- End: Menu Bar -->
+
+      <div id="header_container" class="position-relative">
+        <!--Begin: Logo & Website Name -->
+        <a href="/index.html">
+          <figure id="website_logo" class="margin-0 display-flex">
+            <img src="media/image/logo.png" alt="Website Logo" class="header-item website-logo">
+            <figcaption>
+              <h1 class="header-item website-name">Recipe Hub</h2>
+            </figcaption>
+          </figure>
+        </a>
+        <!-- End:  Logo & Website Name-->
+
+        <div class="float-right display-flex margin-1 menu-header-wrapper">
+          <!-- Responsive Bar Menu Bar -->
+          <div id="menu_bar">
+            <ul class="display-flex padding-0 margin-x-2 menu-bar-list">
+              <li class="menu-item">
+                <a href="#" class="display-flex">
+                  <figure class="margin-0 display-flex">
+                    <img class="signin-image"
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE20lEQVR4nNVZe2xTVRj/iFFifERBowTjI0EkQvQPEzUxmvjgXwMSMPqXf6AQdRIzX5iQYe/ZxI0xJ2E4jKAIhgxBZkyTunPbtc021q0dbix278m6B+1Y1/fjrvcz566Dbt1qe+7tqr/kS25y+33n9zvnu+d85yuABigxwf2lIrwpUKgmFAwChT6BwpRAIZ409tyXfFctiPAG84FCoqwBVhMjfCBQaCMiIKfZBBGKWKxlI15iggeICF8TEUIqiM8zQYSgIEIVobA2b8Rr2+FmHYU9hEJAK+Ik3UKCCPur9bBSU/I6ER4jFC7lkTjOWxEKHWUNsF4T8sQI2/I867iECD+hsFUdeQpvEQrScpMnN76NGUJhNxd5gcKuQhEn6UKKcpt5I2xT1P8HyJPkSugobMmKfJkJ1hERfIUmTRYahUCpCTZkJF9SB7dotdt81XgbHm3ZoFh54+1aCXGw7XzpvBfhMzUDHLLci9YhHbqDl3Ehrgb+RMvgF1hpWa02nT5aPO8prGUnIm9gQ08Rxmb8+G+IStOod+5WlUrEDGvSBcyWBxxBV6Dd9S3minZXjeLLKaQyvTDjrG3MgyXIC9PA57xpFJxXALKqkifQsdYnUJYT3AJkOYHftT7JJ4LCezc+Xs6SuNfzG6qF0/0r7yq0zs6+GdYIFORcA1RaVmFCllQLSMhxPGi+i2cF5FIK9wG7SfHMwC+dr6FWONu5hW8VGuB1lj7VPM4NvR9qJuCP3j28aVTF9n8Dj3PjwD7NBDQO7OMVoGen7wCPs965SzMBv/+1k08AhT52gF3jcf7R/rxmAn5of45LAKHgYQJiPM6lxpswFPeoJh+MXVVicaZQlFsAM+uQoFqAZXA/3+ynCOBKIWYV5jsxEBvjJu+PurC88Q5uAbMpRKGfO4AI+L3tKZQS4ZzJS4kInmh7hp/89Y+YcxtNtVOOlzEcv5Y1+XB8En9yvKhqzGQK6bkPsoV2uOlh7J44w0q0DNRlvDzxM37T9KDq8cjcQcYarVoEm7OalkdR7P9EKdJcvouKsWfa9zEeaV6n2TiE7YQi7ABWEPEUc4U2Ya6YS97GbP9DAS2pl/miQhMiuZoR3p13pVRzoV/KWJ3PU+uTXK+UyVWo4id6N57r2qFc7kemmzAiedP2n4g0pbxjvznXtV2VMEGEgxq0VVbg6Y7N6HSf57qZMR+n+zye7nglp+4E61ov+fcUofBpNkFOtD2LV7xW1AqjPhuetL+QlYBSCsWwFFjbjrXvMrULHaPHMF9wjNYqY2RIHXvG1mKm5m5Ny3qcDDkx35gMOZXDME0AhQD7pygj+ZRU2praXmdFlxa1f7YIxd14vO3p1Jmf0Ynwalbkr4swwjvMufbixkV3lXwjKvmUppdSJVDYCTyotNzz9nRkGAsFb3gIK8yr3gc1aB4uL4nEvZlKzLwgKvlk28hhHWgB68CBzROBjuBykR/z24NNw1++BFpC31u0snv8TD2bmXwRj0jT8qWx44a65u23Qr5g6t+7qcdTb49Kfs2ERCWf3OO50E6H9z4OywWDs/iRrvFTZ8f9Dj9Pi535jPnt/s7xk3Vid/FDy0Z8MTT1V2yyu45WOT31jhFvs8cbHoqF41My6zwzY8/e8GBsZLrZ3eO5YLddOXLI+veBjVoM/g+tjWE7oZqnxgAAAABJRU5ErkJggg==">
+                  </figure>
+                  <figcaption class="signin-image-caption">login</figcaption>
+                </a>
+              </li>
+              <li class="menu-item responsive-menu-bar-show drop-menu">
+                <a href="#"><span>Recipes</span><i class="fa fa-caret-down"></i></a>
+                <div class="display-none drop-down-menu-list">
+                  <div class="display-flex position-absolute drop-down-container">
+                    <div class="submenu-container">
+                      <p class="margin-0 padding-1">Meal</p>
+                      <ul class="display-flex submenu-list padding-x-1">
+                        <li class="submenu-item" data-category="mealType" data-value="breakfast">Breakfast</li>
+                        <li class="submenu-item" data-category="mealType" data-value="lunch">Lunch</li>
+                        <li class="submenu-item" data-category="mealType" data-value="dinner">dinner</li>
+                        <li class="submenu-item" data-category="mealType" data-value="snack">Snack</li>
+                        <li class="submenu-item" data-category="mealType" data-value="teatime">Tea Time</li>
+                      </ul>
+                    </div>
+                    <div class="submenu-container">
+                      <p class="margin-0 padding-1">Dish</p>
+                      <ul class="display-flex submenu-list padding-x-1">
+                        <li class="submenu-item" data-category="dishType" data-value="desserts">Desserts</li>
+                        <li class="submenu-item" data-category="dishType" data-value="drinks">Drinks</li>
+                        <li class="submenu-item" data-category="dishType" data-value="main course">Main Course</li>
+                        <li class="submenu-item" data-category="dishType" data-value="sweets">Sweets</li>
+                      </ul>
+                    </div>
+                    <div class="submenu-container">
+                      <p class="margin-0 padding-1">Cuisine</p>
+                      <ul class="display-flex submenu-list padding-x-1">
+                        <li class="submenu-item" data-category="cuisineType" data-value="italian">Italian</li>
+                        <li class="submenu-item" data-category="cuisineType" data-value="indian">Indian</li>
+                        <li class="submenu-item" data-category="cuisineType" data-value="alcohol-free">Chinese</li>
+                        <li class="submenu-item" data-category="cuisineType" data-value="asian">Asian</li>
+                        <li class="submenu-item" data-category="cuisineType" data-value="american">American</li>
+                        <li class="submenu-item" data-category="cuisineType" data-value="World">World</li>
+                      </ul>
+                    </div>
+                    <div class="submenu-container">
+                      <p class="margin-0 padding-1">Health</p>
+                      <ul class="display-flex submenu-list padding-x-1">
+                        <li class="submenu-item" data-category="health" data-value="vegan">Vegan</li>
+                        <li class="submenu-item" data-category="health" data-value="vegetarian">Vegetarian</li>
+                        <li class="submenu-item" data-category="health" data-value="alcohol-free">Alocohol Free</li>
+                        <li class="submenu-item" data-category="health" data-value="low-sugar">Low Sugar</li>
+                        <li class="submenu-item" data-category="health" data-value="gluten-free">Gluten Free</li>
+                        <li class="submenu-item" data-category="health" data-value="no-oil-added">No Oil</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="menu-item responsive-menu-bar-show">
+                <a href="#"><span>About Us</span></a>
+              </li>
+              <li class="menu-item responsive-menu-bar-show">
+                <a href="#"><span>Contact Us</span></a>
+              </li>
+              <li class="menu-item responsive-menu-bar-hide">
+                <figure class="margin-0">
+                  <img id="menu_toggle_btn" src="media/image/menu.svg"
+                    class="header-item menu-button menu-image margin-x-1" alt="Menu Icon">
+                </figure>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- End: Header -->
+
+    <!-- Begin: Card Wrap -->
+    <section id="card_wrap" class="position-absolute display-flex">
+      <!-- Begin:  Search Button-->
+      <div class="search-box position-relative margin-3">
+        <div id='search_recipe_form' class="header-item search-form margin-0 display-flex">
+          <input id="search_recipes" class="search-input text-white padding-1" type="search" placeholder="Search"
+            onkeydown="handleKeyPress(event)" />
+          <button id="search_button" class="padding-1" type="button" onclick="handleSubmit(event)"><i
+              class="fa fa-search"></i></button>
+        </div>
+      </div>
+      <!-- End: Search Button -->
+
+      <!-- Begin: Tag Line for the Website -->
+      <div class="handwriting-animation  margin-1">
+        <h1 class="margin-0">Explore, Cook & Eat</h1>
+      </div>
+      <!-- End: Tag Line for the Website -->
+    </section>
+    <div class="position-absolute margin-3" id="pause_button">
+      <img class="pause-image"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPklEQVR4nO2UwQkAMAgDM1pHc/MrXcCPtPRx940QEZNEvgZYQDV6nZmJQQE0Ot0CGsQTxS8yBzEHuV7X8oQNGADsJRKs9PMAAAAASUVORK5CYII=">
+    </div>
+    <div id="play_button" class="margin-3 position-absolute">
+      <img class="play-image"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAdElEQVR4nO3UvQnCYBSF4ZBGbCK4hlM4jps4h7tkioBZIXWKPHKLQAbIaeR74bT3hfvXdY0GbpVYJzBjwQt9QnBkxCMpKFa8cUkJdiY8k4Jiwwf3lGCnFuGaFHxTgi3Zoik15DW5pmPi0Ob0qxgqpxdu/A8/IUNjxxZAC7EAAAAASUVORK5CYII=">
+    </div>
+  </section>
+  <!-- END: Card Wrap -->
+  </section>
+  <!-- END: Header and Background Video -->
+
+
+
+  <!-- Begin: Main Body -->
+  <main>
+    <!-- Begin: Recipe Category Section -->
+    <section id="recipes_category" class="padding-1">
+      <ul class="display-flex">
+        <li>
+          <div class="display-flex list-category" data-category="mealType" data-value="breakfast">
+            <figure>
+              <img src="media/image/breakfast.jpeg" alt="Breakfast image">
+            </figure>
+            <figcaption>Breakfast</figcaption>
+          </div>
+        </li>
+        <li>
+          <div class="display-flex list-category" data-category="mealType" data-value="lunch">
+            <figure>
+              <img src="media/image/lunch.jpeg" alt="Brunch image">
+            </figure>
+            <figcaption>Lunch</figcaption>
+          </div>
+        </li>
+        <li>
+          <a href="#">
+            <div class="display-flex list-category" data-category="mealType" data-value="dinner">
+              <figure>
+                <img src="media/image/dinner.jpeg" alt="dinner image">
+              </figure>
+              <figcaption>Dinner</figcaption>
+            </div>
+          </a>
+        </li>
+        <li>
+          <div class="display-flex list-category" data-category="mealType" data-value="snack">
+            <figure>
+              <img src="media/image/snacks.jpeg" alt="Snack image">
+            </figure>
+            <figcaption>Snack</figcaption>
+          </div>
+        </li>
+        <li>
+          <div class="display-flex list-category" data-category="mealType" data-value="teatime">
+            <figure>
+              <img src="media/image/teatime.jpeg" alt="teatime image">
+            </figure>
+            <figcaption>Tea time</figcaption>
+          </div>
+        </li>
+        <li>
+          <div class="display-flex list-category" data-category="dishType" data-value="desserts">
+            <figure>
+              <img src="media/image/desserts.jpeg" alt="Desserts image">
+            </figure>
+            <figcaption>Desserts</figcaption>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <!-- End: Recipe Category Section -->
+
+    <!-- Begin: Recipe By Section -->
+    <section id="recipes_by">
+      <section class="row display-grid">
+        <section id="recipe_grid1">
+          <figure class="row-image-wrap position-relative margin-0">
+            <img src="media/image/ingredients.jpeg" alt="dinner image" class="row-image-item">
+            <div class="overlay"></div>
+            <figcaption>
+              By Ingredients <span class='to-go-arrow'> &#10095;</span>
+            </figcaption>
+          </figure>
+        </section>
+        <section id="recipe_grid2" class="display-grid">
+          <figure class="row-image-wrap position-relative margin-0">
+            <img src="media/image/cuisine.jpeg" alt="lunch image" class="row-image-item">
+            <div class="overlay"></div>
+            <figcaption>
+              Cuisine <span class='to-go-arrow'> &#10095;</span>
+            </figcaption>
+          </figure>
+          <figure class="row-image-wrap position-relative margin-0">
+            <img src="media/image/diet1.jpeg" alt="liquid food image" class="row-image-item">
+            <div class="overlay"></div>
+            <figcaption>
+              By Diet <span class='to-go-arrow'> &#10095;</span>
+            </figcaption>
+          </figure>
+          <figure class="row-image-wrap position-relative margin-0">
+            <img src="media/image/seasonal.png" alt="Desserts image" class="row-image-item">
+            <div class="overlay"></div>
+            <figcaption>
+              Dish Types <span class='to-go-arrow'> &#10095;</span>
+            </figcaption>
+          </figure>
+        </section>
+        <section id="recipe_grid3" class="display-grid">
+          <figure class="row-image-wrap position-relative margin-0">
+            <img src="media/image/healthy1.jpeg" alt="breakfast-bg image" class="row-image-item">
+            <div class="overlay"></div>
+            <figcaption>
+              By Health <span class='to-go-arrow'> &#10095;</span>
+            </figcaption>
+          </figure>
+        </section>
+      </section>
+    </section>
+    <!-- End: Recipe By Section -->
+
+    <section id="popular_recipes" class="recipe-for">
+      <section class="recipe-for-top display-flex">
+        <p class="display-flex">Trending</p><span>&#10095;</span>
+      </section>
+      <section class="position-relative">
+        <section id="recipe_cards" class="recipe-for-images display-flex margin-1">
+          <!-- Get Top 10 most Popular recipes list from the DB based in rating -->
+        </section>
+      </section>
+    </section>
+
+    <section class="recipe-for" id="quick_easy">
+      <section class="recipe-for-top display-flex">
+        <p class="display-flex category-click" data-category="time" data-value="0-30">Quick & Easy</p>
+        <span>&#10095;</span>
+      </section>
+      <section class="recipe-for-images display-flex margin-1" id="quick_easy_recipes">
+        <!-- Gets data from Edamam Recipe Search API -->
+      </section>
+    </section>
+
+    <section class="recipe-for" id="recommended">
+      <section class="recipe-for-top display-flex">
+        <p class="display-flex category-click" id="recommended_section_text">Recipe</p><span>&#10095;</span>
+      </section>
+      <section class="recipe-for-images display-flex margin-1" id="recommended_recipes">
+        <!-- Get data from API -->
+      </section>
+    </section>
+
+  </main>
+  <!-- End: Main Body -->
+
+
+  <!-- Begin: Sign In Modal -->
+  <div id="signin_modal" class="modal">
+
+  </div>
+  <!-- End: Sign In Modal -->
+
+  <!-- Begin : Footer -->
+  <footer>
+    <section class="footer-container">
+      <section class="top-footer display-flex padding-x-2">
+        <div class="top-footer-primary display-grid">
+          <a href="/index.html">
+            <figure class="display-flex margin-1 padding-x-1">
+              <img src="media/image/logo.png" alt="website-logo" class="website-logo">
+              <figcaption>Recipe Hub</figcaption>
+            </figure>
+          </a>
+          <div class="follow-us margin-x-1 display-grid">
+          </div>
+        </div>
+        <div class="top-footer-secondary display-flex padding-y-2">
+          <div class="quick-menu margin-x-2">
+            <p>Quick Menu</p>
+            <ul class="display-grid padding-0">
+              <li class="submenu-item" data-category="search" data-value="">
+                Search
+              </li>
+              <li class="submenu-item" data-category="all" data-value="all">
+                All
+              </li>
+              <li class="submenu-item" data-category="time" data-value="0-30">
+                Quick + Easy
+              </li>
+              <li class="submenu-item" data-category="health" data-value="vegan">
+                Cuisine
+              </li>
+              <li class="submenu-item" data-category="health" data-value="vegan">
+                Seasonal
+              </li>
+              <li class="submenu-item" data-category="health" data-value="vegan">
+                Vegan
+              </li>
+            </ul>
+          </div>
+          <div class="our-website margin-x-2">
+            <p>Recipe Hub</p>
+            <ul class="display-grid padding-0">
+              <li>
+                <a href="#">About Us</a>
+              </li>
+              <li>
+                <a href="#">Contact Us</a>
+              </li>
+              <li>
+                <a href="#">Career</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="top-footer-bottom subscribe display-flex">
+          <div class="subscribe-head">Subscribe Today!</div>
+          <div class="subscribe-tag">Get our Daily Specials</div>
+          <div class="subscribe-email">
+            <input type="email" name="subscriber-email" id="email_id" placeholder="Enter your Email">
+            <button class="subscribe-button">GO</button>
+          </div>
+          <div>
+            <ul class="social-media-list display-flex padding-0 margin-0">
+              <li class="facebook-icon">
+                <a href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+                    <path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z" />
+                    <path fill="#fff"
+                      d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z" />
+                  </svg>
+                </a>
+              </li>
+              <li class="instagram-icon">
+                <a href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+                    <radialGradient id="yOrnnhliCrdS2gy~4tD8ma" cx="19.38" cy="42.035" r="44.899"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#fd5" />
+                      <stop offset=".328" stop-color="#ff543f" />
+                      <stop offset=".348" stop-color="#fc5245" />
+                      <stop offset=".504" stop-color="#e64771" />
+                      <stop offset=".643" stop-color="#d53e91" />
+                      <stop offset=".761" stop-color="#cc39a4" />
+                      <stop offset=".841" stop-color="#c837ab" />
+                    </radialGradient>
+                    <path fill="url(#yOrnnhliCrdS2gy~4tD8ma)"
+                      d="M34.017,41.99l-20,0.019c-4.4,0.004-8.003-3.592-8.008-7.992l-0.019-20	c-0.004-4.4,3.592-8.003,7.992-8.008l20-0.019c4.4-0.004,8.003,3.592,8.008,7.992l0.019,20	C42.014,38.383,38.417,41.986,34.017,41.99z" />
+                    <radialGradient id="yOrnnhliCrdS2gy~4tD8mb" cx="11.786" cy="5.54" r="29.813"
+                      gradientTransform="matrix(1 0 0 .6663 0 1.849)" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#4168c9" />
+                      <stop offset=".999" stop-color="#4168c9" stop-opacity="0" />
+                    </radialGradient>
+                    <path fill="url(#yOrnnhliCrdS2gy~4tD8mb)"
+                      d="M34.017,41.99l-20,0.019c-4.4,0.004-8.003-3.592-8.008-7.992l-0.019-20	c-0.004-4.4,3.592-8.003,7.992-8.008l20-0.019c4.4-0.004,8.003,3.592,8.008,7.992l0.019,20	C42.014,38.383,38.417,41.986,34.017,41.99z" />
+                    <path fill="#fff"
+                      d="M24,31c-3.859,0-7-3.14-7-7s3.141-7,7-7s7,3.14,7,7S27.859,31,24,31z M24,19c-2.757,0-5,2.243-5,5	s2.243,5,5,5s5-2.243,5-5S26.757,19,24,19z" />
+                    <circle cx="31.5" cy="16.5" r="1.5" fill="#fff" />
+                    <path fill="#fff"
+                      d="M30,37H18c-3.859,0-7-3.14-7-7V18c0-3.86,3.141-7,7-7h12c3.859,0,7,3.14,7,7v12	C37,33.86,33.859,37,30,37z M18,13c-2.757,0-5,2.243-5,5v12c0,2.757,2.243,5,5,5h12c2.757,0,5-2.243,5-5V18c0-2.757-2.243-5-5-5H18z" />
+                  </svg>
+                </a>
+              </li>
+              <li class="twitter-icon">
+                <a href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+                    <path fill="#03A9F4"
+                      d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429" />
+                  </svg>
+                </a>
+              </li>
+              <li class="youtube-icon">
+                <a href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+                    <path fill="#FF3D00"
+                      d="M43.2,33.9c-0.4,2.1-2.1,3.7-4.2,4c-3.3,0.5-8.8,1.1-15,1.1c-6.1,0-11.6-0.6-15-1.1c-2.1-0.3-3.8-1.9-4.2-4C4.4,31.6,4,28.2,4,24c0-4.2,0.4-7.6,0.8-9.9c0.4-2.1,2.1-3.7,4.2-4C12.3,9.6,17.8,9,24,9c6.2,0,11.6,0.6,15,1.1c2.1,0.3,3.8,1.9,4.2,4c0.4,2.3,0.9,5.7,0.9,9.9C44,28.2,43.6,31.6,43.2,33.9z" />
+                    <path fill="#FFF" d="M20 31L20 17 32 24z" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="bottom-footer display-flex align-items-centre margin-x-1">
+        <div>
+          <p>&copy; 2023 Recipe Hub. All rights reserved.</p>
+        </div>
+        <div class="privacy-terms">
+          <ul class="display-flex">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+  </footer>
+  <!-- End : Footer -->
+
+  <script src="assets/scripts/homepage.js"></script>
+  <script src="assets/scripts/common.js"></script>
+</body>
+
+
+</html>

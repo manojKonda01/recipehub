@@ -1,0 +1,127 @@
+main {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.filters label {
+    display: block;
+    font-size: small;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.search-container {
+    margin-top: 2rem;
+    border-bottom: 1px solid #d7d7d7;
+}
+.toggle-filter i{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.filter-body, .filter-cat-body{
+    overflow: hidden;
+    transition: height 0.5s;
+}
+.filter-body li {
+    list-style-type: none;
+}
+
+.filter-category {
+    border-bottom: 1px solid #f1f1f1;
+    padding-bottom: 1rem;
+    margin-right: 2rem;
+}
+
+.filter-cat-head,
+.filter-category {
+    margin-bottom: 1rem;
+}
+.filter-category p, .toggle-filter{
+    cursor: pointer;
+}
+.recipe-cat-list {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.filter-cat-body ul li:nth-child(n+6) {
+    display: none;
+}
+
+.see_more {
+    color: #DC582A;
+    font-size: small;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+.see_more:hover {
+    text-decoration: underline;
+}
+#toggleBody.hidden, .hide-sublist{
+    height: 0;
+    padding: 0;
+    border: none;
+}
+.border-bottom{
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #d7d7d7;
+}
+aside{
+    flex: 1;
+    border-right: 1px solid #d7d7d7;
+}
+
+#searchMoreBtn, #search_more_input, #search_icon_button{
+    font-size: large;
+    border: none;
+}
+
+#search_icon_button, #search_more_input{
+    background: none;
+    transition: .5s;
+    box-sizing: border-box;
+    border: 0.5px solid #DC582A;
+    outline: none;
+}
+#search_icon_button{
+    border-right: none;
+    padding: 0.5rem;
+}
+#search_more_input{
+    border-left: none;
+    padding: 0.5rem;
+    width: 30%;
+}
+#searchMoreBtn{
+    padding: 0.5rem 2rem;
+    background: #DC582A;
+    color: white;
+}
+#search_recipes{
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.recipes{
+    flex: 4;
+    margin-bottom: 2rem;
+}
+.recipes h1{
+    margin: 2rem 0;
+}
+.recipe-for-images figure{
+    width: 20%;
+}
+.recipe-cat-list-item input:hover{
+    cursor: pointer;
+}
+.recipe-list{
+    flex-direction: column;
+    flex: 4;
+}
+.buttons{
+    display: flex;
+    gap: 1rem;
+}

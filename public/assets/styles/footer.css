@@ -1,0 +1,81 @@
+.view-more-link, .privacy-terms{
+    margin-left: auto;
+}
+/* Footer Css */
+.social-media-list, .privacy-terms ul, .top-footer-secondary ul{
+    list-style: none;
+    gap: 1rem;
+}
+.social-media-list{
+    justify-content: end;
+}
+.footer-container{
+    font-family: 'Arvo', serif;
+}
+.top-footer{
+    background: rgba(0,0,0,.05);
+    flex-wrap: wrap;
+}
+.bottom-footer, .top-footer-secondary ul, .follow-us{
+    font-size: small;
+}
+.top-footer-secondary p{
+    font-size: larger;
+    font-weight: 400;
+    text-decoration: underline;
+}
+.top-footer-secondary li a, .bottom-footer, .privacy-terms a, #recipes_category a{
+    text-decoration: none;
+    color: rgba(0,0,0,0.6);
+}
+.top-footer-secondary li a:hover, .privacy-terms a:hover, #recipes_category a:hover{
+    text-decoration: underline;
+    text-decoration-color: #DC582A;
+}
+.top-footer-primary figcaption{
+    font-family: 'Amatic SC', cursive;
+    font-size: 56px;
+}
+.top-footer-primary a{
+    text-decoration: none;
+    color: black;
+}
+.top-footer-secondary{
+    justify-content: space-evenly;
+    flex: 1;
+}
+.subscribe{
+    text-align: center;
+    flex-direction: column;
+}
+.subscribe-head{
+    font-size: 30px;
+}
+.subscribe-tag{
+    font-family: 'Allison', cursive;
+    font-size: 36px;
+    color: #DC582A;
+}
+#email_id, .subscribe-button{
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+}
+#email_id{
+    width: 300px;
+}
+.subscribe-button{
+    background: rgba(234, 170, 0, 0.8);
+}
+.subscribe-email{
+    margin: 1rem 0;
+}
+.top-footer, .top-footer figure, .list-category, .scroll-x-card, .menu-header-wrapper, .top-footer-primary, .subscribe, .scroll-buttons{
+    align-items: center;
+    justify-content: center;
+}
+.website-logo{
+    height: 100px;
+    width: 100px;
+    margin: 0 1rem;
+}

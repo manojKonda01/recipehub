@@ -1,0 +1,505 @@
+/* Header CSS of HomePage */
+#website_header{
+    position: absolute;
+    top: 0;
+    left: 0; 
+    width: 100%;
+}
+/* vertically aligining items centre in header */
+.header-item{
+    vertical-align: middle;
+}
+/* NavBar*/
+.rh-navbar{
+    height: 0;
+    width: 100%; /*hide by default*/
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-y:scroll;
+    transition: height .5s;
+}
+#container{
+    position: relative;
+    background-color: rgb(50 70 0);
+    opacity: 0.96;
+}
+/* Menu List CSS in the Menu Bar */
+#menu_list{
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+#menu_toggle_btn, #pause_button, #play_button{
+    cursor: pointer;
+}
+#menu_toggle_btn, .signin-image{
+    width: 36px;
+}
+.signin-image{
+    margin: 0 0.5rem;
+}
+/* Close Icon CSS */
+#close_navbar{
+    border: 1px solid white;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-weight: bolder;
+    top: 0;
+    right: 0;
+    font-size: x-large;
+    cursor: pointer;
+}
+/* Signin and Search Input CSS */
+.signin, .search-form{
+    display: inline;
+    margin: 0.5rem;
+}
+/* Website Logo CSS */
+#website_logo{
+    position: absolute;
+    align-items: center;
+    left: 0;
+}
+.website-logo{
+    height: 100px;
+    width: 100px;
+    margin: 0 1rem;
+}
+/* Set Font and CSS for website Name */
+.website-name{
+    color: white;
+    font-family: 'Amatic SC', cursive;
+    display: inline;
+    font-size: 56px;
+}
+#header_container a{
+    text-decoration: none;
+}
+/* Menu and Header Wrapper CSS */
+.menu-header-wrapper{
+    position: absolute;
+    right: 0;
+}
+/* Menu List Headings CSS */
+.rh-submenu-title{
+    text-decoration:underline;
+    font-size: 48px;
+}
+.nested-submenu{
+    font-size:x-large;
+    display: contents;
+}
+/* CSS to hide the list bullets */
+.nested-submenu-item{
+    list-style-type: none;
+    margin: 0.5rem 0.5rem;
+    -webkit-transition: all 0.2s;
+       -moz-transition: all 0.2s;
+         -o-transition: all 0.2s;
+            transition: all 0.2s;
+}
+/* Animation CSS on hover increase the font of each Sub Menu in the List */
+li.nested-submenu-item:hover{
+    font-size: xx-large;
+    font-weight:bolder;
+    cursor: pointer;
+}
+
+/* new menu bar */
+.responsive-menu-bar-hide{
+    display: none;
+}
+.responsive-menu-bar-show{
+    display: block;
+}
+.menu-bar-list{
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+.menu-item{
+    list-style-type: none;
+}
+#menu_bar a, .menu-header-wrapper a{
+    text-decoration: none;
+    color: white;
+}
+.menu-header-wrapper a{
+    align-items: center;
+    justify-content: center;
+}
+.menu-item span{
+    font-size: large;
+    margin: 0 0.5rem;
+}
+.submenu-list{
+    flex-direction: column;
+    color: black;
+    gap: 0.5rem;
+}
+.drop-down-container{
+    font-family: 'Arvo', serif;
+    background: white;
+    box-shadow: 0 0.1875rem 0.5625rem rgba(0,0,0,.15);
+    gap: 0.5rem;
+}
+.submenu-item{
+    list-style-type: none;
+}
+.drop-menu:hover .drop-down-menu-list{
+    display: block !important;
+}
+.submenu-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.submenu-container p{
+    font-weight: 400;
+    text-decoration: underline;
+    color: black;
+}
+.submenu-item{
+    color: rgba(0,0,0,0.6) !important;
+    font-size: small;
+}
+.submenu-item:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: #DC582A;
+}
+main{
+    display: flex;
+    flex-direction: column;
+}
+/*  Video Wrap for background video and header*/
+#video_wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Background Video Section */
+#videoloop{
+    position: relative;
+    overflow: hidden;
+}
+/* Background video dimensions */
+#videoloop video{
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+/* Overlay on top of the Background Video */
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,1) 100%);
+}
+.color-lime-green{
+    color: rgb(50 70 0);
+}
+/* Search Input CSS in the header */
+#search_recipe_form{
+    justify-content: center;
+}
+#search_recipes, #search_button{
+    background: none;
+    transition: .5s;
+    box-sizing: border-box;
+    border: 2.5px solid #84BD00;
+    outline: none;
+    font-size: large;
+}
+#search_recipes{
+    width: 36rem;
+    border-right: none;
+}
+#search_button{
+    border-left: none;
+    color: white;
+    cursor: pointer;
+}
+#search_recipes::placeholder{
+    color:white;
+}
+#search_recipes::-webkit-search-cancel-button{
+    -webkit-appearance: none;
+}
+/* Card Wrapper for Most popular Recipe Cards and the tag line */
+#card_wrap{
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    bottom: 0;
+    text-align: center;
+    flex-direction: column;
+}
+/* Animation CSS */
+.handwriting-animation{
+    font-family: 'Amatic SC', cursive;
+    opacity: 0;
+    animation: handwriting 2s linear forwards;
+    font-size: 56px;
+}
+.tag-line{
+    font-size: x-large;
+}
+@keyframes handwriting {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+/* Scrollable card section CSS for Most Popular Recipes */
+.scroll-x-card{
+    margin: 0;
+    display: flex;
+}
+/* Most Popular Recipe Cards CSS */
+.recipe-card{
+    display: none;
+    width: 40rem;
+    height: 20rem;
+    text-align: right;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease;
+}
+/* Eahc Most Popular Recipe Card's Image  CSS  */
+.recipe-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the container with the image, possibly cropping it */
+    position: relative;
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+/* .recipe-card:hover img{
+    transform: scale(1.2);
+} */
+/* Overlay for the images in Most Popular Recipe Cards */
+.recipe-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));
+}
+/* Most Popular Recipe Description CSS */
+.recipe-desc{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: 'Poppins', sans-serif;
+}
+.recipe-desc a{
+    text-decoration-color:#DC582A;
+    color: white;
+}
+.recipe-desc a:hover{
+    text-decoration: none;
+    color: #fdec6e;
+    text-shadow:0px 0px 30px #fdec6e;
+}
+.line1, .recipe-name, .chef-name{
+    margin: 1rem;
+}
+.line1{
+    color: #DC582A;
+    font-size: medium;
+    display: none;
+}
+.chef-name{
+    font-size: small;
+    color: white;
+    display: none;
+}
+.recipe-name{
+    font-size: xx-large;
+    font-weight: 400;
+}
+/* Style for the navigation buttons */
+.prev,
+.next {
+    background: none;
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    margin: 0 0.5rem;
+}
+#bg_video{
+    height: 70%;
+}
+#bg_poster{
+    display: none;
+}
+#pause_button, #play_button{
+    bottom: 0;
+    right: 0;
+}
+#play_button{
+    display: none;
+}
+
+/* CSS for the Recipe Categogies Sections */
+#recipes_category{
+    background: rgba(0,0,0,.05);
+}
+#recipes_category img{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+#recipes_category ul{
+    list-style-type: none;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 1rem;
+}
+.list-category{
+    flex-direction: column;
+    flex: 1 1;
+}
+#recipes_category figure{
+    margin: 1rem;
+    width: 15rem;
+    height: 15rem;
+}
+.list-category{
+    text-decoration: none;
+    color: rgba(0,0,0,0.6);
+}
+.list-category:hover{
+    text-decoration: underline;
+    text-decoration-color: #DC582A;
+}
+.row-image-wrap{
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+}
+.row-image-item{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.row-image-wrap:hover, #recipes_category img:hover{
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0, 0.7);
+    z-index: 100;
+    cursor: pointer;
+    opacity: 0.75;
+}
+.row-image-wrap .overlay{
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+}
+.row-image-wrap figcaption{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.row-image-wrap figcaption{
+    font-weight: 600;
+}
+
+/* CSS for the Recipe By Sections */
+#recipes_by{
+    text-align: center;
+    margin: 2rem 10rem;
+}
+#recipes_by p{
+    text-decoration: underline;
+    text-decoration-color: #DC582A;
+    font-size: x-large;
+    display: flex;
+}
+#recipes_by .row{
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+}
+#recipes_by .row-name{
+    background-color: rgb(123 174 3);;
+    padding: 0;
+    border-radius: 0.5rem;
+    color: white;
+}
+#recipes_by .row-image-wrap figcaption{
+    background-color: rgba(196, 214, 0, 0.8);
+}
+
+.row-name{
+    font-size: xx-large;
+    font-weight: 400;
+}
+#recipe_grid2{
+    grid-column: span 2;
+    grid-gap: 1rem;
+}
+#recipe_grid2 figure:nth-child(1){
+    grid-row: 1;
+    grid-column: 1;
+}
+#recipe_grid2 figure:nth-child(2){
+    grid-row: 1;
+    grid-column: 2;
+}
+#recipe_grid2 figure:nth-child(2){
+    grid-column: span 2;
+    grid-row: 2;
+}
+.recipe-for{
+    margin: 0 auto 2rem auto;
+}
+.scroll-buttons{
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.recipe-for-top, .recipe-for-top p, .recipe-for-images, .recipe-for-images figure, .top-footer, .top-footer figure, .list-category, .scroll-x-card, .menu-header-wrapper, .top-footer-primary, .subscribe, .scroll-buttons{
+    align-items: center;
+    justify-content: center;
+}
+.recipe-for-top{
+    margin: 1rem;
+}
+.recipe-for-top p{
+    font-size: xx-large;
+    color: black;
+    text-decoration: underline;
+    text-decoration-color: #84BD00;
+}
+.recipe-for-top span{
+    margin: 0 0.5rem;
+    font-size: x-large;
+}
+.recipe-for-top i{
+    padding: 0.5rem;
+}
+.recipe-for-top p:hover{
+    text-decoration-color:#DC582A;
+    cursor: pointer;
+}
