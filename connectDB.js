@@ -5,16 +5,11 @@ require('dotenv').config();
 const username = encodeURIComponent(process.env.DB_USER);
 const password = encodeURIComponent(process.env.DB_PASSWORD);
 const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mongodb.net/?retryWrites=true&w=majority`;
-const options = {
-  ssl: true,
-  tls: true,
-  tlsAllowInvalidCertificates: true,
-};
 let client;
 
 async function connectToMongoDB() {
   try {
-    client = new MongoClient(uri, options);
+    client = new MongoClient(uri);
     await client.connect();
     console.log('Connected to MongoDB');
   } catch (error) {
