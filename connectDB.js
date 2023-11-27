@@ -8,6 +8,7 @@ const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mong
 const options = {
   ssl: true,
   tls: true,
+  tlsAllowInvalidCertificates: true,
 };
 let client;
 
