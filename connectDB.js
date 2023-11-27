@@ -6,9 +6,8 @@ const username = encodeURIComponent(process.env.DB_USER);
 const password = encodeURIComponent(process.env.DB_PASSWORD);
 const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mongodb.net/?retryWrites=true&w=majority`;
 const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   ssl: true,
+  tls: true,
 };
 let client;
 
