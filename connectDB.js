@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const username = encodeURIComponent(process.env.DB_USER);
 const password = encodeURIComponent(process.env.DB_PASSWORD);
+console.log(username, password);
 const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mongodb.net/?retryWrites=true&w=majority`;
 let client;
 
