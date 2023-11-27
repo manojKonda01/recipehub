@@ -2,15 +2,16 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require("bcryptjs");
 require('dotenv').config();
 
-const username = encodeURIComponent(process.env.DB_USER);
-const password = encodeURIComponent(process.env.DB_PASSWORD);
-console.log(username, password);
-const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mongodb.net/?retryWrites=true&w=majority`;
+// const username = encodeURIComponent(process.env.DB_USER);
+// const password = encodeURIComponent(process.env.DB_PASSWORD);
+// console.log(username, password);
+// const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mongodb.net/?retryWrites=true&w=majority`;
 let client;
 
+const URI = process.env.MONGO_URI;
 async function connectToMongoDB() {
   try {
-    client = new MongoClient(uri);
+    client = new MongoClient(URI);
     await client.connect();
     console.log('Connected to MongoDB');
   } catch (error) {
