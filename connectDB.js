@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 require('dotenv').config();
 
 const username = encodeURIComponent(process.env.DB_USER);
