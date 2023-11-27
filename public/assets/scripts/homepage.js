@@ -58,7 +58,6 @@ const load_recommended_recipes = async () => {
         const randomDishTypes = getRandomDishTypeSubarrays(filters['dishType'], 8);
         const dishTypeQuery = randomDishTypes.map(type => `&dishType=${type}`).join('+');
         const randomRecipeData = await fetchReturnDataJson(apiUrl, `&from=${0}&to=${4}` + dishTypeQuery);
-        console.log(randomRecipeData);
         let appenHtml = '';
         for (let i = 0; i < randomRecipeData.hits.length; i++) {
             appenHtml += createRecipeCard(randomRecipeData.hits[i].recipe);

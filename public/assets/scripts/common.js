@@ -1,3 +1,19 @@
+// Check Session 
+const loginUser = document.getElementById('signin_image_caption');
+let session = false;
+fetch('/api/sessionVerify', {
+  method: 'GET'
+}).then(response => response.json())
+  .then(data => {
+    if (data.status === 200) {
+      session = true;
+      loginUser.innerHTML = 'My Account';
+    }
+    else if (data.status === 404) {
+      loginUser.innerHTML = 'Login';
+    }
+  })
+
 // const edamamID = 'a95235c2';
 const edamamID = 'a29ca2af';
 
@@ -106,22 +122,6 @@ const filters = {
 var searchQuery = '';
 let apiUrl = `https://api.edamam.com/search?&q=${searchQuery}&app_id=${edamamID}&app_key=${edamamKey}`;
 
-let navbar = document.getElementById('rh-navbar_down');
-const menu_toggle_button = document.getElementById('menu_toggle_btn');
-const close_navbar = document.getElementById('close_navbar');
-
-// On Click Menu Icon Show the Menu List
-menu_toggle_button.addEventListener('click', function (event) {
-  navbar.style.height = '80%';
-  document.body.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
-});
-
-// On Click Close Icon close the Menu List
-close_navbar.addEventListener('click', function (event) {
-  navbar.style.height = '0%';
-  document.body.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-});
-
 // Recipe Card
 const createRecipeCard = (jsonData) => {
   return `<figure class="margin-0 display-grid">
@@ -227,3 +227,97 @@ function getRandomDishTypeSubarrays(array, count) {
   }
   return subarrays;
 }
+// scripts.js
+const body = document.body;
+function openModal() {
+  document.getElementById('authModal').style.display = 'block';
+  body.classList.add("modal-open");
+}
+
+function closeModal() {
+  document.getElementById('authModal').style.display = 'none';
+  body.classList.remove("modal-open");
+}
+
+function toggleForms() {
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+
+  if (loginForm.style.display === 'none') {
+    loginForm.style.display = 'block';
+    signupForm.style.display = 'none';
+  } else {
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+  }
+}
+// Email validation
+function isValidEmail(email) {
+  // Basic email format validation using a regular expression
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function login() {
+  event.preventDefault();
+  const email = document.getElementById('login_email').value;
+  const password = document.getElementById('login_password').value;
+  const emailMsg = document.getElementById('invalid_login_email');
+  const passwordMsg = document.getElementById('invalid_login_password');
+  if (email.length === 0) {
+    emailMsg.innerHTML = 'Please Enter Email';
+  }
+  else {
+    if (isValidEmail(email)) {
+      emailMsg.innerHTML = '';
+      if (password.length > 0) {
+        // Verify Login using API created in Node server
+        fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 200) {
+              alert('success ra babu')
+              location.reload();
+            }
+            else if (data.status === 401) {
+              passwordMsg.innerHTML = 'Incorrect Password';
+            }
+            else {
+              alert('Server Error');
+            }
+            console.log(data);
+          })
+          .catch(error => console.error('Error during login:', error));
+      }
+    }
+    else {
+      emailMsg.innerHTML = 'Please Enter Valid Email';
+    }
+  }
+  if (password.length === 0) {
+    passwordMsg.innerHTML = 'Please Enter Password';
+  }
+  else {
+    passwordMsg.innerHTML = '';
+  }
+}
+
+function signup() {
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Fetch and inject the modal into the current page
+  fetch("/assets/templates/modal.html")
+    .then(response => response.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("beforeend", html);
+    })
+    .catch(error => console.error("Error loading modal:", error));
+});

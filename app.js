@@ -1,22 +1,23 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const {connectToMongoDB, loginUser, signupUser} = require('./connectDB')
+require('dotenv').config();
 
-const username = encodeURIComponent("mkonda");
-const password = encodeURIComponent("Bmma@9979");
-const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mongodb.net/?retryWrites=true&w=majority`;
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+
+connectToMongoDB();
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(cookieParser());
+app.use(session({
+    secret: process.env.SECRET_ACCESS_TOKEN,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Change to true if using HTTPS
+}));
 
 // Middleware to parse JSON in requests
 app.use(bodyParser.json());
@@ -27,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
-// Define a route to handle requests for the home page
+//route to handle requests for the home page
 app.get('/', (req, res) => {
   // Send the HTML file as the response
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -50,6 +51,60 @@ app.get('/recipe', (req, res) => {
 
     }
 })
+
+// Login API
+app.post('/api/login', async (req, res) => {
+    try{
+        const { email, password } = req.body;
+        const result = await loginUser(email, password);
+        if(result.success){
+            req.session.user = result.user;
+            res.status(200).json({status: 200, message: result.message, userId: result.userId });
+        }else{
+            res.status(401).json({status: 401, message: result.message});
+        }
+    }
+    catch (error){
+        console.error('Error during user login:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+})
+
+// SignUp API
+app.post('/api/signup', async (req, res) => {
+    try{
+        const { email, password } = req.body;
+        const result = await signupUser(email, password);
+        if(result.success){
+            res.status(200).json({ message: result.message});
+        }else{
+            res.status(401).json({ message: result.message});
+        }
+    }
+    catch (error){
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+})
+
+app.get('/api/sessionVerify', (req, res) => {
+    if(req.session.user){
+        res.json({status:200, user:req.session.user});
+    }
+    else{
+        res.json({status:404});
+    }
+})
+
+app.get('/logout', (req, res) => {
+    // Destroy the session
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            // res.redirect('/login'); // Redirect to login page after logout
+        }
+    });
+});
 
 // Start the server
 app.listen(port, () => {

@@ -44,61 +44,6 @@
     <div class="overlay"></div>
     <!-- Begin: Header -->
     <header id='website_header' class="rh-header padding-y-1">
-
-      <!-- Begin: Menu Bar -->
-      <nav id="rh-navbar_down" class="header-item rh-navbar">
-        <div id="container" class="position-relative">
-
-          <!-- Begin: Close Button -->
-          <div class="close-element display-flex position-absolute" id="close_navbar">
-            <figure class="margin-0 display-flex">
-              <img src="media/image/close_white.svg" alt="close-icon">
-            </figure>
-          </div>
-          <!-- End: Close Button -->
-
-          <div id="menu_list" class="rh-menu">
-            <div id="menu_wrapper" class="text-white display-flex">
-              <!-- Recipe Menu -->
-              <div class="rh-submenu margin-x-2">
-                <h1 class="rh-submenu-title">Recipes</h1>
-                <ul class="nested-submenu">
-                  <li class="nested-submenu-item" data-url="allrecipes">All</li>
-                  <li class="nested-submenu-item" data-url="breakfast">Breakfast</li>
-                  <li class="nested-submenu-item" data-url="lunch">Lunch</li>
-                  <li class="nested-submenu-item" data-url="dinner">Dinner</li>
-                  <li class="nested-submenu-item" data-url="desserts">Desserts</li>
-                  <li class="nested-submenu-item" data-url="timely">Recipes by Time</li>
-                  <li class="nested-submenu-item" data-url="bydiet">Recipes by Diet</li>
-                  <li class="nested-submenu-item" data-url="cusine">Recipes by Cusine</li>
-                  <li class="nested-submenu-item" data-url="ingredients">Recipes by Ingredients</li>
-                </ul>
-              </div>
-              <!-- Quick Bites Menu -->
-              <div class="rh-submenu  margin-x-2">
-                <h1 class="rh-submenu-title">Quick Bites</h1>
-                <ul class="nested-submenu">
-                  <li class="nested-submenu-item" data-url="snacks">Snacks & Drinks</li>
-                  <li class="nested-submenu-item" data-url="salads">Salads</li>
-                  <li class="nested-submenu-item" data-url="fastfood">Fast Food</li>
-                  <li class="nested-submenu-item" data-url="...">...</li>
-                </ul>
-              </div>
-
-              <div class="rh-submenu  margin-x-2">
-                <h1 class="rh-submenu-title">Recipe Hub</h1>
-                <ul class="nested-submenu">
-                  <li class="nested-submenu-item" data-url="about_us">About Us</li>
-                  <li class="nested-submenu-item" data-url="contact_us">Contact Us</li>
-                  <li class="nested-submenu-item" data-url="contact_us">Career</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <!-- End: Menu Bar -->
-
       <div id="header_container" class="position-relative">
         <!--Begin: Logo & Website Name -->
         <a href="/index.html">
@@ -115,14 +60,12 @@
           <!-- Responsive Bar Menu Bar -->
           <div id="menu_bar">
             <ul class="display-flex padding-0 margin-x-2 menu-bar-list">
-              <li class="menu-item">
-                <a href="#" class="display-flex">
+              <li class="menu-item display-flex justify-content-centre align-items-centre" onclick="openModal()" id="loginIcon">
                   <figure class="margin-0 display-flex">
                     <img class="signin-image"
                       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE20lEQVR4nNVZe2xTVRj/iFFifERBowTjI0EkQvQPEzUxmvjgXwMSMPqXf6AQdRIzX5iQYe/ZxI0xJ2E4jKAIhgxBZkyTunPbtc021q0dbix278m6B+1Y1/fjrvcz566Dbt1qe+7tqr/kS25y+33n9zvnu+d85yuABigxwf2lIrwpUKgmFAwChT6BwpRAIZ409tyXfFctiPAG84FCoqwBVhMjfCBQaCMiIKfZBBGKWKxlI15iggeICF8TEUIqiM8zQYSgIEIVobA2b8Rr2+FmHYU9hEJAK+Ik3UKCCPur9bBSU/I6ER4jFC7lkTjOWxEKHWUNsF4T8sQI2/I867iECD+hsFUdeQpvEQrScpMnN76NGUJhNxd5gcKuQhEn6UKKcpt5I2xT1P8HyJPkSugobMmKfJkJ1hERfIUmTRYahUCpCTZkJF9SB7dotdt81XgbHm3ZoFh54+1aCXGw7XzpvBfhMzUDHLLci9YhHbqDl3Ehrgb+RMvgF1hpWa02nT5aPO8prGUnIm9gQ08Rxmb8+G+IStOod+5WlUrEDGvSBcyWBxxBV6Dd9S3minZXjeLLKaQyvTDjrG3MgyXIC9PA57xpFJxXALKqkifQsdYnUJYT3AJkOYHftT7JJ4LCezc+Xs6SuNfzG6qF0/0r7yq0zs6+GdYIFORcA1RaVmFCllQLSMhxPGi+i2cF5FIK9wG7SfHMwC+dr6FWONu5hW8VGuB1lj7VPM4NvR9qJuCP3j28aVTF9n8Dj3PjwD7NBDQO7OMVoGen7wCPs965SzMBv/+1k08AhT52gF3jcf7R/rxmAn5of45LAKHgYQJiPM6lxpswFPeoJh+MXVVicaZQlFsAM+uQoFqAZXA/3+ynCOBKIWYV5jsxEBvjJu+PurC88Q5uAbMpRKGfO4AI+L3tKZQS4ZzJS4kInmh7hp/89Y+YcxtNtVOOlzEcv5Y1+XB8En9yvKhqzGQK6bkPsoV2uOlh7J44w0q0DNRlvDzxM37T9KDq8cjcQcYarVoEm7OalkdR7P9EKdJcvouKsWfa9zEeaV6n2TiE7YQi7ABWEPEUc4U2Ya6YS97GbP9DAS2pl/miQhMiuZoR3p13pVRzoV/KWJ3PU+uTXK+UyVWo4id6N57r2qFc7kemmzAiedP2n4g0pbxjvznXtV2VMEGEgxq0VVbg6Y7N6HSf57qZMR+n+zye7nglp+4E61ov+fcUofBpNkFOtD2LV7xW1AqjPhuetL+QlYBSCsWwFFjbjrXvMrULHaPHMF9wjNYqY2RIHXvG1mKm5m5Ny3qcDDkx35gMOZXDME0AhQD7pygj+ZRU2praXmdFlxa1f7YIxd14vO3p1Jmf0Ynwalbkr4swwjvMufbixkV3lXwjKvmUppdSJVDYCTyotNzz9nRkGAsFb3gIK8yr3gc1aB4uL4nEvZlKzLwgKvlk28hhHWgB68CBzROBjuBykR/z24NNw1++BFpC31u0snv8TD2bmXwRj0jT8qWx44a65u23Qr5g6t+7qcdTb49Kfs2ERCWf3OO50E6H9z4OywWDs/iRrvFTZ8f9Dj9Pi535jPnt/s7xk3Vid/FDy0Z8MTT1V2yyu45WOT31jhFvs8cbHoqF41My6zwzY8/e8GBsZLrZ3eO5YLddOXLI+veBjVoM/g+tjWE7oZqnxgAAAABJRU5ErkJggg==">
                   </figure>
-                  <figcaption class="signin-image-caption">login</figcaption>
-                </a>
+                  <figcaption id="signin_image_caption">Login</figcaption>
               </li>
               <li class="menu-item responsive-menu-bar-show drop-menu">
                 <a href="#"><span>Recipes</span><i class="fa fa-caret-down"></i></a>
@@ -364,13 +307,6 @@
 
   </main>
   <!-- End: Main Body -->
-
-
-  <!-- Begin: Sign In Modal -->
-  <div id="signin_modal" class="modal">
-
-  </div>
-  <!-- End: Sign In Modal -->
 
   <!-- Begin : Footer -->
   <footer>
