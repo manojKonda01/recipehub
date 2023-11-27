@@ -9,7 +9,6 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   ssl: true,
-  sslValidate: true,
 };
 let client;
 
