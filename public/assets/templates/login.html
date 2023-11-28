@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="media/image/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/image/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/image/favicon/favicon-16x16.png">
+    <link rel="manifest" href="media/image/favicon/site.webmanifest">
+    <!-- Title -->
+    <title>Recipe Hub | Explore, Cook & Savor </title>
+    <!-- HomePage CSS -->
+    <link rel="stylesheet" href="assets/styles/common.css">
+    <link rel="stylesheet" href="assets/styles/responsive.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Avro & Amatic Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allison&family=Amatic+SC:wght@400;700&family=Arvo&display=swap"
+        rel="stylesheet">
+    <style>
+        .website-logo{
+            height: 100px;
+            width: 100px;
+            margin: 0 1rem;
+        }
+        .login-content a{
+            text-decoration: none;
+            color: black;
+        }
+        .login-content figcaption{
+            font-family: 'Amatic SC', cursive;
+            font-size: 56px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login_container">
+        <div class="login-image"></div>
+        <div class="login-content">
+            <a href="/">
+                <figure class="display-flex margin-1 padding-x-1 align-items-centre justify-content-centre">
+                  <img src="media/image/logo.png" alt="website-logo" class="website-logo">
+                  <figcaption>Recipe Hub</figcaption>
+                </figure>
+              </a>
+            <div id="loginForm">
+                <form>
+                    <div class="signup-input">
+                        <div class="icon-container">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <input type="email" name="login_email" id="login_email" placeholder="Email *">
+                        <div id="invalid_login_email" class="invalid-msg"></div>
+                    </div>
+                    <div class="signup-input">
+                        <div class="icon-container">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <input type="password" name="login_password" id="login_password" placeholder="Password *">
+                        <div id="invalid_login_password" class="invalid-msg"></div>
+                    </div>
+                    <button onclick="login()" type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <span class="login_toggle" onclick="toggleForms()">Sign up</span></p>
+            </div>
+            <div id="signupForm" style="display: none;">
+                <form>
+                    <div class="signup-input">
+                        <div class="icon-container">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <input type="text" name="name" id="name" placeholder="Name *">
+                        <div id="invalid_name" class="invalid-msg"></div>
+                    </div>
+                    <div class="signup-input">
+                        <div class="icon-container">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <input type="email" name="email" id="email" placeholder="Email *">
+                        <div id="invalid_email" class="invalid-msg"></div>
+                    </div>
+                    <div class="signup-input">
+                        <div class="icon-container">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <input type="password" name="password" id="password" placeholder="Password *">
+                        <div id="invalid_password" class="invalid-msg"></div>
+                    </div>
+                    <div class="signup-input">
+                        <div class="icon-container">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <input type="text" name="verify_password" id="verify_password" placeholder="Confirm Password *">
+                        <div id="invalid_confirm_password" class="invalid-msg"></div>
+                    </div>
+                    <button onclick="signup()" type="submit">Sign up</button>
+                </form>
+                <p>Already have an account? <span class="login_toggle" onclick="toggleForms()">Login</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/scripts/login.js"></script>
+</body>
+
+</html>

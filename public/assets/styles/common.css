@@ -19,25 +19,26 @@ body{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 1rem;
-    border: 1px solid #dee2e6;
-    width: 30%;
-    text-align: center;
-    /* background: url('/media/image/login_bg.jpeg') center/cover no-repeat; */
+#loginIcon{
+    flex-wrap: wrap;
 }
-.modal-content button{
+.account-drop-down{
+    flex-basis: 100%;
+}
+#account_drop_down{
+    display: none;
+}
+.login-content button{
     color: #84BD00;
     border: 1px solid #84BD00;
     background-color: transparent;
     background-image: none;
     padding: 0.25rem 0.75rem;
     border-radius: 0.25rem;
+    font-size: medium;
+    font-family: 'Arvo', serif;
 }
-.modal-content button:hover{
+.login-content button:hover{
     color: white;
     background: #84BD00;
 }
@@ -56,6 +57,7 @@ body{
     color: #dc3545;
     font-size: small;
     margin-top: 0.25rem;
+    flex-basis: 100%;
 }
 #menu_bar .menu-item:hover{
     cursor: pointer;
@@ -65,7 +67,7 @@ body{
 body.modal-open {
     overflow: hidden;
 }
-#authModal input{
+.login-content input{
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -73,8 +75,11 @@ body.modal-open {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    border-left: 0;
+    outline: none;
+    transition: border-color 0.1s;
+}
+.login-content input:focus{
+    border: 1px solid #84BD00;
 }
 .icon-container{
     display: flex;
@@ -103,7 +108,7 @@ body.modal-open {
     justify-content: center;
 }
 .signup-input input{
-    flex: 1 1 auto;
+    flex-basis: 50%;
 }
 .login_toggle{
     cursor: pointer;
@@ -407,4 +412,19 @@ body.modal-open {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Login.html css */
+.login_container{
+    display: flex;
+}
+.login-image{
+    background: url('/media/image/ingredients.jpeg') center/cover no-repeat;
+    flex-basis: 50%;
+    height: 100vh;
+}
+.login-content{
+    flex-basis: 50%;
+    text-align: center;
+    margin: auto;
 }

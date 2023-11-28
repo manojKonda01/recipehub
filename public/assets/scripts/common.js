@@ -1,5 +1,6 @@
 // Check Session 
 const loginUser = document.getElementById('signin_image_caption');
+const username = document.getElementById('username');
 let session = false;
 fetch('/api/sessionVerify', {
   method: 'GET'
@@ -8,12 +9,35 @@ fetch('/api/sessionVerify', {
     if (data.status === 200) {
       session = true;
       loginUser.innerHTML = 'My Account';
+      username.innerHTML = 'Hi, '+data.user.name;
     }
     else if (data.status === 404) {
       loginUser.innerHTML = 'Login';
     }
   })
 
+// Login Icon
+const loginIcon = document.getElementById('loginIcon');
+
+// On Click Login Icon
+loginIcon.addEventListener('click', function () {
+  // If session open Account settings else redirect login
+  if (!session) {
+    window.location.href = '/login';
+  }
+})
+const myaccount = document.getElementById('loginIcon');
+const showAccount = document.getElementById('account_drop_down');
+myaccount.addEventListener('mouseenter', function () {
+  if (session) {
+    showAccount.style.display = 'block';
+  }
+});
+myaccount.addEventListener('mouseleave', function () {
+  if (session) {
+    showAccount.style.display = 'none';
+  }
+});
 // const edamamID = 'a95235c2';
 const edamamID = 'a29ca2af';
 
@@ -227,97 +251,16 @@ function getRandomDishTypeSubarrays(array, count) {
   }
   return subarrays;
 }
-// scripts.js
-const body = document.body;
-function openModal() {
-  document.getElementById('authModal').style.display = 'block';
-  body.classList.add("modal-open");
-}
 
-function closeModal() {
-  document.getElementById('authModal').style.display = 'none';
-  body.classList.remove("modal-open");
-}
-
-function toggleForms() {
-  const loginForm = document.getElementById('loginForm');
-  const signupForm = document.getElementById('signupForm');
-
-  if (loginForm.style.display === 'none') {
-    loginForm.style.display = 'block';
-    signupForm.style.display = 'none';
-  } else {
-    loginForm.style.display = 'none';
-    signupForm.style.display = 'block';
-  }
-}
-// Email validation
-function isValidEmail(email) {
-  // Basic email format validation using a regular expression
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-function login() {
-  event.preventDefault();
-  const email = document.getElementById('login_email').value;
-  const password = document.getElementById('login_password').value;
-  const emailMsg = document.getElementById('invalid_login_email');
-  const passwordMsg = document.getElementById('invalid_login_password');
-  if (email.length === 0) {
-    emailMsg.innerHTML = 'Please Enter Email';
-  }
-  else {
-    if (isValidEmail(email)) {
-      emailMsg.innerHTML = '';
-      if (password.length > 0) {
-        // Verify Login using API created in Node server
-        fetch('/api/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        })
-          .then(response => response.json())
-          .then(data => {
-            if (data.status === 200) {
-              alert('success ra babu')
-              location.reload();
-            }
-            else if (data.status === 401) {
-              passwordMsg.innerHTML = 'Incorrect Password';
-            }
-            else {
-              alert('Server Error');
-            }
-            console.log(data);
-          })
-          .catch(error => console.error('Error during login:', error));
+function logout(){
+  fetch('/api/logout').then(response=>response.json())
+  .then(data=>{
+      if(data.status === 200){
+          alert(data.message)
+          window.location.href = '/';
       }
-    }
-    else {
-      emailMsg.innerHTML = 'Please Enter Valid Email';
-    }
-  }
-  if (password.length === 0) {
-    passwordMsg.innerHTML = 'Please Enter Password';
-  }
-  else {
-    passwordMsg.innerHTML = '';
-  }
+      else{
+          alert('LogOut Failed');
+      }
+  })
 }
-
-function signup() {
-
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Fetch and inject the modal into the current page
-  fetch("/assets/templates/modal.html")
-    .then(response => response.text())
-    .then(html => {
-      document.body.insertAdjacentHTML("beforeend", html);
-    })
-    .catch(error => console.error("Error loading modal:", error));
-});

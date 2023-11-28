@@ -16,7 +16,7 @@ app.use(session({
     secret: process.env.SECRET_ACCESS_TOKEN,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Change to true if using HTTPS
+    cookie: { maxAge: 1200000 }
 }));
 
 // Middleware to parse JSON in requests
@@ -51,7 +51,19 @@ app.get('/recipe', (req, res) => {
 
     }
 })
+app.get('/login', (req, res) => {
+    try{
+        if(req.session.user){
+            res.redirect('/')
+        }
+        else{
+            res.sendFile(path.join(__dirname, 'public', '/assets/templates/login.html'));
+        }
+    }
+    finally{
 
+    }
+})
 // Login API
 app.post('/api/login', async (req, res) => {
     try{
@@ -70,6 +82,18 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
+app.get('/api/logout', (req, res) => {
+    // Destroy the session on logout
+    req.session.destroy(err => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        res.status(500).send('Internal Server Error');
+      } else {
+        res.status(200).json({status: 200, message: 'Logged Out Successfully'});
+      }
+    });
+  });
+  
 // SignUp API
 app.post('/api/signup', async (req, res) => {
     try{

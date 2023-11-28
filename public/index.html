@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="media/image/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="media/image/favicon/favicon-32x32.png">
@@ -21,7 +21,8 @@
   <!-- Avro & Amatic Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allison&family=Amatic+SC:wght@400;700&family=Arvo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allison&family=Amatic+SC:wght@400;700&family=Arvo&display=swap"
+    rel="stylesheet">
 </head>
 
 
@@ -46,7 +47,7 @@
     <header id='website_header' class="rh-header padding-y-1">
       <div id="header_container" class="position-relative">
         <!--Begin: Logo & Website Name -->
-        <a href="/index.html">
+        <a href="/">
           <figure id="website_logo" class="margin-0 display-flex">
             <img src="media/image/logo.png" alt="Website Logo" class="header-item website-logo">
             <figcaption>
@@ -60,12 +61,22 @@
           <!-- Responsive Bar Menu Bar -->
           <div id="menu_bar">
             <ul class="display-flex padding-0 margin-x-2 menu-bar-list">
-              <li class="menu-item display-flex justify-content-centre align-items-centre" onclick="openModal()" id="loginIcon">
-                  <figure class="margin-0 display-flex">
-                    <img class="signin-image"
-                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE20lEQVR4nNVZe2xTVRj/iFFifERBowTjI0EkQvQPEzUxmvjgXwMSMPqXf6AQdRIzX5iQYe/ZxI0xJ2E4jKAIhgxBZkyTunPbtc021q0dbix278m6B+1Y1/fjrvcz566Dbt1qe+7tqr/kS25y+33n9zvnu+d85yuABigxwf2lIrwpUKgmFAwChT6BwpRAIZ409tyXfFctiPAG84FCoqwBVhMjfCBQaCMiIKfZBBGKWKxlI15iggeICF8TEUIqiM8zQYSgIEIVobA2b8Rr2+FmHYU9hEJAK+Ik3UKCCPur9bBSU/I6ER4jFC7lkTjOWxEKHWUNsF4T8sQI2/I867iECD+hsFUdeQpvEQrScpMnN76NGUJhNxd5gcKuQhEn6UKKcpt5I2xT1P8HyJPkSugobMmKfJkJ1hERfIUmTRYahUCpCTZkJF9SB7dotdt81XgbHm3ZoFh54+1aCXGw7XzpvBfhMzUDHLLci9YhHbqDl3Ehrgb+RMvgF1hpWa02nT5aPO8prGUnIm9gQ08Rxmb8+G+IStOod+5WlUrEDGvSBcyWBxxBV6Dd9S3minZXjeLLKaQyvTDjrG3MgyXIC9PA57xpFJxXALKqkifQsdYnUJYT3AJkOYHftT7JJ4LCezc+Xs6SuNfzG6qF0/0r7yq0zs6+GdYIFORcA1RaVmFCllQLSMhxPGi+i2cF5FIK9wG7SfHMwC+dr6FWONu5hW8VGuB1lj7VPM4NvR9qJuCP3j28aVTF9n8Dj3PjwD7NBDQO7OMVoGen7wCPs965SzMBv/+1k08AhT52gF3jcf7R/rxmAn5of45LAKHgYQJiPM6lxpswFPeoJh+MXVVicaZQlFsAM+uQoFqAZXA/3+ynCOBKIWYV5jsxEBvjJu+PurC88Q5uAbMpRKGfO4AI+L3tKZQS4ZzJS4kInmh7hp/89Y+YcxtNtVOOlzEcv5Y1+XB8En9yvKhqzGQK6bkPsoV2uOlh7J44w0q0DNRlvDzxM37T9KDq8cjcQcYarVoEm7OalkdR7P9EKdJcvouKsWfa9zEeaV6n2TiE7YQi7ABWEPEUc4U2Ya6YS97GbP9DAS2pl/miQhMiuZoR3p13pVRzoV/KWJ3PU+uTXK+UyVWo4id6N57r2qFc7kemmzAiedP2n4g0pbxjvznXtV2VMEGEgxq0VVbg6Y7N6HSf57qZMR+n+zye7nglp+4E61ov+fcUofBpNkFOtD2LV7xW1AqjPhuetL+QlYBSCsWwFFjbjrXvMrULHaPHMF9wjNYqY2RIHXvG1mKm5m5Ny3qcDDkx35gMOZXDME0AhQD7pygj+ZRU2praXmdFlxa1f7YIxd14vO3p1Jmf0Ynwalbkr4swwjvMufbixkV3lXwjKvmUppdSJVDYCTyotNzz9nRkGAsFb3gIK8yr3gc1aB4uL4nEvZlKzLwgKvlk28hhHWgB68CBzROBjuBykR/z24NNw1++BFpC31u0snv8TD2bmXwRj0jT8qWx44a65u23Qr5g6t+7qcdTb49Kfs2ERCWf3OO50E6H9z4OywWDs/iRrvFTZ8f9Dj9Pi535jPnt/s7xk3Vid/FDy0Z8MTT1V2yyu45WOT31jhFvs8cbHoqF41My6zwzY8/e8GBsZLrZ3eO5YLddOXLI+veBjVoM/g+tjWE7oZqnxgAAAABJRU5ErkJggg==">
-                  </figure>
-                  <figcaption id="signin_image_caption">Login</figcaption>
+              <li class="menu-item display-flex justify-content-centre align-items-centre drop-menu" id="loginIcon">
+                <figure class="margin-0 display-flex">
+                  <img class="signin-image"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE20lEQVR4nNVZe2xTVRj/iFFifERBowTjI0EkQvQPEzUxmvjgXwMSMPqXf6AQdRIzX5iQYe/ZxI0xJ2E4jKAIhgxBZkyTunPbtc021q0dbix278m6B+1Y1/fjrvcz566Dbt1qe+7tqr/kS25y+33n9zvnu+d85yuABigxwf2lIrwpUKgmFAwChT6BwpRAIZ409tyXfFctiPAG84FCoqwBVhMjfCBQaCMiIKfZBBGKWKxlI15iggeICF8TEUIqiM8zQYSgIEIVobA2b8Rr2+FmHYU9hEJAK+Ik3UKCCPur9bBSU/I6ER4jFC7lkTjOWxEKHWUNsF4T8sQI2/I867iECD+hsFUdeQpvEQrScpMnN76NGUJhNxd5gcKuQhEn6UKKcpt5I2xT1P8HyJPkSugobMmKfJkJ1hERfIUmTRYahUCpCTZkJF9SB7dotdt81XgbHm3ZoFh54+1aCXGw7XzpvBfhMzUDHLLci9YhHbqDl3Ehrgb+RMvgF1hpWa02nT5aPO8prGUnIm9gQ08Rxmb8+G+IStOod+5WlUrEDGvSBcyWBxxBV6Dd9S3minZXjeLLKaQyvTDjrG3MgyXIC9PA57xpFJxXALKqkifQsdYnUJYT3AJkOYHftT7JJ4LCezc+Xs6SuNfzG6qF0/0r7yq0zs6+GdYIFORcA1RaVmFCllQLSMhxPGi+i2cF5FIK9wG7SfHMwC+dr6FWONu5hW8VGuB1lj7VPM4NvR9qJuCP3j28aVTF9n8Dj3PjwD7NBDQO7OMVoGen7wCPs965SzMBv/+1k08AhT52gF3jcf7R/rxmAn5of45LAKHgYQJiPM6lxpswFPeoJh+MXVVicaZQlFsAM+uQoFqAZXA/3+ynCOBKIWYV5jsxEBvjJu+PurC88Q5uAbMpRKGfO4AI+L3tKZQS4ZzJS4kInmh7hp/89Y+YcxtNtVOOlzEcv5Y1+XB8En9yvKhqzGQK6bkPsoV2uOlh7J44w0q0DNRlvDzxM37T9KDq8cjcQcYarVoEm7OalkdR7P9EKdJcvouKsWfa9zEeaV6n2TiE7YQi7ABWEPEUc4U2Ya6YS97GbP9DAS2pl/miQhMiuZoR3p13pVRzoV/KWJ3PU+uTXK+UyVWo4id6N57r2qFc7kemmzAiedP2n4g0pbxjvznXtV2VMEGEgxq0VVbg6Y7N6HSf57qZMR+n+zye7nglp+4E61ov+fcUofBpNkFOtD2LV7xW1AqjPhuetL+QlYBSCsWwFFjbjrXvMrULHaPHMF9wjNYqY2RIHXvG1mKm5m5Ny3qcDDkx35gMOZXDME0AhQD7pygj+ZRU2praXmdFlxa1f7YIxd14vO3p1Jmf0Ynwalbkr4swwjvMufbixkV3lXwjKvmUppdSJVDYCTyotNzz9nRkGAsFb3gIK8yr3gc1aB4uL4nEvZlKzLwgKvlk28hhHWgB68CBzROBjuBykR/z24NNw1++BFpC31u0snv8TD2bmXwRj0jT8qWx44a65u23Qr5g6t+7qcdTb49Kfs2ERCWf3OO50E6H9z4OywWDs/iRrvFTZ8f9Dj9Pi535jPnt/s7xk3Vid/FDy0Z8MTT1V2yyu45WOT31jhFvs8cbHoqF41My6zwzY8/e8GBsZLrZ3eO5YLddOXLI+veBjVoM/g+tjWE7oZqnxgAAAABJRU5ErkJggg==">
+                </figure>
+                <figcaption id="signin_image_caption">Login</figcaption>
+                <div class="account-drop-down" id="account_drop_down">
+                  <div class="display-flex position-absolute drop-down-container" id="showAccount">
+                    <ul class="display-flex submenu-list padding-0 margin-0">
+                      <li id="username">Hi, User</li>
+                      <li class="account-submenu-item">Profile</li>
+                      <li class="account-submenu-item">Saved Recipes</li>
+                      <li class="account-submenu-item" onclick="logout()">LogOut</li>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li class="menu-item responsive-menu-bar-show drop-menu">
                 <a href="#"><span>Recipes</span><i class="fa fa-caret-down"></i></a>
@@ -313,7 +324,7 @@
     <section class="footer-container">
       <section class="top-footer display-flex padding-x-2">
         <div class="top-footer-primary display-grid">
-          <a href="/index.html">
+          <a href="/">
             <figure class="display-flex margin-1 padding-x-1">
               <img src="media/image/logo.png" alt="website-logo" class="website-logo">
               <figcaption>Recipe Hub</figcaption>
