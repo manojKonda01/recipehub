@@ -2,20 +2,39 @@
 const loginUser = document.getElementById('signin_image_caption');
 const username = document.getElementById('username');
 let session = false;
-fetch('/api/sessionVerify', {
-  method: 'GET'
-}).then(response => response.json())
-  .then(data => {
-    if (data.status === 200) {
-      session = true;
-      loginUser.innerHTML = 'My Account';
-      username.innerHTML = 'Hi, '+data.user.name;
-    }
-    else if (data.status === 404) {
-      loginUser.innerHTML = 'Login';
-    }
-  })
 
+// Fetch Api
+const fetchReturnDataJson = async (url, request) => {
+  let responseData = await fetch(url + request);
+  return await responseData.json();
+};
+
+// Check Session for user
+async function sessionVerify() {
+  // Check user login and get session data
+  const sessionData = await fetchReturnDataJson('/api/sessionVerify', '');
+  if (sessionData.status === 200) {
+    session = true;
+    loginUser.innerHTML = 'My Account';
+    username.innerHTML = 'Hi, ' + sessionData.user.name;
+  }
+  else if (sessionData.status === 404) {
+    loginUser.innerHTML = 'Login';
+  }
+  // Display modals with diff msgs when login signup and logout success
+  if (sessionStorage.getItem('modal') === 'login') {
+    openModal('Logged in. Welcome Back ' + sessionData.user.name + ' !');
+  }
+  else if (sessionStorage.getItem('modal') === 'signup') {
+    openModal('Welcome ' + sessionData.user.name + ' !');
+  }
+  else if (sessionStorage.getItem('modal') === 'logout') {
+    openModal('Logged Out Successfully');
+  }
+  sessionStorage.setItem('modal', '');
+  sessionStorage.setItem('username', '')
+}
+sessionVerify();
 // Login Icon
 const loginIcon = document.getElementById('loginIcon');
 
@@ -159,12 +178,6 @@ const createRecipeCard = (jsonData) => {
     </figure>`;
 };
 
-// Fetch Api
-const fetchReturnDataJson = async (url, request) => {
-  let responseData = await fetch(url + request);
-  return await responseData.json();
-};
-
 // Click on list category
 const mealList = document.querySelectorAll('.list-category, .submenu-item, .category-click');
 for (let i = 0; i < mealList.length; i++) {
@@ -252,15 +265,38 @@ function getRandomDishTypeSubarrays(array, count) {
   return subarrays;
 }
 
-function logout(){
-  fetch('/api/logout').then(response=>response.json())
-  .then(data=>{
-      if(data.status === 200){
-          alert(data.message)
-          window.location.href = '/';
+function logout() {
+  fetch('/api/logout').then(response => response.json())
+    .then(data => {
+      if (data.status === 200) {
+        sessionStorage.setItem('modal', 'logout')
+        location.reload();
       }
-      else{
-          alert('LogOut Failed');
+      else {
+        alert('LogOut Failed');
       }
-  })
+    })
+}
+
+// Function to open the modal with a specific message
+function openModal(message) {
+  const modal = document.getElementById('alertModal');
+  const alertMessage = document.getElementById('alertMessage');
+
+  // Set the alert message
+  alertMessage.textContent = message;
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Automatically close the modal after 5 seconds (5000 milliseconds)
+  setTimeout(() => {
+    closeModal();
+  }, 5000);
+}
+
+// function to close modal
+function closeModal() {
+  const modal = document.getElementById('alertModal');
+  modal.style.display = 'none';
 }

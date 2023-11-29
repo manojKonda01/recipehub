@@ -19,13 +19,6 @@ async function connectToMongoDB() {
   }
 }
 
-function closeMongoDBConnection() {
-  if (client) {
-    client.close();
-    console.log('Closed MongoDB connection');
-  }
-}
-
 async function loginUser(email, password) {
   try {
     await connectToMongoDB();
@@ -56,7 +49,7 @@ async function loginUser(email, password) {
   }
   finally {
     // Close the MongoDB connection when done, even if an error occurred
-    closeMongoDBConnection();
+    await client.close();
   }
 }
 
@@ -68,19 +61,21 @@ async function signupUser(user) {
     const existingUser = await db.collection('users').findOne({ email });
 
     if (existingUser) {
-      console.log('User with this email already exists. Redirecting to login.');
+      console.log('User with this email already exists.');
       return { success: false, message: 'User already exists' };
     }
     // Insert the new user into the database
     await insertUser(user);
-
     console.log('User successfully registered!');
-    return { success: true, message: 'Registered Successfully' };
-  } catch (error) {
+    const newUser = await db.collection('users').findOne({ email });
+    return { success: true, message: 'Registered Successfully', user: newUser};
+  }
+  catch (error) {
     console.error('Error during signup:', error.message);
     return { success: false, message: 'Error During SignUp' };
-  } finally {
-    closeMongoDBConnection();
+  }
+  finally {
+    await client.close();
   }
 }
 
@@ -94,12 +89,7 @@ async function insertUser(user) {
       email: user.email,
       password: hashedPassword,
       name: user.name,
-      age: user.age,
-      birthdate: user.birthdate,
-      imageUrl: user.imageUrl,
-      userPreferences: user.userPreferences,
-      savedRecipes: user.savedRecipes,
-      createdAt: user.createdAt
+      createdAt: new Date(),
     });
     success = result.insertedCount === 1;
     console.log('User inserted:', result.insertedId);
@@ -107,10 +97,7 @@ async function insertUser(user) {
   catch (error) {
     console.error('Error inserting user:', error.message);
   }
-  finally {
-    closeMongoDBConnection();
-  }
   return success;
 }
 
-module.exports = { connectToMongoDB, closeMongoDBConnection, loginUser, signupUser, getClient: () => client };
+module.exports = { connectToMongoDB, loginUser, signupUser, getClient: () => client };

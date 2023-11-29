@@ -22,16 +22,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Allison&family=Amatic+SC:wght@400;700&family=Arvo&display=swap"
         rel="stylesheet">
     <style>
-        .website-logo{
+        .website-logo {
             height: 100px;
             width: 100px;
             margin: 0 1rem;
         }
-        .login-content a{
+
+        .login-content a {
             text-decoration: none;
             color: black;
         }
-        .login-content figcaption{
+
+        .login-content figcaption {
             font-family: 'Amatic SC', cursive;
             font-size: 56px;
         }
@@ -42,12 +44,12 @@
     <div class="login_container">
         <div class="login-image"></div>
         <div class="login-content">
-            <a href="/">
-                <figure class="display-flex margin-1 padding-x-1 align-items-centre justify-content-centre">
-                  <img src="media/image/logo.png" alt="website-logo" class="website-logo">
-                  <figcaption>Recipe Hub</figcaption>
-                </figure>
-              </a>
+            <figure class="display-flex margin-1 padding-x-1 align-items-centre justify-content-centre">
+                <a href="/"><img src="media/image/logo.png" alt="website-logo" class="website-logo"></a>
+                <a href="/">
+                    <figcaption>Recipe Hub</figcaption>
+                </a>
+            </figure>
             <div id="loginForm">
                 <form>
                     <div class="signup-input">
@@ -75,7 +77,6 @@
                             <i class="fa fa-user"></i>
                         </div>
                         <input type="text" name="name" id="name" placeholder="Name *">
-                        <div id="invalid_name" class="invalid-msg"></div>
                     </div>
                     <div class="signup-input">
                         <div class="icon-container">
@@ -89,22 +90,43 @@
                             <i class="fa fa-lock"></i>
                         </div>
                         <input type="password" name="password" id="password" placeholder="Password *">
-                        <div id="invalid_password" class="invalid-msg"></div>
                     </div>
                     <div class="signup-input">
                         <div class="icon-container">
                             <i class="fa fa-lock"></i>
                         </div>
-                        <input type="text" name="verify_password" id="verify_password" placeholder="Confirm Password *">
+                        <input type="password" name="verify_password" id="verify_password"
+                            placeholder="Confirm Password *">
                         <div id="invalid_confirm_password" class="invalid-msg"></div>
                     </div>
+                    <div id="invalid_fields" class="invalid-msg margin-y-1"></div>
                     <button onclick="signup()" type="submit">Sign up</button>
                 </form>
                 <p>Already have an account? <span class="login_toggle" onclick="toggleForms()">Login</span></p>
             </div>
         </div>
     </div>
-
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256"
+                width="24px" height="24px">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                    stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                    font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                    style="mix-blend-mode: normal">
+                    <g transform="scale(5.33333,5.33333)">
+                        <path
+                            d="M44,24c0,11.045 -8.955,20 -20,20c-11.045,0 -20,-8.955 -20,-20c0,-11.045 8.955,-20 20,-20c11.045,0 20,8.955 20,20z"
+                            fill="#4caf50"></path>
+                        <path d="M34.586,14.586l-13.57,13.586l-5.602,-5.586l-2.828,2.828l8.434,8.414l16.395,-16.414z"
+                            fill="#ffffff"></path>
+                    </g>
+                </g>
+            </svg>
+            <p id="alertMessage"></p>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+    </div>
     <script src="assets/scripts/login.js"></script>
 </body>
 

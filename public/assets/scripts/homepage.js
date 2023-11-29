@@ -6,7 +6,7 @@ function handleKeyPress(event) {
 }
 
 // Function to Query and get Recipes
-function handleSubmit(event){
+function handleSubmit(event) {
     const searchInput = document.getElementById("search_recipes").value;
     // Redirect to the results page with the search input as a query parameter
     window.location.href = `/category?type=search&query=${searchInput}`;
@@ -101,4 +101,3 @@ const quickRecipesData = async (from, to) => {
     // fetchReturnDataJson() is in common.js file
     return fetchReturnDataJson(apiUrl, requestData);
 }
-

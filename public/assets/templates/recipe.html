@@ -28,66 +28,11 @@
 
 <body>
     <header id='website_header' class="rh-header padding-y-1">
-        <!-- Begin: Menu Bar -->
-        <nav id="rh-navbar_down" class="header-item rh-navbar">
-            <div id="container" class="position-relative">
-
-                <!-- Begin: Close Button -->
-                <div class="close-element display-flex position-absolute" id="close_navbar">
-                    <figure class="margin-0 display-flex">
-                        <img src="/media/image/close_white.svg" alt="close-icon">
-                    </figure>
-                </div>
-                <!-- End: Close Button -->
-
-                <div id="menu_list" class="rh-menu">
-                    <div id="menu_wrapper" class="text-white display-flex">
-                        <!-- Recipe Menu -->
-                        <div class="rh-submenu margin-x-2">
-                            <h1 class="rh-submenu-title">Recipes</h1>
-                            <ul class="nested-submenu">
-                                <li class="nested-submenu-item" data-url="allrecipes">All</li>
-                                <li class="nested-submenu-item" data-url="breakfast">Breakfast</li>
-                                <li class="nested-submenu-item" data-url="lunch">Lunch</li>
-                                <li class="nested-submenu-item" data-url="dinner">Dinner</li>
-                                <li class="nested-submenu-item" data-url="desserts">Desserts</li>
-                                <li class="nested-submenu-item" data-url="timely">Recipes by Time</li>
-                                <li class="nested-submenu-item" data-url="bydiet">Recipes by Diet</li>
-                                <li class="nested-submenu-item" data-url="cusine">Recipes by Cusine</li>
-                                <li class="nested-submenu-item" data-url="ingredients">Recipes by Ingredients</li>
-                            </ul>
-                        </div>
-                        <!-- Quick Bites Menu -->
-                        <div class="rh-submenu  margin-x-2">
-                            <h1 class="rh-submenu-title">Quick Bites</h1>
-                            <ul class="nested-submenu">
-                                <li class="nested-submenu-item" data-url="snacks">Snacks & Drinks</li>
-                                <li class="nested-submenu-item" data-url="salads">Salads</li>
-                                <li class="nested-submenu-item" data-url="fastfood">Fast Food</li>
-                                <li class="nested-submenu-item" data-url="...">...</li>
-                            </ul>
-                        </div>
-
-                        <div class="rh-submenu  margin-x-2">
-                            <h1 class="rh-submenu-title">Recipe Hub</h1>
-                            <ul class="nested-submenu">
-                                <li class="nested-submenu-item" data-url="about_us">About Us</li>
-                                <li class="nested-submenu-item" data-url="contact_us">Contact Us</li>
-                                <li class="nested-submenu-item" data-url="contact_us">Career</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <!-- End: Menu Bar -->
-
         <div id="header_container" class="display-flex">
             <!--Begin: Logo & Website Name -->
             <a href="/">
                 <figure id="website_logo" class="margin-0 display-flex">
-                    <img src="/media/image/logo.png" alt="Website Logo"
-                            class="header-item website-logo">
+                    <img src="/media/image/logo.png" alt="Website Logo" class="header-item website-logo">
                     <figcaption>
                         <h1 class="header-item website-name">Recipe Hub</h2>
                     </figcaption>
@@ -99,60 +44,90 @@
                 <!--Begin: Responsive Menu Bar-->
                 <div id="menu_bar">
                     <ul class="display-flex padding-0 margin-x-2 menu-bar-list">
-                        <li class="menu-item">
-                            <a href="#" class="display-flex">
-                                <figure class="margin-0 display-flex">
-                                    <img class="signin-image"
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE20lEQVR4nNVZe2xTVRj/iFFifERBowTjI0EkQvQPEzUxmvjgXwMSMPqXf6AQdRIzX5iQYe/ZxI0xJ2E4jKAIhgxBZkyTunPbtc021q0dbix278m6B+1Y1/fjrvcz566Dbt1qe+7tqr/kS25y+33n9zvnu+d85yuABigxwf2lIrwpUKgmFAwChT6BwpRAIZ409tyXfFctiPAG84FCoqwBVhMjfCBQaCMiIKfZBBGKWKxlI15iggeICF8TEUIqiM8zQYSgIEIVobA2b8Rr2+FmHYU9hEJAK+Ik3UKCCPur9bBSU/I6ER4jFC7lkTjOWxEKHWUNsF4T8sQI2/I867iECD+hsFUdeQpvEQrScpMnN76NGUJhNxd5gcKuQhEn6UKKcpt5I2xT1P8HyJPkSugobMmKfJkJ1hERfIUmTRYahUCpCTZkJF9SB7dotdt81XgbHm3ZoFh54+1aCXGw7XzpvBfhMzUDHLLci9YhHbqDl3Ehrgb+RMvgF1hpWa02nT5aPO8prGUnIm9gQ08Rxmb8+G+IStOod+5WlUrEDGvSBcyWBxxBV6Dd9S3minZXjeLLKaQyvTDjrG3MgyXIC9PA57xpFJxXALKqkifQsdYnUJYT3AJkOYHftT7JJ4LCezc+Xs6SuNfzG6qF0/0r7yq0zs6+GdYIFORcA1RaVmFCllQLSMhxPGi+i2cF5FIK9wG7SfHMwC+dr6FWONu5hW8VGuB1lj7VPM4NvR9qJuCP3j28aVTF9n8Dj3PjwD7NBDQO7OMVoGen7wCPs965SzMBv/+1k08AhT52gF3jcf7R/rxmAn5of45LAKHgYQJiPM6lxpswFPeoJh+MXVVicaZQlFsAM+uQoFqAZXA/3+ynCOBKIWYV5jsxEBvjJu+PurC88Q5uAbMpRKGfO4AI+L3tKZQS4ZzJS4kInmh7hp/89Y+YcxtNtVOOlzEcv5Y1+XB8En9yvKhqzGQK6bkPsoV2uOlh7J44w0q0DNRlvDzxM37T9KDq8cjcQcYarVoEm7OalkdR7P9EKdJcvouKsWfa9zEeaV6n2TiE7YQi7ABWEPEUc4U2Ya6YS97GbP9DAS2pl/miQhMiuZoR3p13pVRzoV/KWJ3PU+uTXK+UyVWo4id6N57r2qFc7kemmzAiedP2n4g0pbxjvznXtV2VMEGEgxq0VVbg6Y7N6HSf57qZMR+n+zye7nglp+4E61ov+fcUofBpNkFOtD2LV7xW1AqjPhuetL+QlYBSCsWwFFjbjrXvMrULHaPHMF9wjNYqY2RIHXvG1mKm5m5Ny3qcDDkx35gMOZXDME0AhQD7pygj+ZRU2praXmdFlxa1f7YIxd14vO3p1Jmf0Ynwalbkr4swwjvMufbixkV3lXwjKvmUppdSJVDYCTyotNzz9nRkGAsFb3gIK8yr3gc1aB4uL4nEvZlKzLwgKvlk28hhHWgB68CBzROBjuBykR/z24NNw1++BFpC31u0snv8TD2bmXwRj0jT8qWx44a65u23Qr5g6t+7qcdTb49Kfs2ERCWf3OO50E6H9z4OywWDs/iRrvFTZ8f9Dj9Pi535jPnt/s7xk3Vid/FDy0Z8MTT1V2yyu45WOT31jhFvs8cbHoqF41My6zwzY8/e8GBsZLrZ3eO5YLddOXLI+veBjVoM/g+tjWE7oZqnxgAAAABJRU5ErkJggg==">
-                                </figure>
-                            </a>
-                        </li>
+                        <li class="menu-item display-flex justify-content-centre align-items-centre drop-menu" id="loginIcon">
+                            <figure class="margin-0 display-flex">
+                              <img class="signin-image"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE20lEQVR4nNVZe2xTVRj/iFFifERBowTjI0EkQvQPEzUxmvjgXwMSMPqXf6AQdRIzX5iQYe/ZxI0xJ2E4jKAIhgxBZkyTunPbtc021q0dbix278m6B+1Y1/fjrvcz566Dbt1qe+7tqr/kS25y+33n9zvnu+d85yuABigxwf2lIrwpUKgmFAwChT6BwpRAIZ409tyXfFctiPAG84FCoqwBVhMjfCBQaCMiIKfZBBGKWKxlI15iggeICF8TEUIqiM8zQYSgIEIVobA2b8Rr2+FmHYU9hEJAK+Ik3UKCCPur9bBSU/I6ER4jFC7lkTjOWxEKHWUNsF4T8sQI2/I867iECD+hsFUdeQpvEQrScpMnN76NGUJhNxd5gcKuQhEn6UKKcpt5I2xT1P8HyJPkSugobMmKfJkJ1hERfIUmTRYahUCpCTZkJF9SB7dotdt81XgbHm3ZoFh54+1aCXGw7XzpvBfhMzUDHLLci9YhHbqDl3Ehrgb+RMvgF1hpWa02nT5aPO8prGUnIm9gQ08Rxmb8+G+IStOod+5WlUrEDGvSBcyWBxxBV6Dd9S3minZXjeLLKaQyvTDjrG3MgyXIC9PA57xpFJxXALKqkifQsdYnUJYT3AJkOYHftT7JJ4LCezc+Xs6SuNfzG6qF0/0r7yq0zs6+GdYIFORcA1RaVmFCllQLSMhxPGi+i2cF5FIK9wG7SfHMwC+dr6FWONu5hW8VGuB1lj7VPM4NvR9qJuCP3j28aVTF9n8Dj3PjwD7NBDQO7OMVoGen7wCPs965SzMBv/+1k08AhT52gF3jcf7R/rxmAn5of45LAKHgYQJiPM6lxpswFPeoJh+MXVVicaZQlFsAM+uQoFqAZXA/3+ynCOBKIWYV5jsxEBvjJu+PurC88Q5uAbMpRKGfO4AI+L3tKZQS4ZzJS4kInmh7hp/89Y+YcxtNtVOOlzEcv5Y1+XB8En9yvKhqzGQK6bkPsoV2uOlh7J44w0q0DNRlvDzxM37T9KDq8cjcQcYarVoEm7OalkdR7P9EKdJcvouKsWfa9zEeaV6n2TiE7YQi7ABWEPEUc4U2Ya6YS97GbP9DAS2pl/miQhMiuZoR3p13pVRzoV/KWJ3PU+uTXK+UyVWo4id6N57r2qFc7kemmzAiedP2n4g0pbxjvznXtV2VMEGEgxq0VVbg6Y7N6HSf57qZMR+n+zye7nglp+4E61ov+fcUofBpNkFOtD2LV7xW1AqjPhuetL+QlYBSCsWwFFjbjrXvMrULHaPHMF9wjNYqY2RIHXvG1mKm5m5Ny3qcDDkx35gMOZXDME0AhQD7pygj+ZRU2praXmdFlxa1f7YIxd14vO3p1Jmf0Ynwalbkr4swwjvMufbixkV3lXwjKvmUppdSJVDYCTyotNzz9nRkGAsFb3gIK8yr3gc1aB4uL4nEvZlKzLwgKvlk28hhHWgB68CBzROBjuBykR/z24NNw1++BFpC31u0snv8TD2bmXwRj0jT8qWx44a65u23Qr5g6t+7qcdTb49Kfs2ERCWf3OO50E6H9z4OywWDs/iRrvFTZ8f9Dj9Pi535jPnt/s7xk3Vid/FDy0Z8MTT1V2yyu45WOT31jhFvs8cbHoqF41My6zwzY8/e8GBsZLrZ3eO5YLddOXLI+veBjVoM/g+tjWE7oZqnxgAAAABJRU5ErkJggg==">
+                            </figure>
+                            <figcaption id="signin_image_caption">Login</figcaption>
+                            <div class="account-drop-down" id="account_drop_down">
+                              <div class="display-flex position-absolute drop-down-container" id="showAccount">
+                                <ul class="display-flex submenu-list padding-0 margin-0">
+                                  <li id="username">Hi, User</li>
+                                  <li class="account-submenu-item">Profile</li>
+                                  <li class="account-submenu-item">Saved Recipes</li>
+                                  <li class="account-submenu-item" onclick="logout()">LogOut</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </li>
                         <li class="menu-item responsive-menu-bar-show drop-menu">
                             <a href="#"><span>Recipes</span><i class="fa fa-caret-down"></i></a>
                             <div class="display-none drop-down-menu-list">
-                                <div class="display-flex position-absolute drop-down-container">
+                                <div class="display-flex position-absolute drop-down-container" id="recipe_dropdown">
                                     <div class="submenu-container">
-                                      <p class="margin-0 padding-1">Meal</p>
-                                      <ul class="display-flex submenu-list padding-x-1">
-                                        <li class="submenu-item" data-category="mealType" data-value="breakfast">Breakfast</li>
-                                        <li class="submenu-item" data-category="mealType" data-value="lunch">Lunch</li>
-                                        <li class="submenu-item" data-category="mealType" data-value="dinner">dinner</li>
-                                        <li class="submenu-item" data-category="mealType" data-value="snack">Snack</li>
-                                        <li class="submenu-item" data-category="mealType" data-value="teatime">Tea Time</li>
-                                      </ul>
+                                        <p class="margin-0 padding-1">Meal</p>
+                                        <ul class="display-flex submenu-list padding-x-1">
+                                            <li class="submenu-item" data-category="mealType" data-value="breakfast">
+                                                Breakfast</li>
+                                            <li class="submenu-item" data-category="mealType" data-value="lunch">Lunch
+                                            </li>
+                                            <li class="submenu-item" data-category="mealType" data-value="dinner">dinner
+                                            </li>
+                                            <li class="submenu-item" data-category="mealType" data-value="snack">Snack
+                                            </li>
+                                            <li class="submenu-item" data-category="mealType" data-value="teatime">Tea
+                                                Time</li>
+                                        </ul>
                                     </div>
                                     <div class="submenu-container">
-                                      <p class="margin-0 padding-1">Dish</p>
-                                      <ul class="display-flex submenu-list padding-x-1">
-                                        <li class="submenu-item" data-category="dishType" data-value="desserts">Desserts</li>
-                                        <li class="submenu-item" data-category="dishType" data-value="drinks">Drinks</li>
-                                        <li class="submenu-item" data-category="dishType" data-value="main course">Main Course</li>
-                                        <li class="submenu-item" data-category="dishType" data-value="sweets">Sweets</li>
-                                      </ul>
+                                        <p class="margin-0 padding-1">Dish</p>
+                                        <ul class="display-flex submenu-list padding-x-1">
+                                            <li class="submenu-item" data-category="dishType" data-value="desserts">
+                                                Desserts</li>
+                                            <li class="submenu-item" data-category="dishType" data-value="drinks">Drinks
+                                            </li>
+                                            <li class="submenu-item" data-category="dishType" data-value="main course">
+                                                Main Course</li>
+                                            <li class="submenu-item" data-category="dishType" data-value="sweets">Sweets
+                                            </li>
+                                        </ul>
                                     </div>
                                     <div class="submenu-container">
-                                      <p class="margin-0 padding-1">Cuisine</p>
-                                      <ul class="display-flex submenu-list padding-x-1">
-                                        <li class="submenu-item" data-category="cuisineType" data-value="italian">Italian</li>
-                                        <li class="submenu-item" data-category="cuisineType" data-value="indian">Indian</li>
-                                        <li class="submenu-item" data-category="cuisineType" data-value="chinese">Chinese</li>
-                                        <li class="submenu-item" data-category="cuisineType" data-value="asian">Asian</li>
-                                        <li class="submenu-item" data-category="cuisineType" data-value="american">American</li>
-                                        <li class="submenu-item" data-category="cuisineType" data-value="World">World</li>
-                                      </ul>
+                                        <p class="margin-0 padding-1">Cuisine</p>
+                                        <ul class="display-flex submenu-list padding-x-1">
+                                            <li class="submenu-item" data-category="cuisineType" data-value="italian">
+                                                Italian</li>
+                                            <li class="submenu-item" data-category="cuisineType" data-value="indian">
+                                                Indian</li>
+                                            <li class="submenu-item" data-category="cuisineType" data-value="chinese">
+                                                Chinese</li>
+                                            <li class="submenu-item" data-category="cuisineType" data-value="asian">
+                                                Asian</li>
+                                            <li class="submenu-item" data-category="cuisineType" data-value="american">
+                                                American</li>
+                                            <li class="submenu-item" data-category="cuisineType" data-value="World">
+                                                World</li>
+                                        </ul>
                                     </div>
                                     <div class="submenu-container">
                                         <p class="margin-0 padding-1">Health</p>
                                         <ul class="display-flex submenu-list padding-x-1">
-                                          <li class="submenu-item" data-category="health" data-value="vegan">Vegan</li>
-                                          <li class="submenu-item" data-category="health" data-value="vegetarian">Vegetarian</li>
-                                          <li class="submenu-item" data-category="health" data-value="alcohol-free">Alocohol Free</li>
-                                          <li class="submenu-item" data-category="health" data-value="low-sugar">Low Sugar</li>
-                                          <li class="submenu-item" data-category="health" data-value="gluten-free">Gluten Free</li>
-                                          <li class="submenu-item" data-category="health" data-value="no-oil-added">No Oil</li>
+                                            <li class="submenu-item" data-category="health" data-value="vegan">Vegan
+                                            </li>
+                                            <li class="submenu-item" data-category="health" data-value="vegetarian">
+                                                Vegetarian</li>
+                                            <li class="submenu-item" data-category="health" data-value="alcohol-free">
+                                                Alocohol Free</li>
+                                            <li class="submenu-item" data-category="health" data-value="low-sugar">Low
+                                                Sugar</li>
+                                            <li class="submenu-item" data-category="health" data-value="gluten-free">
+                                                Gluten Free</li>
+                                            <li class="submenu-item" data-category="health" data-value="no-oil-added">No
+                                                Oil</li>
                                         </ul>
-                                      </div>
-                                  </div>
+                                    </div>
+                                </div>
                             </div>
                         </li>
                         <li class="menu-item responsive-menu-bar-hide">
@@ -169,7 +144,7 @@
 
     <main>
         <section class="display-flex align-items-centre justify-content-centre" id="recipe_section">
-            
+
         </section>
         <div class="recipe-body">
             <div>Short details of Recipe(mealtype, caloreis, time taken)</div>
@@ -189,37 +164,37 @@
             <section class="top-footer display-flex padding-x-2">
                 <div class="top-footer-primary display-grid">
                     <a href="/">
-                      <figure class="display-flex margin-1 padding-x-1">
-                        <img src="/media/image/logo.png" alt="website-logo" class="website-logo">
-                        <figcaption>Recipe Hub</figcaption>
-                      </figure>
+                        <figure class="display-flex margin-1 padding-x-1">
+                            <img src="/media/image/logo.png" alt="website-logo" class="website-logo">
+                            <figcaption>Recipe Hub</figcaption>
+                        </figure>
                     </a>
                     <div class="follow-us margin-x-1 display-grid">
                     </div>
-                  </div>
-                  <div class="top-footer-secondary display-flex padding-y-2">
+                </div>
+                <div class="top-footer-secondary display-flex padding-y-2">
                     <div class="quick-menu margin-x-2">
-                      <p>Quick Menu</p>
-                      <ul class="display-grid padding-0">
-                        <li class="submenu-item" data-category="search" data-value="">
-                          Search
-                        </li>
-                        <li class="submenu-item" data-category="all" data-value="all">
-                          All
-                        </li>
-                        <li class="submenu-item" data-category="time" data-value="0-30">
-                          Quick + Easy
-                        </li>
-                        <li class="submenu-item" data-category="health" data-value="vegan">
-                          Cuisine
-                        </li>
-                        <li class="submenu-item" data-category="health" data-value="vegan">
-                          Seasonal
-                        </li>
-                        <li class="submenu-item" data-category="health" data-value="vegan">
-                          Vegan
-                        </li>
-                      </ul>
+                        <p>Quick Menu</p>
+                        <ul class="display-grid padding-0">
+                            <li class="submenu-item" data-category="search" data-value="">
+                                Search
+                            </li>
+                            <li class="submenu-item" data-category="all" data-value="all">
+                                All
+                            </li>
+                            <li class="submenu-item" data-category="time" data-value="0-30">
+                                Quick + Easy
+                            </li>
+                            <li class="submenu-item" data-category="health" data-value="vegan">
+                                Cuisine
+                            </li>
+                            <li class="submenu-item" data-category="health" data-value="vegan">
+                                Seasonal
+                            </li>
+                            <li class="submenu-item" data-category="health" data-value="vegan">
+                                Vegan
+                            </li>
+                        </ul>
                     </div>
                     <div class="our-website margin-x-2">
                         <p>Recipe Hub</p>
@@ -323,6 +298,28 @@
             </section>
         </section>
     </footer>
+
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256"
+                width="24px" height="24px">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                    stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                    font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                    style="mix-blend-mode: normal">
+                    <g transform="scale(5.33333,5.33333)">
+                        <path
+                            d="M44,24c0,11.045 -8.955,20 -20,20c-11.045,0 -20,-8.955 -20,-20c0,-11.045 8.955,-20 20,-20c11.045,0 20,8.955 20,20z"
+                            fill="#4caf50"></path>
+                        <path d="M34.586,14.586l-13.57,13.586l-5.602,-5.586l-2.828,2.828l8.434,8.414l16.395,-16.414z"
+                            fill="#ffffff"></path>
+                    </g>
+                </g>
+            </svg>
+            <p id="alertMessage"></p>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+    </div>
 
     <script src="/assets/scripts/common.js"></script>
     <script src="/assets/scripts/recipe.js"></script>

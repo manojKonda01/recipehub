@@ -136,12 +136,14 @@ li.nested-submenu-item:hover{
     gap: 0.5rem;
 }
 .drop-down-container{
-    right: 0;
     font-family: 'Arvo', serif;
     background: white;
     box-shadow: 0 0.1875rem 0.5625rem rgba(0,0,0,.15);
     gap: 0.5rem;
     z-index: 1;
+}
+#recipe_dropdown{
+    right: 0;
 }
 .submenu-item, .account-submenu-item, #username{
     list-style-type: none;
