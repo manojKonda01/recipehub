@@ -24,7 +24,6 @@ async function loginUser(email, password) {
     await connectToMongoDB();
     const db = client.db('recipehub');
     const user = await db.collection('users').findOne({ email });
-
     if (user) {
       // Compare the provided password with the hashed password from the database
       const passwordMatch = await bcrypt.compare(password, user.password);
@@ -68,7 +67,7 @@ async function signupUser(user) {
     await insertUser(user);
     console.log('User successfully registered!');
     const newUser = await db.collection('users').findOne({ email });
-    return { success: true, message: 'Registered Successfully', user: newUser};
+    return { success: true, message: 'Registered Successfully', user: newUser };
   }
   catch (error) {
     console.error('Error during signup:', error.message);
@@ -100,4 +99,30 @@ async function insertUser(user) {
   return success;
 }
 
-module.exports = { connectToMongoDB, loginUser, signupUser, getClient: () => client };
+async function updatePreferences(userEmail, preferences) {
+  try {
+    await connectToMongoDB();
+    const db = client.db('recipehub');
+    const userCollection = db.collection('users');
+    const updateQuery = { email: userEmail };
+    const update = {
+      $set: {
+        userPreferences : preferences
+      }
+  };
+    userCollection.updateOne(updateQuery, update, (updateErr) => {
+      if (updateErr) {
+        console.error('Error updating user preferences:', updateErr);
+      } else {
+        console.log('User preferences updated successfully');
+      }
+      client.close();
+    });
+    return {success: true, message: 'User preferences updated successfully'};
+  }
+  catch (error) {
+    console.error('Error Updating Preferences: ', error.message);
+    return {success: false, message: error.message};
+  }
+}
+module.exports = { connectToMongoDB, loginUser, signupUser, updatePreferences, getClient: () => client };

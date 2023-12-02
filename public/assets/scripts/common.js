@@ -5,34 +5,54 @@ let session = false;
 
 // Fetch Api
 const fetchReturnDataJson = async (url, request) => {
-  let responseData = await fetch(url + request);
-  return await responseData.json();
+  // Check if data is already in localStorage
+  const cachedData = localStorage.getItem(url+request);
+  if(cachedData){
+    // If cached data is available, parse and return it
+    console.log('data is from cache');
+    return JSON.parse(cachedData);
+  }
+  else{
+    console.log('api data');
+    const response = await fetch(url + request);
+    if(response.ok){
+      const data = await response.json();
+      localStorage.setItem(url+request, JSON.stringify(data));
+      return data;
+    }
+  }
 };
 
 // Check Session for user
 async function sessionVerify() {
   // Check user login and get session data
-  const sessionData = await fetchReturnDataJson('/api/sessionVerify', '');
-  if (sessionData.status === 200) {
-    session = true;
-    loginUser.innerHTML = 'My Account';
-    username.innerHTML = 'Hi, ' + sessionData.user.name;
+  const sessionFetch = await fetch('/api/sessionVerify');
+  if (sessionFetch.ok) {
+    const sessionData = await sessionFetch.json();
+    if (sessionData.status === 200) {
+      session = true;
+      loginUser.innerHTML = 'My Account';
+      username.innerHTML = 'Hi, ' + sessionData.user.name;
+      // store user data in local cache
+      localStorage.setItem('user', JSON.stringify(sessionData.user));
+    }
+    else if (sessionData.status === 404) {
+      loginUser.innerHTML = 'Login';
+      localStorage.removeItem('user');
+    }
+    // Display modals with diff msgs when login signup and logout success
+    if (sessionStorage.getItem('modal') === 'login') {
+      openModal('Logged in. Welcome Back ' + sessionData.user.name + ' !');
+    }
+    else if (sessionStorage.getItem('modal') === 'signup') {
+      openModal('Welcome ' + sessionData.user.name + ' !');
+    }
+    else if (sessionStorage.getItem('modal') === 'logout') {
+      openModal('Logged Out Successfully');
+    }
+    sessionStorage.setItem('modal', '');
+    sessionStorage.setItem('username', '');
   }
-  else if (sessionData.status === 404) {
-    loginUser.innerHTML = 'Login';
-  }
-  // Display modals with diff msgs when login signup and logout success
-  if (sessionStorage.getItem('modal') === 'login') {
-    openModal('Logged in. Welcome Back ' + sessionData.user.name + ' !');
-  }
-  else if (sessionStorage.getItem('modal') === 'signup') {
-    openModal('Welcome ' + sessionData.user.name + ' !');
-  }
-  else if (sessionStorage.getItem('modal') === 'logout') {
-    openModal('Logged Out Successfully');
-  }
-  sessionStorage.setItem('modal', '');
-  sessionStorage.setItem('username', '')
 }
 sessionVerify();
 // Login Icon
@@ -57,11 +77,10 @@ myaccount.addEventListener('mouseleave', function () {
     showAccount.style.display = 'none';
   }
 });
-// const edamamID = 'a95235c2';
-const edamamID = 'a29ca2af';
 
-// const edamamKey = '564076ca84419d8fb46806893bfcf5d4';
-const edamamKey = 'c6337b9eed35a5669b86dd5a6c188cc2';
+// Edamam API ID and Key 
+const edamamID = '6d7cac0d';
+const edamamKey = 'b1976c96297a0b1dfd3715d8497f59a6';
 
 const filters = {
   mealType: ['breakfast', 'lunch', 'dinner', 'snack', 'teatime'],
@@ -269,7 +288,8 @@ function logout() {
   fetch('/api/logout').then(response => response.json())
     .then(data => {
       if (data.status === 200) {
-        sessionStorage.setItem('modal', 'logout')
+        localStorage.removeItem('user');
+        sessionStorage.setItem('modal', 'logout');
         location.reload();
       }
       else {

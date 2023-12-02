@@ -39,10 +39,13 @@ function load_popular_recipes_section() {
 
 // Load Quick Recipe DOM
 const load_quickRecipes_DOM = async () => {
-    let jsonData = await quickRecipesData(0, 4);
+    const maxTime = 30;
+    const requestData = `&time=0-${maxTime}`;
+    // fetchReturnDataJson() is in common.js file
+    let jsonData = await fetchReturnDataJson(`https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=${edamamID}&app_key=${edamamKey}&random=true`, requestData);;
     const quickRecipe = document.getElementById('quick_easy_recipes');
     let appenHtml = '';
-    for (let i = 0; i < jsonData.hits.length; i++) {
+    for (let i = 0; i < 4; i++) {
         appenHtml += createRecipeCard(jsonData.hits[i].recipe);
     }
     quickRecipe.innerHTML = appenHtml;
@@ -50,23 +53,30 @@ const load_quickRecipes_DOM = async () => {
 
 // Load Recommended Recipes DOM
 const load_recommended_recipes = async () => {
+    document.getElementById('recommended').style.display = 'none';
     const recommndedRecipe_section = document.getElementById('recommended_recipes');
-    const login = false;
-    // If no login show Random Recipes
-    if (!login) {
-        document.getElementById('recommended_section_text').innerHTML = 'Recommended Recipes';
-        const randomDishTypes = getRandomDishTypeSubarrays(filters['dishType'], 8);
-        const dishTypeQuery = randomDishTypes.map(type => `&dishType=${type}`).join('+');
-        const randomRecipeData = await fetchReturnDataJson(apiUrl, `&from=${0}&to=${4}` + dishTypeQuery);
-        let appenHtml = '';
-        for (let i = 0; i < randomRecipeData.hits.length; i++) {
-            appenHtml += createRecipeCard(randomRecipeData.hits[i].recipe);
+    // Check User Session
+    const userSession = JSON.parse(localStorage.getItem('user'));
+    if (userSession){
+        document.getElementById('recommended').style.display = 'block';
+        // Create request for recommeneded recipes for a user.
+        document.getElementById('recommended_section_text').innerHTML = 'Recommended for you';
+        let requestUrl = '';
+        if(userSession.userPreferences){
+            for ( each in userSession.userPreferences){
+                userSession.userPreferences[each].forEach((preference) => {
+                    requestUrl += '&'+each+'='+preference;
+                });
+            }
         }
+        const recommendedRecipeData = await fetchReturnDataJson(`https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=${edamamID}&app_key=${edamamKey}&random=true`, requestUrl);
+        let appenHtml = '';
+        for (let i = 0; i < 8; i++) {
+            appenHtml += createRecipeCard(recommendedRecipeData.hits[i].recipe);
+        }
+        document.getElementById('recommended_section_text').setAttribute('data-category','recommended');
+        document.getElementById('recommended_section_text').setAttribute('data-value','na');
         recommndedRecipe_section.innerHTML = appenHtml;
-    }
-    // else show Recommended Recipes
-    else {
-        document.getElementById('recommended_section_text').innerHTML = 'Recommended Recipes';
     }
 
 }
@@ -90,14 +100,3 @@ playVideo.addEventListener('click', function () {
     this.style.display = 'none';
     pauseVideo.style.display = 'block';
 });
-
-// Fetch Quick Recipes Data from API
-const quickRecipesData = async (from, to) => {
-    const maxTime = 30;
-    const sort = 'alphabet';
-    const randomDishTypes = getRandomDishTypeSubarrays(filters['dishType'], 12);
-    const dishTypeQuery = randomDishTypes.map(type => `&dishType=${type}`).join('+');
-    const requestData = `&time=0-${maxTime}&sort=${sort}&from=${from}&to=${to}${dishTypeQuery}`;
-    // fetchReturnDataJson() is in common.js file
-    return fetchReturnDataJson(apiUrl, requestData);
-}

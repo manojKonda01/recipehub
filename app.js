@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const { connectToMongoDB, loginUser, signupUser } = require('./database')
+const { connectToMongoDB, loginUser, signupUser, updatePreferences} = require('./database')
 require('dotenv').config();
 
 
@@ -27,6 +27,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
+
+// const allowedURLs = ['/recipe', '/category', '/login', '/api/login', '/api/logout', '/api/signup', '/api/sessionVerify'];
+
+// app.use((req, res, next) => {
+//     const requestedURL = req.url.split('?')[0];
+//     if (allowedURLs.includes(requestedURL)) {
+//         // Do nothing, allow access to login and signup pages
+//         next();
+//     }else {
+//         // Redirect to the home page
+//         res.redirect('/');
+//     }
+// });
 
 //route to handle requests for the home page
 app.get('/', (req, res) => {
@@ -119,6 +132,24 @@ app.get('/api/sessionVerify', (req, res) => {
     }
     else {
         res.json({ status: 404 });
+    }
+})
+
+app.post('/api/updatePreferences', async (req, res) => {
+    try {
+        const { email, updatedPreferences } = req.body;
+        const result = await updatePreferences(email, updatedPreferences);
+        console.log(result);
+        if (result.success) {
+            res.status(200).json({ status: 200, message: result.message });
+            req.session.user.userPreferences = result.updatedPreferences;
+        } else {
+            res.status(401).json({ status: 401, message: result.message });
+        }
+    }
+    catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: error.message });
     }
 })
 

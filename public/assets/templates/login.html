@@ -50,81 +50,109 @@
                     <figcaption>Recipe Hub</figcaption>
                 </a>
             </figure>
-            <div id="loginForm">
-                <form>
-                    <div class="signup-input">
-                        <div class="icon-container">
-                            <i class="fa fa-envelope"></i>
+            <div id="login_content">
+                <div id="loginForm">
+                    <form>
+                        <div class="signup-input">
+                            <div class="icon-container">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <input type="email" name="login_email" id="login_email" placeholder="Email *">
+                            <div id="invalid_login_email" class="invalid-msg"></div>
                         </div>
-                        <input type="email" name="login_email" id="login_email" placeholder="Email *">
-                        <div id="invalid_login_email" class="invalid-msg"></div>
-                    </div>
-                    <div class="signup-input">
-                        <div class="icon-container">
-                            <i class="fa fa-lock"></i>
+                        <div class="signup-input">
+                            <div class="icon-container">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                            <input type="password" name="login_password" id="login_password" placeholder="Password *">
+                            <div id="invalid_login_password" class="invalid-msg"></div>
                         </div>
-                        <input type="password" name="login_password" id="login_password" placeholder="Password *">
-                        <div id="invalid_login_password" class="invalid-msg"></div>
-                    </div>
-                    <button onclick="login()" type="submit">Login</button>
-                </form>
-                <p>Don't have an account? <span class="login_toggle" onclick="toggleForms()">Sign up</span></p>
+                        <button onclick="login()" type="submit">Login</button>
+                    </form>
+                    <p>Don't have an account? <span class="login_toggle" onclick="toggleForms()">Sign up</span></p>
+                </div>
+                <div id="signupForm" style="display: none;">
+                    <form>
+                        <div class="signup-conntainer">
+                            <div class="signup-input">
+                                <div class="icon-container">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <input type="text" name="name" id="name" placeholder="Name *">
+                            </div>
+                            <div class="signup-input">
+                                <div class="icon-container">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <input type="email" name="email" id="email" placeholder="Email *">
+                                <div id="invalid_email" class="invalid-msg"></div>
+                            </div>
+                            <div class="signup-input">
+                                <div class="icon-container">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <input type="password" name="password" id="password" placeholder="Password *">
+                            </div>
+                            <div class="signup-input">
+                                <div class="icon-container">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <input type="password" name="verify_password" id="verify_password"
+                                    placeholder="Confirm Password *">
+                                <div id="invalid_confirm_password" class="invalid-msg"></div>
+                            </div>
+                            <div id="invalid_fields" class="invalid-msg margin-y-1"></div>
+                            <button onclick="signup()" type="submit">Sign up</button>
+                        </div>
+                    </form>
+                    <p>Already have an account? <span class="login_toggle" onclick="toggleForms()">Login</span></p>
+                </div>
             </div>
-            <div id="signupForm" style="display: none;">
-                <form>
-                    <div class="signup-input">
-                        <div class="icon-container">
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <input type="text" name="name" id="name" placeholder="Name *">
-                    </div>
-                    <div class="signup-input">
-                        <div class="icon-container">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <input type="email" name="email" id="email" placeholder="Email *">
-                        <div id="invalid_email" class="invalid-msg"></div>
-                    </div>
-                    <div class="signup-input">
-                        <div class="icon-container">
-                            <i class="fa fa-lock"></i>
-                        </div>
-                        <input type="password" name="password" id="password" placeholder="Password *">
-                    </div>
-                    <div class="signup-input">
-                        <div class="icon-container">
-                            <i class="fa fa-lock"></i>
-                        </div>
-                        <input type="password" name="verify_password" id="verify_password"
-                            placeholder="Confirm Password *">
-                        <div id="invalid_confirm_password" class="invalid-msg"></div>
-                    </div>
-                    <div id="invalid_fields" class="invalid-msg margin-y-1"></div>
-                    <button onclick="signup()" type="submit">Sign up</button>
-                </form>
-                <p>Already have an account? <span class="login_toggle" onclick="toggleForms()">Login</span></p>
-            </div>
+            <div id="spinner"></div>
         </div>
     </div>
-    <div id="alertModal" class="modal">
-        <div class="modal-content">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256"
-                width="24px" height="24px">
-                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                    stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                    font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                    style="mix-blend-mode: normal">
-                    <g transform="scale(5.33333,5.33333)">
-                        <path
-                            d="M44,24c0,11.045 -8.955,20 -20,20c-11.045,0 -20,-8.955 -20,-20c0,-11.045 8.955,-20 20,-20c11.045,0 20,8.955 20,20z"
-                            fill="#4caf50"></path>
-                        <path d="M34.586,14.586l-13.57,13.586l-5.602,-5.586l-2.828,2.828l8.434,8.414l16.395,-16.414z"
-                            fill="#ffffff"></path>
-                    </g>
-                </g>
-            </svg>
-            <p id="alertMessage"></p>
-            <span class="close" onclick="closeModal()">&times;</span>
+    <div class="preferences-modal" id="preferences">
+        <div class="preferences-modal-content">
+            <!-- Progress -->
+            <div class="display-flex modal-head">
+                <div class="skip-survey" onclick="skip()">Skip</div>
+                <div class="progress-container display-flex align-items-centre justify-content-centre">
+                    <div class="progress active"></div>
+                    <div class="progress"></div>
+                    <div class="progress"></div>
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div class="labels-container">
+                <div class="labels show">
+                    <p>What Diets interests you ?</p>
+                    <div id="diet_labels">
+
+                    </div>
+                </div>
+                <div class="labels">
+                    <p>What Health Labels suits you?</p>
+                    <div id="health_labels">
+
+                    </div>
+                </div>
+                <div class="labels">
+                    <p>What DishTypes you like ?</p>
+                    <div id="dishType_labels">
+
+                    </div>
+                </div>
+                <div class="labels">
+                    <p>What Cuisines you prefer ?</p>
+                    <div id="cuisineType_labels">
+
+                    </div>
+                </div>
+            </div>
+            <div class="slide-container display-flex align-items-centre justify-content-centre">
+                <button onclick="showDiv('prev')" class="slide" id="prev">Back</button>
+                <button onclick="showDiv('next')" class="slide active" id="next">Next</button>
+            </div>
         </div>
     </div>
     <script src="assets/scripts/login.js"></script>

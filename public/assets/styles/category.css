@@ -4,7 +4,7 @@ main {
     flex-direction: column;
 }
 
-.filters label {
+#filters label {
     display: block;
     font-size: small;
     color: rgba(0, 0, 0, 0.6);
@@ -106,7 +106,7 @@ aside{
 }
 .recipes{
     flex: 4;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 .recipes h1{
     margin: 2rem 0;
@@ -117,6 +117,9 @@ aside{
 .recipe-cat-list-item input:hover{
     cursor: pointer;
 }
+.recipe-cat-list-item{
+    font-size: small;
+}
 .recipe-list{
     flex-direction: column;
     flex: 4;
@@ -124,4 +127,5 @@ aside{
 .buttons{
     display: flex;
     gap: 1rem;
+    margin-bottom: 1rem;
 }

@@ -13,17 +13,27 @@ const quick = '30';
 
 const searchRecipes = document.querySelector('.search-container');
 const categoryHeading = document.querySelector('.recipes h1');
+searchRecipes.style.display = 'none';
 if (pageType === 'search') {
     // Show Search Input for pageType = 'search' parameter
     searchRecipes.style.display = 'flex';
     categoryHeading.innerText = 'Search Results';
 }
 else if (pageType === 'time') {
-    searchRecipes.style.display = 'none';
     categoryHeading.innerHTML = 'Quick + Easy Recipes';
 }
+else if(pageType === 'recommended'){
+    categoryHeading.innerHTML = 'Recommended for You';
+    // Hide filters
+    document.getElementById('filters').style.display = 'none';
+    const userSession = JSON.parse(localStorage.getItem('user'));
+    if(!userSession){
+        // If user is not logged in display Please login message
+        document.getElementById('categorypage_body').innerHTML = '';
+        alert('Please Login first');
+    }
+}
 else {
-    searchRecipes.style.display = 'none';
     categoryHeading.innerText =
         value.length > 0
             ? formatRecipeName(value)
@@ -41,7 +51,18 @@ window.onload = function () {
         if (searchQuery === '') {
             request = generateDefaultRequest();
         }
-    } else {
+    }
+    else if(pageType === 'recommended'){
+        const userSession = JSON.parse(localStorage.getItem('user'));
+        if(userSession.userPreferences){
+            for ( each in userSession.userPreferences){
+                userSession.userPreferences[each].forEach((preference) => {
+                    request += '&'+each+'='+preference;
+                });
+            }
+        }
+    } 
+    else {
         request =
             value.length > 0
                 ? `&${pageType}=${value}`
@@ -71,11 +92,10 @@ const loadFiltersDOM = () => {
             filters[category].forEach((option) => {
                 // Create a each filter checkbox
                 eachFilterList += `<li class="recipe-cat-list-item">
-                    <label for="${option}">
+                    <label for="${option}"></label>
                         <input type="checkbox" name="${category}" id="${category}_${option}" data-value="${option}">${capitalizeAndReplaceHyphens(
                     option
                 )}
-                    </label>
                 </li>`;
             });
             let seeMore_list = '';
@@ -202,7 +222,7 @@ const loadFiltersDOM = () => {
 
 const prevButton = document.getElementById('prev_page');
 const nextButton = document.getElementById('next_page');
-// fetch search results from API and show ina div id="search_recipes"
+// fetch search results from API and show in a div id="search_recipes"
 const loadRecipes = async (searchQuery, request, page) => {
     apiUrl = `https://api.edamam.com/search?&q=${searchQuery}&app_id=${edamamID}&app_key=${edamamKey}`;
     const recipeSection = document.getElementById('search_recipes');
@@ -236,7 +256,8 @@ function searchHandleSubmit(event) {
         searchQuery = searchMoreInput;
     }
     else {
-        searchQuery = fixedSearchQuery;
+        alert('Serach Input Cannot be empty');
+        return;
     }
     currentPage = 1;
     loadRecipes(searchQuery, request, currentPage);
@@ -253,13 +274,16 @@ prevButton.addEventListener('click', function () {
         currentPage--;
         loadRecipes(searchQuery, request, currentPage);
     }
-    categoryHeading.scrollIntoView()
+    nextButton.classList.remove('active');
+    prevButton.classList.add('active');
+    categoryHeading.scrollIntoView();
 });
 nextButton.addEventListener('click', function () {
     if (currentPage > 0) {
         currentPage++;
         loadRecipes(searchQuery, request, currentPage);
     }
-    categoryHeading.scrollIntoView()
+    nextButton.classList.add('active');
+    prevButton.classList.remove('active');
+    categoryHeading.scrollIntoView();
 });
-// 
