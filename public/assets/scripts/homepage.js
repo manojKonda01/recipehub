@@ -67,9 +67,12 @@ const load_quickRecipes_DOM = async () => {
 const load_recommended_recipes = async () => {
     document.getElementById('recommended').style.display = 'none';
     const recommndedRecipe_section = document.getElementById('recommended_recipes');
+    console.log('recommended');
     // Check User Session
     const userSession = JSON.parse(localStorage.getItem('user'));
+    console.log(userSession);
     if (userSession) {
+        console.log('yes am in');
         document.getElementById('recommended').style.display = 'block';
         // Create request for recommeneded recipes for a user.
         document.getElementById('recommended_section_text').innerHTML = 'Recommended for you';
