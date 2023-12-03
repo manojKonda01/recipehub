@@ -91,7 +91,7 @@ const load_recommended_recipes = async () => {
                 console.log(savedRecipes);
             }
         }
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 8; i++) {
             let saved = false;
             if (savedRecipes.includes(recommendedRecipeData.hits[i].recipe.uri)) {
                 saved = true;
