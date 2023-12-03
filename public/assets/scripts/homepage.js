@@ -23,6 +23,7 @@ window.onload = function () {
 
 function load_popular_recipes_section() {
     const popular_recipes_section = document.getElementById('recipe_cards');
+    
     fetch('assets/scripts/popular_recipes.json')
         .then(response => response.json())
         .then(data => {
@@ -45,8 +46,19 @@ const load_quickRecipes_DOM = async () => {
     let jsonData = await fetchReturnDataJson(`https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=${edamamID}&app_key=${edamamKey}&random=true`, requestData);;
     const quickRecipe = document.getElementById('quick_easy_recipes');
     let appenHtml = '';
+    const user = JSON.parse(localStorage.getItem('user'));
+    let savedRecipes = []
+    if (user) {
+        if(user.savedRecipes){
+            savedRecipes = user.savedRecipes.map(recipe=>recipe.uri)
+        }
+    }
     for (let i = 0; i < 4; i++) {
-        appenHtml += createRecipeCard(jsonData.hits[i].recipe);
+        let saved = false;
+        if (savedRecipes.includes(jsonData.hits[i].recipe.uri)) {
+            saved = true;
+        }
+        appenHtml += createRecipeCard(saved, jsonData.hits[i].recipe);
     }
     quickRecipe.innerHTML = appenHtml;
 }
@@ -57,25 +69,37 @@ const load_recommended_recipes = async () => {
     const recommndedRecipe_section = document.getElementById('recommended_recipes');
     // Check User Session
     const userSession = JSON.parse(localStorage.getItem('user'));
-    if (userSession){
+    if (userSession) {
         document.getElementById('recommended').style.display = 'block';
         // Create request for recommeneded recipes for a user.
         document.getElementById('recommended_section_text').innerHTML = 'Recommended for you';
         let requestUrl = '';
-        if(userSession.userPreferences){
-            for ( each in userSession.userPreferences){
+        if (userSession.userPreferences) {
+            for (each in userSession.userPreferences) {
                 userSession.userPreferences[each].forEach((preference) => {
-                    requestUrl += '&'+each+'='+preference;
+                    requestUrl += '&' + each + '=' + preference;
                 });
             }
         }
         const recommendedRecipeData = await fetchReturnDataJson(`https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=${edamamID}&app_key=${edamamKey}&random=true`, requestUrl);
         let appenHtml = '';
-        for (let i = 0; i < 8; i++) {
-            appenHtml += createRecipeCard(recommendedRecipeData.hits[i].recipe);
+        const user = JSON.parse(localStorage.getItem('user'));
+        let savedRecipes = []
+        if (user) {
+            if(user.savedRecipes){
+                savedRecipes = user.savedRecipes.map(recipe=>recipe.uri);
+                console.log(savedRecipes);
+            }
         }
-        document.getElementById('recommended_section_text').setAttribute('data-category','recommended');
-        document.getElementById('recommended_section_text').setAttribute('data-value','na');
+        for (let i = 0; i < 4; i++) {
+            let saved = false;
+            if (savedRecipes.includes(recommendedRecipeData.hits[i].recipe.uri)) {
+                saved = true;
+            }
+            appenHtml += createRecipeCard(saved, recommendedRecipeData.hits[i].recipe);
+        }
+        document.getElementById('recommended_section_text').setAttribute('data-category', 'recommended');
+        document.getElementById('recommended_section_text').setAttribute('data-value', 'na');
         recommndedRecipe_section.innerHTML = appenHtml;
     }
 

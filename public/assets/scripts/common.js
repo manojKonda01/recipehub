@@ -6,18 +6,18 @@ let session = false;
 // Fetch Api
 const fetchReturnDataJson = async (url, request) => {
   // Check if data is already in localStorage
-  const cachedData = localStorage.getItem(url+request);
-  if(cachedData){
+  const cachedData = sessionStorage.getItem(url + request);
+  if (cachedData) {
     // If cached data is available, parse and return it
     console.log('data is from cache');
     return JSON.parse(cachedData);
   }
-  else{
+  else {
     console.log('api data');
     const response = await fetch(url + request);
-    if(response.ok){
+    if (response.ok) {
       const data = await response.json();
-      localStorage.setItem(url+request, JSON.stringify(data));
+      sessionStorage.setItem(url + request, JSON.stringify(data));
       return data;
     }
   }
@@ -34,6 +34,7 @@ async function sessionVerify() {
       loginUser.innerHTML = 'My Account';
       username.innerHTML = 'Hi, ' + sessionData.user.name;
       // store user data in local cache
+      localStorage.clear();
       localStorage.setItem('user', JSON.stringify(sessionData.user));
     }
     else if (sessionData.status === 404) {
@@ -185,18 +186,113 @@ var searchQuery = '';
 let apiUrl = `https://api.edamam.com/search?&q=${searchQuery}&app_id=${edamamID}&app_key=${edamamKey}`;
 
 // Recipe Card
-const createRecipeCard = (jsonData) => {
+function utf8_to_b64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+const createRecipeCard = (saved, jsonData) => {
+  const encodedData = utf8_to_b64(JSON.stringify(jsonData));
+  let iconClass = 'far fa-heart', dataAttribute = false;
+  if (saved) {
+    iconClass = 'fa fa-heart activeIcon';
+    dataAttribute = true;
+  }
   return `<figure class="margin-0 display-grid">
         <a href="recipe?id=${jsonData.uri.split('_')[1]}" id="${jsonData.uri.split('_')[1]}"><img src="${jsonData.image}" alt="${jsonData.label}"><a>
         <figcaption class="padding-x-1">
         <p class="recipe-image-category-name display-inline-flex">${jsonData.dishType ? jsonData.dishType[0] : ''}</p>
-        <i class="far fa-heart float-right"></i>
+        <span class="save_recipes" onclick="callSaveRecipe(this.getAttribute('id'))" id="${encodedData}" data-saved='${dataAttribute}'>
+          <i class="${iconClass} float-right"></i>
+        </span>
         <hr class='recipe-name-image-seperator'>
         <p class='recipe-card-name'>${jsonData.label}</p>
         </figcaption>
     </figure>`;
 };
 
+// Function to call saveRecipe with Base64-encoded JSON data
+function callSaveRecipe(encodedData) {
+  const user = JSON.parse(localStorage.getItem('user'));
+  // Decode Base64 and parse JSON
+  if (user) {
+    const saveIconContainer = document.getElementById(encodedData)
+    const saveIcon = saveIconContainer.querySelector('i');
+    if (saveIconContainer.getAttribute('data-saved') === 'false') {
+      // Save Recipe
+      saveRecipe(user, JSON.parse(atob(encodedData)));
+      saveIconContainer.setAttribute('data-saved', 'true')
+      saveIcon.classList.remove('far');
+      saveIcon.classList.add('fa');
+    }
+    else if (saveIconContainer.getAttribute('data-saved') === 'true') {
+      // unsave Recipe
+      unSaveRecipe(user, JSON.parse(atob(encodedData)));
+      saveIconContainer.setAttribute('data-saved', 'false')
+      saveIcon.classList.add('far');
+      saveIcon.classList.remove('fa');
+    }
+    saveIcon.classList.toggle('activeIcon')
+  }
+  else {
+    window.location.href = '/login';
+    return;
+  }
+}
+
+// Save Recipe function
+function saveRecipe(user, jsonData) {
+  const email = user.email;
+  if (jsonData) {
+    fetch('/api/saveRecipe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, jsonData }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (user.savedRecipes) {
+          // Check if the recipe exists within the user session
+          const exists = user.savedRecipes.some(obj => obj.uri === jsonData.uri);
+          // If the value doesn't exist, add a new object to the array
+          if (!exists) {
+            user.savedRecipes.push(jsonData);
+            localStorage.setItem('user', JSON.stringify(user));
+          }
+        }
+        console.log(data.message)
+      })
+      .catch(error => console.error('Error during Saving Recipe Data:', error));
+  }
+}
+
+// unSave Recipe function
+function unSaveRecipe(user, jsonData) {
+  const email = user.email;
+  if (jsonData) {
+    fetch('/api/unSaveRecipe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, jsonData }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (user.savedRecipes) {
+          // Find the index of the recipe to remove from user session;
+          const index = user.savedRecipes.findIndex(obj => obj.uri === jsonData.uri);
+          // If the value exists, remove the object from the array
+          if (index !== -1) {
+            user.savedRecipes.splice(index, 1);
+            localStorage.setItem('user', JSON.stringify(user));
+          }
+        }
+        console.log(data.message)
+      })
+      .catch(error => console.error('Error during Unsaving Recipe Data:', error));
+  }
+}
 // Click on list category
 const mealList = document.querySelectorAll('.list-category, .submenu-item, .category-click');
 for (let i = 0; i < mealList.length; i++) {
@@ -290,7 +386,7 @@ function logout() {
       if (data.status === 200) {
         localStorage.removeItem('user');
         sessionStorage.setItem('modal', 'logout');
-        location.reload();
+        window.location.href = '/';
       }
       else {
         alert('LogOut Failed');

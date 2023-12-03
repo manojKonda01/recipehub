@@ -1,11 +1,6 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require("bcryptjs");
 require('dotenv').config();
-
-// const username = encodeURIComponent(process.env.DB_USER);
-// const password = encodeURIComponent(process.env.DB_PASSWORD);
-// console.log(username, password);
-// const uri = `mongodb+srv://${username}:${password}@recipehubcluster.avc0ez1.mongodb.net/?retryWrites=true&w=majority`;
 let client;
 
 const URI = process.env.MONGO_URI;
@@ -19,6 +14,23 @@ async function connectToMongoDB() {
   }
 }
 
+async function getUserDetails(email) {
+  try {
+    await connectToMongoDB();
+    const db = client.db('recipehub');
+    const user = await db.collection('users').findOne({ email });
+    if (user) {
+      return user;
+    }
+    else {
+      return false;
+    }
+  }
+  catch (error) {
+    console.log(error.message);
+  }
+}
+
 async function loginUser(email, password) {
   try {
     await connectToMongoDB();
@@ -27,7 +39,6 @@ async function loginUser(email, password) {
     if (user) {
       // Compare the provided password with the hashed password from the database
       const passwordMatch = await bcrypt.compare(password, user.password);
-
       if (passwordMatch) {
         console.log('User authenticated:', user._id);
         return { success: true, message: 'Login successful', user: user }
@@ -89,6 +100,7 @@ async function insertUser(user) {
       password: hashedPassword,
       name: user.name,
       createdAt: new Date(),
+      savedRecipes: []
     });
     success = result.insertedCount === 1;
     console.log('User inserted:', result.insertedId);
@@ -107,9 +119,9 @@ async function updatePreferences(userEmail, preferences) {
     const updateQuery = { email: userEmail };
     const update = {
       $set: {
-        userPreferences : preferences
+        userPreferences: preferences
       }
-  };
+    };
     userCollection.updateOne(updateQuery, update, (updateErr) => {
       if (updateErr) {
         console.error('Error updating user preferences:', updateErr);
@@ -118,11 +130,55 @@ async function updatePreferences(userEmail, preferences) {
       }
       client.close();
     });
-    return {success: true, message: 'User preferences updated successfully'};
+    return { success: true, message: 'User preferences updated successfully' };
   }
   catch (error) {
     console.error('Error Updating Preferences: ', error.message);
-    return {success: false, message: error.message};
+    return { success: false, message: error.message };
   }
 }
-module.exports = { connectToMongoDB, loginUser, signupUser, updatePreferences, getClient: () => client };
+
+async function saveRecipe(userEmail, recipejsonData) {
+  try {
+    await connectToMongoDB();
+    const db = client.db('recipehub');
+    const userCollection = db.collection('users');
+    const result = await userCollection.updateOne(
+      { email: userEmail },
+      { $push: { savedRecipes: recipejsonData } }
+    );
+    if (result.modifiedCount > 0) {
+      console.log('Recipe saved successfully!');
+      return { success: true, message: 'Recipe saved successfully!' }
+    } else {
+      console.log('User not found or recipe not saved.');
+      return { success: false, message: 'User not found or recipe not saved.' }
+    }
+
+  }
+  catch (error) {
+    console.log('Error while saving recipe:', error.message);
+    return { success: false, message: 'Error while saving recipe: ' + error.message }
+  }
+}
+
+async function unSaveRecipe(userEmail, recipejsonData) {
+  try {
+    await connectToMongoDB();
+    const db = client.db('recipehub');
+    const userCollection = db.collection('users');
+    const uri = recipejsonData['uri'];
+    if (uri) {
+      const userFilter = { email: userEmail };
+      const updateOperation = { $pull: { savedRecipes: { uri: uri } } };
+      const result = await userCollection.updateOne(userFilter, updateOperation);
+    await client.close();
+    return ({ success: true, message: 'Recipe unsaved successfully', user: result.value });
+    }
+  }
+  catch (error) {
+    console.log('Error while saving recipe:', error.message);
+    return { success: false, message: 'Error while saving recipe: ' + error.message }
+  }
+}
+module.exports = { connectToMongoDB, loginUser, signupUser, saveRecipe, unSaveRecipe, updatePreferences, getClient: () => client };

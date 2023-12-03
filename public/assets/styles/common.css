@@ -606,3 +606,12 @@ body.modal-open {
     justify-content: center;
     align-items: center;
 }
+.hide{
+    display: none;
+}
+.save_recipes i{
+    cursor: pointer;
+}
+.activeIcon{
+    color: red;
+}

@@ -235,8 +235,19 @@ const loadRecipes = async (searchQuery, request, page) => {
         request + `&from=${startIndex}&to=${startIndex + limit}`
     );
     let appenHtml = '';
+    const user = JSON.parse(localStorage.getItem('user'));
+    let savedRecipes = []
+    if(user){
+        if(user.savedRecipes){
+            savedRecipes = user.savedRecipes.map(recipe=>recipe.uri)
+        }
+    }
     for (let i = 0; i < searchResults.hits.length; i++) {
-        appenHtml += createRecipeCard(searchResults.hits[i].recipe);
+        let saved = false;
+        if(savedRecipes.includes(searchResults.hits[i].recipe.uri)){
+            saved = true;
+        }
+        appenHtml += createRecipeCard(saved, searchResults.hits[i].recipe);
     }
     hideLoading();
     recipeSection.style.display = 'flex';
