@@ -5,7 +5,7 @@ let session = false;
 
 // Fetch Api
 const fetchReturnDataJson = async (url, request) => {
-  // Check if data is already in localStorage
+  // Check if data is already in sessionStorage
   const cachedData = sessionStorage.getItem(url + request);
   if (cachedData) {
     // If cached data is available, parse and return it
@@ -34,12 +34,12 @@ async function sessionVerify() {
       loginUser.innerHTML = 'My Account';
       username.innerHTML = 'Hi, ' + sessionData.user.name;
       // store user data in local cache
-      localStorage.clear();
-      localStorage.setItem('user', JSON.stringify(sessionData.user));
+      sessionStorage.clear();
+      sessionStorage.setItem('user', JSON.stringify(sessionData.user));
     }
     else if (sessionData.status === 404) {
       loginUser.innerHTML = 'Login';
-      localStorage.removeItem('user');
+      sessionStorage.removeItem('user');
     }
     // Display modals with diff msgs when login signup and logout success
     if (sessionStorage.getItem('modal') === 'login') {
@@ -211,7 +211,7 @@ const createRecipeCard = (saved, jsonData) => {
 
 // Function to call saveRecipe with Base64-encoded JSON data
 function callSaveRecipe(encodedData) {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
   // Decode Base64 and parse JSON
   if (user) {
     const saveIconContainer = document.getElementById(encodedData)
@@ -257,7 +257,7 @@ function saveRecipe(user, jsonData) {
           // If the value doesn't exist, add a new object to the array
           if (!exists) {
             user.savedRecipes.push(jsonData);
-            localStorage.setItem('user', JSON.stringify(user));
+            sessionStorage.setItem('user', JSON.stringify(user));
           }
         }
         console.log(data.message)
@@ -285,7 +285,7 @@ function unSaveRecipe(user, jsonData) {
           // If the value exists, remove the object from the array
           if (index !== -1) {
             user.savedRecipes.splice(index, 1);
-            localStorage.setItem('user', JSON.stringify(user));
+            sessionStorage.setItem('user', JSON.stringify(user));
           }
         }
         console.log(data.message)
@@ -384,7 +384,7 @@ function logout() {
   fetch('/api/logout').then(response => response.json())
     .then(data => {
       if (data.status === 200) {
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
         sessionStorage.setItem('modal', 'logout');
         window.location.href = '/';
       }

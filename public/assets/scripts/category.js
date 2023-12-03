@@ -26,7 +26,7 @@ else if(pageType === 'recommended'){
     categoryHeading.innerHTML = 'Recommended for You';
     // Hide filters
     document.getElementById('filters').style.display = 'none';
-    const userSession = JSON.parse(localStorage.getItem('user'));
+    const userSession = JSON.parse(sessionStorage.getItem('user'));
     if(!userSession){
         // If user is not logged in display Please login message
         document.getElementById('categorypage_body').innerHTML = '';
@@ -53,7 +53,7 @@ window.onload = function () {
         }
     }
     else if(pageType === 'recommended'){
-        const userSession = JSON.parse(localStorage.getItem('user'));
+        const userSession = JSON.parse(sessionStorage.getItem('user'));
         if(userSession.userPreferences){
             for ( each in userSession.userPreferences){
                 userSession.userPreferences[each].forEach((preference) => {
@@ -235,7 +235,7 @@ const loadRecipes = async (searchQuery, request, page) => {
         request + `&from=${startIndex}&to=${startIndex + limit}`
     );
     let appenHtml = '';
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(sessionStorage.getItem('user'));
     let savedRecipes = []
     if(user){
         if(user.savedRecipes){
