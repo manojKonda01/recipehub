@@ -15,7 +15,7 @@ function handleSubmit(event) {
 
 
 window.onload = function () {
-    load_popular_recipes_section();
+    // load_popular_recipes_section();
     load_quickRecipes_DOM();
     load_recommended_recipes();
 }
@@ -88,7 +88,6 @@ const load_recommended_recipes = async () => {
         if (user) {
             if(user.savedRecipes){
                 savedRecipes = user.savedRecipes.map(recipe=>recipe.uri);
-                console.log(savedRecipes);
             }
         }
         for (let i = 0; i < 8; i++) {
