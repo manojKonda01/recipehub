@@ -46,7 +46,7 @@ const load_quickRecipes_DOM = async () => {
     let jsonData = await fetchReturnDataJson(`https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=${edamamID}&app_key=${edamamKey}&random=true`, requestData);;
     const quickRecipe = document.getElementById('quick_easy_recipes');
     let appenHtml = '';
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     let savedRecipes = []
     if (user) {
         if(user.savedRecipes){
@@ -68,7 +68,7 @@ const load_recommended_recipes = async () => {
     document.getElementById('recommended').style.display = 'none';
     const recommndedRecipe_section = document.getElementById('recommended_recipes');
     // Check User Session
-    const userSession = JSON.parse(sessionStorage.getItem('user'));
+    const userSession = JSON.parse(localStorage.getItem('user'));
     if (userSession) {
         document.getElementById('recommended').style.display = 'block';
         // Create request for recommeneded recipes for a user.
@@ -83,7 +83,7 @@ const load_recommended_recipes = async () => {
         }
         const recommendedRecipeData = await fetchReturnDataJson(`https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=${edamamID}&app_key=${edamamKey}&random=true`, requestUrl);
         let appenHtml = '';
-        const user = JSON.parse(sessionStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user'));
         let savedRecipes = []
         if (user) {
             if(user.savedRecipes){

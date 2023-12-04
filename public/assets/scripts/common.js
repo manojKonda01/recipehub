@@ -4,7 +4,7 @@ const username = document.getElementById('username');
 let session = false;
 
 
-const userSession = JSON.parse(sessionStorage.getItem('user'));
+const userSession = JSON.parse(localStorage.getItem('user'));
 if (userSession) {
   session = true;
   // Display modals with diff msgs when login signup and logout success
@@ -16,14 +16,14 @@ if (userSession) {
   else if (sessionStorage.getItem('modal') === 'signup') {
     openModal('Welcome ' + userSession.name + ' !');
   }
-  else if (sessionStorage.getItem('modal') === 'logout') {
-    openModal('Logged Out Successfully');
-  }
   sessionStorage.setItem('modal', '');
   sessionStorage.setItem('username', '');
 }
 else{
   loginUser.innerHTML = 'Login';
+  if (sessionStorage.getItem('modal') === 'logout') {
+    openModal('Logged Out Successfully');
+  }
 }
 
 
@@ -174,7 +174,6 @@ const filters = {
     'Mediterranean',
     'mollusk-free',
     'mustard-free',
-    'No-oil-added',
     'paleo',
     'peanut-free',
     'pecatarian',
@@ -221,7 +220,7 @@ const createRecipeCard = (saved, jsonData) => {
 
 // Function to call saveRecipe with Base64-encoded JSON data
 function callSaveRecipe(encodedData) {
-  const user = JSON.parse(sessionStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
   // Decode Base64 and parse JSON
   if (user) {
     const saveIconContainer = document.getElementById(encodedData)

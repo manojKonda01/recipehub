@@ -58,7 +58,6 @@ const preferences = {
         'kidney-friendly',
         'low-sugar',
         'mustard-free',
-        'No-oil-added',
         'peanut-free',
         'pork-free',
         'red-meat-free',
@@ -153,7 +152,7 @@ function unSaveRecipe(user, jsonData) {
     }
 }
 // User Session Details
-const userSession = JSON.parse(sessionStorage.getItem('user'));
+const userSession = JSON.parse(localStorage.getItem('user'));
 const parentElement = document.getElementById('changeContent');
 const userName = document.getElementById('userName');
 if (userSession) {

@@ -101,8 +101,16 @@ function isValidEmail(email) {
 }
 
 // function to get user details
-async function getUserDetails() {
-    const response = await fetch('/api/get-user-details');
+async function getUserDetails(email) {
+    const response = await fetch('/api/get-user-details',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email })
+        }
+    );
     if (response.ok) {
       const data = await response.json();
       sessionStorage.setItem('user', JSON.stringify(data.user));
@@ -273,7 +281,7 @@ function signup() {
                     }
                     else {
                         sessionStorage.setItem('modal', 'signup');
-                        const user = await getUserDetails();
+                        const user = await getUserDetails(email);
                         openPreferncesModal();
                     }
                 }
@@ -366,7 +374,7 @@ function updatePreferences() {
         .then(async data => {
             alert(data.message)
             if (data.status === 200) {
-                const user = await getUserDetails();
+                const user = await getUserDetails(email);
                 window.location.href = '/';
             }
         })
