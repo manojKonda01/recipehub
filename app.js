@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const { connectToMongoDB, loginUser, signupUser, unSaveRecipe, saveRecipe, updatePreferences } = require('./database')
+const { connectToMongoDB, loginUser, signupUser, unSaveRecipe, saveRecipe, updatePreferences, changePassword, updateUser} = require('./database')
 require('dotenv').config();
 
 
@@ -57,6 +57,20 @@ app.get('/', (req, res) => {
 app.get('/category', (req, res) => {
     try {
         res.sendFile(path.join(__dirname, 'public', '/assets/templates/category.html'));
+    }
+    finally {
+
+    }
+})
+
+app.get('/profile', (req, res) => {
+    try {
+        if (req.session.user) {
+            res.sendFile(path.join(__dirname, 'public', '/assets/templates/profile.html'));
+        }
+        else{
+            res.redirect('/login')
+        }
     }
     finally {
 
@@ -135,7 +149,6 @@ app.post('/api/signup', async (req, res) => {
 
 app.get('/api/sessionVerify', async (req, res) => {
     if (req.session.user) {
-        console.log(req.session.user);
         res.json({ status: 200, user: req.session.user });
     }
     else {
@@ -147,10 +160,12 @@ app.post('/api/updatePreferences', async (req, res) => {
     try {
         const { email, updatedPreferences } = req.body;
         const result = await updatePreferences(email, updatedPreferences);
-        console.log(result);
         if (result.success) {
             res.status(200).json({ status: 200, message: result.message });
-            req.session.user.userPreferences = updatedPreferences;
+            const user = req.session.user;
+            user.userPreferences = updatedPreferences;
+            req.session.user = user;
+            req.session.save();
         } else {
             res.status(401).json({ status: 401, message: result.message });
         }
@@ -220,6 +235,46 @@ app.post('/api/unSaveRecipe', async (req, res) => {
     }
 });
 
+// change password api
+
+app.post('/api/changePassword', async (req, res) => {
+    try {
+        const { email, oldPassword, newPassword } = req.body;
+        const result = await changePassword(email, oldPassword, newPassword);
+        if (result.success) {
+            const user = req.session.user;
+            user.email = email;
+            req.session.user = user;
+            req.session.save();
+            res.status(200).json({ status: 200, message: result.message});
+        } else {
+            res.status(401).json({ status: 401, message: result.message });
+        }
+    }
+    catch (error) {
+        console.error('Error during user login:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+})
+
+// update personal details info
+app.post('/api/updateUser', async (req, res) => {
+    try {
+        const { oldEmail, email, name } = req.body;
+        const result = await updateUser(oldEmail, email, name);
+        if (result.success) {
+            const user = req.session.user
+
+            res.status(200).json({ status: 200, message: result.message});
+        } else {
+            res.status(401).json({ status: 401, message: result.message });
+        }
+    }
+    catch (error) {
+        console.error('Error during user login:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+})
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

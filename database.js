@@ -172,8 +172,8 @@ async function unSaveRecipe(userEmail, recipejsonData) {
       const userFilter = { email: userEmail };
       const updateOperation = { $pull: { savedRecipes: { uri: uri } } };
       const result = await userCollection.updateOne(userFilter, updateOperation);
-    await client.close();
-    return ({ success: true, message: 'Recipe unsaved successfully', user: result.value });
+      await client.close();
+      return ({ success: true, message: 'Recipe unsaved successfully', user: result.value });
     }
   }
   catch (error) {
@@ -181,4 +181,76 @@ async function unSaveRecipe(userEmail, recipejsonData) {
     return { success: false, message: 'Error while saving recipe: ' + error.message }
   }
 }
-module.exports = { connectToMongoDB, loginUser, signupUser, saveRecipe, unSaveRecipe, updatePreferences, getClient: () => client };
+
+async function changePassword(email, oldPassword, newPassword) {
+  try {
+    await connectToMongoDB();
+    const db = client.db('recipehub');
+    const userCollection = db.collection('users');
+    const user = await userCollection.findOne({ email: email });
+    // const user = await db.collection('users').findOne({ email });
+    if (user) {
+      // Compare the provided password with the hashed password from the database
+      const passwordMatch = await bcrypt.compare(oldPassword, user.password);
+      if (passwordMatch) {
+        console.log('User authenticated:', user._id);
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+        // Update the user's password in the database
+        await userCollection.updateOne(
+          { email: email },
+          { $set: { password: hashedNewPassword } }
+        );
+        return { success: true, message: 'Password Changed Succesfully' }
+      }
+      else {
+        console.log('Incorrect password for user:', user._id);
+        return { success: false, message: 'Old password is incorrect' }
+      }
+    }
+    else {
+      console.log('User not found with email:', email);
+      return { success: false, message: 'Email Not Found' }
+    }
+
+  }
+  catch (error) {
+    console.log(error.message);
+    return {success: false, message: error.message}
+  }
+}
+
+// function to update email and name
+async function updateUser(oldEmail, email, name){
+  try{
+    await connectToMongoDB();
+    const db = client.db('recipehub');
+    const userCollection = db.collection('users');
+    const user = await userCollection.findOne({ email: oldEmail });
+    if(user){
+      let update = {};
+      if(email.length>0 && name.length>0){
+        update = {email:email, name:name};
+      }
+      else if(email.length === 0){
+        update = {name:name};
+      }
+      else if(name.length === 0){
+        update = {email:email};
+      }
+      await userCollection.updateOne(
+        { email: oldEmail },
+        { $set: update }
+      );
+      return { success: true, message: 'Personal Info Updated' }
+    }
+    else{
+      return { success: false, message: 'Invalid User' };
+
+    }
+  }
+  catch(error){
+    console.log(error.message);
+    return {success: false, message: error.message}
+  }
+}
+module.exports = { connectToMongoDB, loginUser, signupUser, saveRecipe, unSaveRecipe, updatePreferences, changePassword, updateUser, getClient: () => client };

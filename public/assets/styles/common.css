@@ -33,7 +33,16 @@ body {
     font-size: medium;
     font-family: 'Arvo', serif;
 }
-
+.recipehub-button{
+    color: white;
+    border: 1px solid #84BD00;
+    background: #84BD00;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: medium;
+    font-family: 'Arvo', serif;
+    cursor: pointer;
+}
 .login-content button:hover{
     color: white;
     background: #84BD00;
@@ -113,7 +122,9 @@ body.modal-open {
 .display-inline {
     display: inline !important;
 }
-
+.display-inline-block{
+    display: inline-block !important;
+}
 .display-block {
     display: block !important;
 }

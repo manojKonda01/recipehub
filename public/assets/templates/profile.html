@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/media/image/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/image/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/image/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/media/image/favicon/site.webmanifest">
+    <!-- Title -->
+    <title>Recipe Hub | Explore, Cook & Savor </title>
+    <!-- HomePage CSS -->
+    <link rel="stylesheet" href="/assets/styles/header.css">
+    <link rel="stylesheet" href="/assets/styles/profile.css">
+    <link rel="stylesheet" href="/assets/styles/common.css">
+    <link rel="stylesheet" href="/assets/styles/responsive.css">
+    <link rel="stylesheet" href="/assets/styles/footer.css">
+    <!-- Finger Paint & Poppins Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allison&family=Amatic+SC:wght@400;700&family=Arvo&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header id='website_header' class="rh-header padding-y-1">
+        <div id="header_container" class="display-flex">
+            <!--Begin: Logo & Website Name -->
+            <a href="/">
+                <figure id="website_logo" class="margin-0 display-flex">
+                    <img src="/media/image/logo.png" alt="Website Logo" class="header-item website-logo">
+                    <figcaption>
+                        <h1 class="header-item website-name">Recipe Hub</h2>
+                    </figcaption>
+                </figure>
+            </a>
+            <!-- End:  Logo & Website Name-->
+        </div>
+    </header>
+    <main>
+        <section id="profile_section">
+            <div>
+                <div class="padding-1 user-name">
+                    <span id="userName">Hi, User Name</span>
+                </div>
+                <ul>
+                    <li class="profile-nav selected"><span>Personal Details</span></li>
+                    <li class="profile-nav"><span>Change Password</span></li>
+                    <li class="profile-nav"><span>Update Preferences</span></li>
+                    <li class="profile-nav"><span>Saved Recipes</span></li>
+                    <li class="profile-nav"><span>My Reviews</span></li>
+                </ul>
+            </div>
+        </section>
+        <section id="user_section">
+            <div class="padding-2">
+                <div id="changeContent">
+                    <div>
+                        <form id="saveDetaild_form">
+                            <p class="personal-details-heading">Personal Details</p>
+                            <div class="input-div">
+                                <label for="changeEmail" class="form-label">Email Address</label>
+                                <input type="email" name="changeEmail" id="changeEmail">
+                            </div>
+                            <div class="input-div">
+                                <label for="changeName" class="form-label">Name</label>
+                                <input type="text" name="changeName" id="changeName">
+                            </div>
+                            <button type="submit" class="recipehub-button" onclick="savePersonalDetails()">Save Details</button>
+                        </form>
+                    </div>
+                    <div class="hide">
+                        <form id="changePass_form">
+                            <p class="personal-details-heading">Change Password</p>
+                            <div class="input-div">
+                                <label for="oldPassword" class="form-label">Old Password: </label>
+                                <input type="password" name="oldPassword" id="oldPassword">
+                            </div>
+                            <div class="input-div">
+                                <label for="newPassword" class="form-label">New Password: </label>
+                                <input type="password" name="newPassword" id="newPassword">
+                            </div>
+                            <div class="input-div">
+                                <label for="confirmPassword" class="form-label">New Password: </label>
+                                <input type="text" name="confirmPassword" id="confirmPassword">
+                            </div>
+                            <button type="submit" class="recipehub-button" onclick="changePassword()">Change Password</button>
+                        </form>
+                    </div>
+                    <div class="hide">
+                        <form>
+                            <p class="personal-details-heading">Change Preferences</p>
+                            <div class="display-flex modal-head">
+                                <div class="progress-container display-flex align-items-centre justify-content-centre">
+                                    <div class="progress active"></div>
+                                    <div class="progress"></div>
+                                    <div class="progress"></div>
+                                    <div class="progress"></div>
+                                </div>
+                            </div>
+                            <div class="labels-container">
+                                <div class="labels show">
+                                    <p>Diet Labels</p>
+                                    <div id="diet_labels">
+                
+                                    </div>
+                                </div>
+                                <div class="labels">
+                                    <p>Health Labels</p>
+                                    <div id="health_labels">
+                
+                                    </div>
+                                </div>
+                                <div class="labels">
+                                    <p>Dish Types</p>
+                                    <div id="dishType_labels">
+                
+                                    </div>
+                                </div>
+                                <div class="labels">
+                                    <p>Cuisines</p>
+                                    <div id="cuisineType_labels">
+                
+                                    </div>
+                                </div>
+                                <div class="slide-container display-flex align-items-centre justify-content-centre">
+                                    <button onclick="showDiv('prev')" class="slide" id="prev">Back</button>
+                                    <button onclick="showDiv('next')" class="slide active" id="next">Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="hide">
+                        <p class="personal-details-heading">Saved Recipes</p>
+                        <div id="saved_recipes" class="recipe-for-images display-flex">
+
+                        </div>
+                    </div>
+                    <div class="hide">
+                        <p class="personal-details-heading">My Reviews</p>
+
+                    </div>
+                </div>
+                <div id="spinner"></div>
+            </div>
+        </section>
+    </main>
+    <script src="/assets/scripts/profile.js"></script>
+</body>
+
+</html>

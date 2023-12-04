@@ -34,7 +34,6 @@ async function sessionVerify() {
       loginUser.innerHTML = 'My Account';
       username.innerHTML = 'Hi, ' + sessionData.user.name;
       // store user data in local cache
-      // sessionStorage.clear();
       sessionStorage.setItem('user', JSON.stringify(sessionData.user));
     }
     else if (sessionData.status === 404) {
@@ -308,9 +307,9 @@ const loader = document.querySelector('#spinner');
 function displayLoading() {
   loader.classList.add('display');
   // to stop loading after some time
-  setTimeout(() => {
-    loader.classList.remove('display');
-  }, 5000);
+  // setTimeout(() => {
+  //   loader.classList.remove('display');
+  // }, 5000);
 }
 
 // hiding loading
@@ -386,6 +385,7 @@ function logout() {
       if (data.status === 200) {
         sessionStorage.removeItem('user');
         sessionStorage.setItem('modal', 'logout');
+        sessionStorage.clear();
         window.location.href = '/';
       }
       else {
@@ -416,3 +416,8 @@ function closeModal() {
   const modal = document.getElementById('alertModal');
   modal.style.display = 'none';
 }
+
+const profile = document.getElementById('profile');
+profile.addEventListener('click', function(){
+  window.location.href = '/profile';
+});

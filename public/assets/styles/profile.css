@@ -1,0 +1,83 @@
+body{
+    background: rgba(0,0,0,.05);
+}
+header, #profile_section, #user_section{
+    background: white;
+}
+/* #profile_section, #user_section{
+    padding: 1rem;
+} */
+main{
+    margin: 2rem;
+    display: flex;
+    gap: 2rem;
+}
+#userName{
+    font-size: larger;
+    font-weight:900;
+    color: #DC582A;
+}
+#profile_section{
+    flex: 1;
+}
+.user-name{
+    box-shadow: 0 1px 0 0 rgba(0,0,0,.15);
+}
+ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+}
+.profile-nav{
+    box-shadow: 0 1px 0 0 rgba(0,0,0,.15);
+    width: 100%;
+    padding: 0.75rem 0;
+}
+.profile-nav:hover{
+    background: rgba(0,0,0,.15);
+    cursor: pointer;
+}
+#user_section{
+    flex: 3;
+}
+li span{
+    padding: 0 1rem;
+}
+.selected{
+    border-left: 4px solid #DC582A;
+    border-top: 1px solid rgba(0,0,0,.15);
+    background-color: rgba(0,0,0,.03);
+}
+.personal-details-heading{
+    font-size: x-large;
+    font-weight: 900;
+    padding-left: 1rem;
+    box-shadow: 0 1px 0 0 rgba(0,0,0,.15);
+}
+.input-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem 0;
+}
+.input-div input{
+    border: 1px solid rgba(0,0,0,.65);
+    width: 50%;
+    padding: 0.5rem;
+}
+.labels-container{
+    flex-direction: column;
+}
+#saved_recipes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#saved_recipes figure{
+    width: 25% !important;
+}

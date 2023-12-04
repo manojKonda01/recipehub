@@ -107,9 +107,9 @@ function displayLoading() {
     loginContent.style.display = 'none';
     loader.classList.add('display');
     // to stop loading after some time
-    setTimeout(() => {
-        loader.classList.remove('display');
-    }, 5000);
+    // setTimeout(() => {
+    //     loader.classList.remove('display');
+    // }, 5000);
 }
 
 // hiding loading
