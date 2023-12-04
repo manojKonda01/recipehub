@@ -150,6 +150,7 @@ function login() {
                             passwordInput.style.borderColor = '#ced4da';
                             emailInput.style.borderColor = '#ced4da';
                             sessionStorage.setItem('modal', 'login');
+                            sessionStorage.setItem('user', JSON.stringify(data.user));
                             window.location.href = '/';
                         }
                         else if (data.status === 401) {

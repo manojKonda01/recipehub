@@ -91,7 +91,7 @@ app.post('/api/login', async (req, res) => {
         const result = await loginUser(email, password);
         if (result.success) {
             req.session.user = result.user;
-            res.status(200).json({ status: 200, message: result.message, userId: result.userId });
+            res.status(200).json({ status: 200, message: result.message, user: result.user});
         } else {
             res.status(401).json({ status: 401, message: result.message });
         }

@@ -34,7 +34,7 @@ async function sessionVerify() {
       loginUser.innerHTML = 'My Account';
       username.innerHTML = 'Hi, ' + sessionData.user.name;
       // store user data in local cache
-      sessionStorage.clear();
+      // sessionStorage.clear();
       sessionStorage.setItem('user', JSON.stringify(sessionData.user));
     }
     else if (sessionData.status === 404) {
