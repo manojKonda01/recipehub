@@ -53,7 +53,7 @@ const load_quickRecipes_DOM = async () => {
             savedRecipes = user.savedRecipes.map(recipe=>recipe.uri)
         }
     }
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 8; i++) {
         let saved = false;
         if (savedRecipes.includes(jsonData.hits[i].recipe.uri)) {
             saved = true;

@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const { connectToMongoDB, loginUser, signupUser, unSaveRecipe, saveRecipe, updatePreferences, changePassword, updateUser} = require('./database')
+const { connectToMongoDB, loginUser, signupUser, unSaveRecipe, saveRecipe, updatePreferences, changePassword, updateUser, getUserDetails} = require('./database')
 require('dotenv').config();
 
 
@@ -65,12 +65,12 @@ app.get('/category', (req, res) => {
 
 app.get('/profile', (req, res) => {
     try {
-        if (req.session.user) {
+        // if (req.session.user) {
             res.sendFile(path.join(__dirname, 'public', '/assets/templates/profile.html'));
-        }
-        else{
-            res.redirect('/login')
-        }
+        // }
+        // else{
+        //     res.redirect('/login')
+        // }
     }
     finally {
 
@@ -87,12 +87,12 @@ app.get('/recipe', (req, res) => {
 })
 app.get('/login', (req, res) => {
     try {
-        if (req.session.user) {
-            res.redirect('/')
-        }
-        else {
+        // if (req.session.user) {
+        //     res.redirect('/')
+        // }
+        // else {
             res.sendFile(path.join(__dirname, 'public', '/assets/templates/login.html'));
-        }
+        // }
     }
     finally {
 
@@ -275,6 +275,24 @@ app.post('/api/updateUser', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 })
+
+app.post('/api/get-user-details', async (req, res) => {
+    try{
+        const {email} = req.body;
+        const user = await getUserDetails(email);
+        if(user){
+            res.status(200).json({ status: 200, user: user});
+        }
+        else{
+            res.status(401).json({ status: 401, message:'No Such User'});
+        }
+    }
+    catch(error){
+        res.status(500).json({message: error.message});
+
+    }
+})
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

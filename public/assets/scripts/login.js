@@ -100,6 +100,15 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
+// function to get user details
+async function getUserDetails() {
+    const response = await fetch('/api/get-user-details');
+    if (response.ok) {
+      const data = await response.json();
+      sessionStorage.setItem('user', JSON.stringify(data.user));
+      return data;
+    }
+}
 const loader = document.querySelector('#spinner');
 const loginContent = document.getElementById('login_content');
 // showing loading
@@ -188,6 +197,7 @@ function login() {
     }
 }
 
+// functiopn to signup logic
 function signup() {
     event.preventDefault();
 
@@ -254,7 +264,7 @@ function signup() {
             body: JSON.stringify({ name, email, password }),
         })
             .then(response => response.json())
-            .then(data => {
+            .then(async data => {
                 hideLoading();
                 if (data.status === 200) {
                     if (data.message === 'User already exists') {
@@ -263,6 +273,7 @@ function signup() {
                     }
                     else {
                         sessionStorage.setItem('modal', 'signup');
+                        const user = await getUserDetails();
                         openPreferncesModal();
                     }
                 }
@@ -352,9 +363,10 @@ function updatePreferences() {
         body: JSON.stringify({ email, updatedPreferences }),
     })
         .then(response => response.json())
-        .then(data => {
+        .then(async data => {
             alert(data.message)
             if (data.status === 200) {
+                const user = await getUserDetails();
                 window.location.href = '/';
             }
         })

@@ -3,6 +3,30 @@ const loginUser = document.getElementById('signin_image_caption');
 const username = document.getElementById('username');
 let session = false;
 
+
+const userSession = JSON.parse(sessionStorage.getItem('user'));
+if (userSession) {
+  session = true;
+  // Display modals with diff msgs when login signup and logout success
+  loginUser.innerHTML = 'My Account';
+  username.innerHTML = 'Hi, ' + userSession.name;
+  if (sessionStorage.getItem('modal') === 'login') {
+    openModal('Logged in. Welcome Back ' + userSession.name + ' !');
+  }
+  else if (sessionStorage.getItem('modal') === 'signup') {
+    openModal('Welcome ' + userSession.name + ' !');
+  }
+  else if (sessionStorage.getItem('modal') === 'logout') {
+    openModal('Logged Out Successfully');
+  }
+  sessionStorage.setItem('modal', '');
+  sessionStorage.setItem('username', '');
+}
+else{
+  loginUser.innerHTML = 'Login';
+}
+
+
 // Fetch Api
 const fetchReturnDataJson = async (url, request) => {
   // Check if data is already in sessionStorage
@@ -40,21 +64,8 @@ async function sessionVerify() {
       loginUser.innerHTML = 'Login';
       sessionStorage.removeItem('user');
     }
-    // Display modals with diff msgs when login signup and logout success
-    if (sessionStorage.getItem('modal') === 'login') {
-      openModal('Logged in. Welcome Back ' + sessionData.user.name + ' !');
-    }
-    else if (sessionStorage.getItem('modal') === 'signup') {
-      openModal('Welcome ' + sessionData.user.name + ' !');
-    }
-    else if (sessionStorage.getItem('modal') === 'logout') {
-      openModal('Logged Out Successfully');
-    }
-    sessionStorage.setItem('modal', '');
-    sessionStorage.setItem('username', '');
   }
 }
-sessionVerify();
 // Login Icon
 const loginIcon = document.getElementById('loginIcon');
 
@@ -418,6 +429,6 @@ function closeModal() {
 }
 
 const profile = document.getElementById('profile');
-profile.addEventListener('click', function(){
+profile.addEventListener('click', function () {
   window.location.href = '/profile';
 });

@@ -180,6 +180,9 @@ if (userSession) {
     const changeName = document.getElementById('changeName');
     changeName.placeholder = userSession.name;
 }
+else {
+    window.location.href = '/';
+}
 
 // Function to create survery DOM through JS
 function createSurvery() {
@@ -221,6 +224,28 @@ createSurvery();
 function utf8_to_b64(str) {
     return btoa(unescape(encodeURIComponent(str)));
 }
+
+// function showSavedRecipes() {
+//     const email = userSession.email;
+//     fetch('/api/get-user-details', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ email }),
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             sessionStorage.setItem('user', JSON.stringify(userSession));
+//             const saved_recipes = document.getElementById('saved_recipes');
+//             const savedRecipesJson = data.user.savedRecipes;
+//             savedRecipesJson.forEach((each) => {
+//                 saved_recipes.innerHTML += createRecipeCard(true, each);
+//             });
+//         })
+//         .catch(error => console.error('Error during Saving Preferences:', error));
+// }
+
 // function to display all the saved recipe cards
 function showSavedRecipes() {
     const savedRecipesJson = userSession.savedRecipes;
@@ -320,7 +345,7 @@ function savePersonalDetails() {
     const oldEmail = userSession.email;
     if (email.length > 0 || name.length > 0) {
         // Update User info using API created in Node server
-        if(email.length>0 && !isValidEmail(email)){
+        if (email.length > 0 && !isValidEmail(email)) {
             alert('Invalid Email');
             return;
         }

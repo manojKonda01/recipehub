@@ -253,4 +253,4 @@ async function updateUser(oldEmail, email, name){
     return {success: false, message: error.message}
   }
 }
-module.exports = { connectToMongoDB, loginUser, signupUser, saveRecipe, unSaveRecipe, updatePreferences, changePassword, updateUser, getClient: () => client };
+module.exports = { connectToMongoDB, loginUser, signupUser, saveRecipe, unSaveRecipe, updatePreferences, changePassword, updateUser, getUserDetails, getClient: () => client };

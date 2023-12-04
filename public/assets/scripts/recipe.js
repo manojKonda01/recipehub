@@ -14,7 +14,7 @@ const loadRecipeDetails =  async() => {
     // Fetch Recipe Data from the API
     const recipeDetails = await fetchReturnDataJson(url, '');
     const recipeDom = document.getElementById('recipe_section');
-    // Create a DOM for Recipe Details
+    // Create a DOM for Recipe Details    
     recipeDom.innerHTML = `
         <div class="recipe-head">
             <h1>${recipeDetails.recipe['label']}</h1>
@@ -23,6 +23,16 @@ const loadRecipeDetails =  async() => {
             <figure>
                 <img src="${recipeDetails.recipe['image']}" alt="${recipeDetails.recipe['label']}">
             </figure>
+        </div>
+        <div class="recipe-body">
+            <div>Short details of Recipe(mealtype, caloreis, time taken)</div>
+            <div>Steps to make Recipe</div>
+            <div class="nutrition-facts-container">
+                <p class="nutrition-facts-head">Nutrition Facts</p>
+            </div>
+        </div>
+        <div class="recipe-foot">
+            <div class="review-rating">Review</div>
         </div>
     `;
 }
