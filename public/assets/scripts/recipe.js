@@ -343,17 +343,31 @@ const write_review = document.getElementById('write_review');
 const write_review_btn = document.getElementById('write_review_btn');
 const hiddenInp = document.getElementById('hiddenInp');
 write_review_btn.addEventListener('click', function () {
-    write_review.classList.toggle('hide');
+    if(!localStorage.getItem('user')){
+        alert('Please Login to Write a review');
+        window.location.href = '/login';
+    }
+    else{
+        write_review.classList.toggle('hide');
+    }
 })
 
+// Function to load reviews
 async function loadReviews() {
+    displayLoading();
     const reviewData = await userRatings();
+    hideLoading();
     const userRatingsContainer = document.getElementById('userRatings');
+    userRatingsContainer.innerHTML = '';
     const userRating_txt = document.getElementById('userRating_txt');
     if (reviewData.data) {
+        // Create a More Reviews
+        const moreReviewsBtn = document.createElement('button');
+        moreReviewsBtn.innerHTML = 'See More Reviews'
+        moreReviewsBtn.classList.add('slide', 'active', 'more-reviews-btn');
         userRating_txt.innerHTML = 'Click to Write a Review';
-        const reviews = reviewData.data['reviews'];
-        reviews.forEach(review => {
+        const reviews = reviewData.data;
+        reviews.slice(0,3).forEach(review => {
             const userRatingElement = createUserRatingElement(review);
             userRatingsContainer.appendChild(userRatingElement);
         })
@@ -363,6 +377,23 @@ async function loadReviews() {
             const toggleReview = document.getElementById('toggleReview');
             toggleReview.classList.add('hide');
         }
+        // Display More Review button
+        if(reviews.length > 3){
+            userRatingsContainer.appendChild(moreReviewsBtn);
+        }
+
+        let reviewIndex = 3;
+        moreReviewsBtn.addEventListener('click', function(){
+            reviews.slice(reviewIndex,reviewIndex+9).forEach(review => {
+                moreReviewsBtn.remove();
+                const userRatingElement = createUserRatingElement(review);
+                userRatingsContainer.appendChild(userRatingElement);
+            })
+            reviewIndex += 9;
+            if(reviews.length > reviewIndex+9){
+                userRatingsContainer.appendChild(moreReviewsBtn);
+            }
+        })
     }
     else {
         userRating_txt.innerHTML = 'Be First one to Review the Recipe';

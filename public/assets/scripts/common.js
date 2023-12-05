@@ -3,7 +3,7 @@ const loginUser = document.getElementById('signin_image_caption');
 const username = document.getElementById('username');
 let session = false;
 
-if(localStorage.getItem('user') !== 'undefined'){
+if(localStorage.getItem('user') !== 'undefined' || localStorage.getItem('user')){
   let userSession = JSON.parse(localStorage.getItem('user'));
   if (userSession) {
     session = true;
@@ -199,7 +199,6 @@ const filters = {
     'mustard-free',
     'paleo',
     'peanut-free',
-    'pecatarian',
     'pork-free',
     'red-meat-free',
     'sesame-free',
@@ -207,7 +206,6 @@ const filters = {
     'soy-free',
     'sugar-conscious',
     'sulfite-free',
-    'tree-but-free',
     'vegan',
     'vegetarian',
     'wheat-free',

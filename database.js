@@ -268,7 +268,8 @@ async function getReviews(recipeID){
     const reviewCollection = db.collection('review');
     const existingRecipe = await reviewCollection.findOne({ recipeID: recipeID });
     if(existingRecipe){
-      return {success: true, data: existingRecipe, message: 'Recipe Review Data'};
+      const sortedReviews = existingRecipe.reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      return {success: true, data: sortedReviews, message: 'Recipe Review Data'};
     }
     else{
       console.log('No review Data for such Recipe ID :' + recipeID)
@@ -277,9 +278,6 @@ async function getReviews(recipeID){
   }
   catch(error){
     console.log(error.message);
-  }
-  finally{
-    await client.close();
   }
 }
 

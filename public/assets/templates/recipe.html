@@ -148,28 +148,30 @@
         </div>
         <div id="review_section">
             <h2>Reviews</h2>
-            <div id="userRatings">
-                <div id="toggleReview">
-                    <span id="userRating_txt"></span>
-                    <button class="slide active margin-x-1" id="write_review_btn">Review</button>
-                    <div id="write_review" class="hide">
-                        <h3>Review This Recipe</h3>
-                        <div class="rating-container" id="writeRating">
-                            <span class="star" data-rating="1">&#9733;</span>
-                            <span class="star" data-rating="2">&#9733;</span>
-                            <span class="star" data-rating="3">&#9733;</span>
-                            <span class="star" data-rating="4">&#9733;</span>
-                            <span class="star" data-rating="5">&#9733;</span>
-                            <input type="hidden" id="hiddenInp">
-                        </div>
-                        <label for="comment">Comment :</label>
-                        <input type="text" name="comment" id="comment" placeholder="Type Something">
-                        <div class="submit-btn">
-                            <button class="slide active" onclick="submitReview()">Submit</button>
-                        </div>
+            <div id="toggleReview">
+                <span id="userRating_txt"></span>
+                <button class="slide active margin-x-1" id="write_review_btn">Review</button>
+                <div id="write_review" class="hide">
+                    <h3>Review This Recipe</h3>
+                    <div class="rating-container" id="writeRating">
+                        <span class="star" data-rating="1">&#9733;</span>
+                        <span class="star" data-rating="2">&#9733;</span>
+                        <span class="star" data-rating="3">&#9733;</span>
+                        <span class="star" data-rating="4">&#9733;</span>
+                        <span class="star" data-rating="5">&#9733;</span>
+                        <input type="hidden" id="hiddenInp">
+                    </div>
+                    <label for="comment">Comment :</label>
+                    <input type="text" name="comment" id="comment" placeholder="Type Something">
+                    <div class="submit-btn">
+                        <button class="slide active" onclick="submitReview()">Submit</button>
                     </div>
                 </div>
             </div>
+            <div id="userRatings">
+
+            </div>
+            <div id="spinner"></div>
         </div>
     </main>
 
