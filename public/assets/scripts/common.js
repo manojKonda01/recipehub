@@ -413,7 +413,7 @@ function logout() {
   fetch('/api/logout').then(response => response.json())
     .then(data => {
       if (data.status === 200) {
-        sessionStorage.removeItem('user');
+        localStorage.removeItem('user');
         sessionStorage.setItem('modal', 'logout');
         sessionStorage.clear();
         window.location.href = '/';
