@@ -22,7 +22,8 @@ async function getUserDetails(email) {
     const db = client.db('recipehub');
     const user = await db.collection('users').findOne({ email });
     if (user) {
-      return user;
+      const {email, name, savedRecipes, userPreferences} = user;
+      return {email, name, savedRecipes, userPreferences};
     }
     else {
       return false;
@@ -45,7 +46,8 @@ async function loginUser(email, password) {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (passwordMatch) {
         console.log('User authenticated:', user._id);
-        return { success: true, message: 'Login successful', user: user }
+        const {email, name, savedRecipes, userPreferences} = user;
+        return { success: true, message: 'Login successful', user: {email, name, savedRecipes, userPreferences} }
       }
       else {
         console.log('Incorrect password for user:', user._id);
@@ -84,7 +86,8 @@ async function signupUser(user) {
     await insertUser(user);
     console.log('User successfully registered!');
     const newUser = await db.collection('users').findOne({ email });
-    return { success: true, message: 'Registered Successfully', user: newUser };
+    const {newemail, name, savedRecipes, userPreferences} = newUser;
+    return { success: true, message: 'Registered Successfully', user: {newemail, name, savedRecipes, userPreferences} };
   }
   catch (error) {
     console.error('Error during signup:', error.message);
