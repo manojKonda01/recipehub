@@ -3,27 +3,29 @@ const loginUser = document.getElementById('signin_image_caption');
 const username = document.getElementById('username');
 let session = false;
 
-
-let userSession = JSON.parse(localStorage.getItem('user'));
-if (userSession) {
-  session = true;
-  userSession =  getUserDetails(userSession.email);
-  // Display modals with diff msgs when login signup and logout success
-  loginUser.innerHTML = 'My Account';
-  username.innerHTML = 'Hi, ' + userSession.name;
-  if (sessionStorage.getItem('modal') === 'login') {
-    openModal('Logged in. Welcome Back ' + userSession.name + ' !');
+if(localStorage.getItem('user') !== 'undefined'){
+  let userSession = JSON.parse(localStorage.getItem('user'));
+  if (userSession) {
+    session = true;
+    getUserDetails(userSession.email);
+    userSession = JSON.parse(localStorage.getItem('user'));
+    // Display modals with diff msgs when login signup and logout success
+    loginUser.innerHTML = 'My Account';
+    username.innerHTML = 'Hi, ' + userSession.name;
+    if (sessionStorage.getItem('modal') === 'login') {
+      openModal('Logged in. Welcome Back ' + userSession.name + ' !');
+    }
+    else if (sessionStorage.getItem('modal') === 'signup') {
+      openModal('Welcome ' + userSession.name + ' !');
+    }
+    sessionStorage.setItem('modal', '');
+    sessionStorage.setItem('username', '');
   }
-  else if (sessionStorage.getItem('modal') === 'signup') {
-    openModal('Welcome ' + userSession.name + ' !');
-  }
-  sessionStorage.setItem('modal', '');
-  sessionStorage.setItem('username', '');
-}
-else{
-  loginUser.innerHTML = 'Login';
-  if (sessionStorage.getItem('modal') === 'logout') {
-    openModal('Logged Out Successfully');
+  else {
+    loginUser.innerHTML = 'Login';
+    if (sessionStorage.getItem('modal') === 'logout') {
+      openModal('Logged Out Successfully');
+    }
   }
 }
 
@@ -69,21 +71,22 @@ async function sessionVerify() {
 }
 
 // function to get user details
-async function getUserDetails(email) {
-  const response = await fetch('/api/get-user-details',
-      {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email })
-      }
-  );
-  if (response.ok) {
-    const data = await response.json();
-    localStorage.setItem('user', JSON.stringify(data.user));
-    return data;
-  }
+function getUserDetails(email) {
+  fetch('/api/get-user-details',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email })
+    })
+    .then(response => response.json())
+      .then(data => {
+        if(data.status === 200){
+          localStorage.setItem('user', JSON.stringify(data.user));
+        }
+      })
+      .catch(error => console.error('Error:', error));
 }
 
 // Login Icon

@@ -4,6 +4,7 @@ require('dotenv').config();
 let client;
 
 const URI = process.env.MONGO_URI;
+// Function to connect mongo
 async function connectToMongoDB() {
   try {
     client = new MongoClient(URI);
@@ -14,6 +15,7 @@ async function connectToMongoDB() {
   }
 }
 
+// Get User Details 
 async function getUserDetails(email) {
   try {
     await connectToMongoDB();
@@ -31,10 +33,12 @@ async function getUserDetails(email) {
   }
 }
 
+// function to user login
 async function loginUser(email, password) {
   try {
     await connectToMongoDB();
     const db = client.db('recipehub');
+    // Check user exists or not.
     const user = await db.collection('users').findOne({ email });
     if (user) {
       // Compare the provided password with the hashed password from the database
@@ -63,11 +67,13 @@ async function loginUser(email, password) {
   }
 }
 
+// function to sign up  a new user
 async function signupUser(user) {
   try {
     await connectToMongoDB();
     const db = client.db('recipehub');
     const email = user.email;
+    // check for existing user
     const existingUser = await db.collection('users').findOne({ email });
 
     if (existingUser) {
@@ -215,27 +221,27 @@ async function changePassword(email, oldPassword, newPassword) {
   }
   catch (error) {
     console.log(error.message);
-    return {success: false, message: error.message}
+    return { success: false, message: error.message }
   }
 }
 
 // function to update email and name
-async function updateUser(oldEmail, email, name){
-  try{
+async function updateUser(oldEmail, email, name) {
+  try {
     await connectToMongoDB();
     const db = client.db('recipehub');
     const userCollection = db.collection('users');
     const user = await userCollection.findOne({ email: oldEmail });
-    if(user){
+    if (user) {
       let update = {};
-      if(email.length>0 && name.length>0){
-        update = {email:email, name:name};
+      if (email.length > 0 && name.length > 0) {
+        update = { email: email, name: name };
       }
-      else if(email.length === 0){
-        update = {name:name};
+      else if (email.length === 0) {
+        update = { name: name };
       }
-      else if(name.length === 0){
-        update = {email:email};
+      else if (name.length === 0) {
+        update = { email: email };
       }
       await userCollection.updateOne(
         { email: oldEmail },
@@ -243,14 +249,106 @@ async function updateUser(oldEmail, email, name){
       );
       return { success: true, message: 'Personal Info Updated' }
     }
-    else{
+    else {
       return { success: false, message: 'Invalid User' };
 
     }
   }
-  catch(error){
+  catch (error) {
     console.log(error.message);
-    return {success: false, message: error.message}
+    return { success: false, message: error.message }
   }
 }
-module.exports = { connectToMongoDB, loginUser, signupUser, saveRecipe, unSaveRecipe, updatePreferences, changePassword, updateUser, getUserDetails, getClient: () => client };
+
+// Funciton to get reviews of a recipe
+async function getReviews(recipeID){
+  try{
+    await connectToMongoDB();
+    const db = client.db('recipehub');
+    const reviewCollection = db.collection('review');
+    const existingRecipe = await reviewCollection.findOne({ recipeID: recipeID });
+    if(existingRecipe){
+      return {success: true, data: existingRecipe, message: 'Recipe Review Data'};
+    }
+    else{
+      console.log('No review Data for such Recipe ID :' + recipeID)
+      return {success: true, message: 'No review Data for such Recipe ID :' + recipeID, data: ''};
+    }
+  }
+  catch(error){
+    console.log(error.message);
+  }
+  finally{
+    await client.close();
+  }
+}
+
+// Function to add a review to a recipe
+async function review(recipeID, userReview) {
+  try {
+    await connectToMongoDB();
+    const db = client.db('recipehub');
+    const reviewCollection = db.collection('review');
+    const existingRecipe = await reviewCollection.findOne({ recipeID: recipeID });
+    if (existingRecipe) {
+      console.log('Recipe Review Data do not exist.')
+      // Calculate new average rating
+      const totalRatings = existingRecipe.reviews.length;
+      const newTotalRatings = totalRatings + 1;
+
+      const newAverageRating =
+        (existingRecipe.averageRating * totalRatings + userReview.rating) / newTotalRatings;
+
+      // Create new review object
+      const newReview = {
+        email: userReview.email,
+        name: userReview.name,
+        rating: userReview.rating,
+        review: userReview.review,
+        createdAt: new Date()
+      };
+
+      // Update the recipe document with new averageRating and reviews
+      const result = await reviewCollection.updateOne(
+        { recipeID: recipeID },
+        {
+          $set: {
+            averageRating: newAverageRating,
+          },
+          $push: {
+            reviews: newReview,
+          },
+        }
+      );
+      return {success: true, message: 'Review added to existing recipe'};
+    }
+    else {
+      console.log('Creating new Recipe Review Data')
+      // Create new review db for recipe
+      const newRecipe = {
+        recipeID: recipeID,
+        averageRating: userReview.rating,
+        reviews: [
+          {
+            email: userReview.email,
+            name: userReview.name,
+            rating: userReview.rating,
+            review: userReview.review,
+            createdAt: new Date()
+          },
+        ],
+      };
+
+      const result = await reviewCollection.insertOne(newRecipe);
+      return {success: true, message: 'Review added to new recipe'};
+    }
+  }
+  catch (error) {
+    console.log(error.message)
+    return { success: false, message: error.message };
+  }
+  finally {
+    await client.close();
+  }
+}
+module.exports = { connectToMongoDB, loginUser, signupUser, saveRecipe, unSaveRecipe, updatePreferences, changePassword, updateUser, getUserDetails, getReviews, review, getClient: () => client };

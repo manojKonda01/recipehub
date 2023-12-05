@@ -618,7 +618,7 @@ body.modal-open {
     align-items: center;
 }
 .hide{
-    display: none;
+    display: none !important;
 }
 .save_recipes i{
     cursor: pointer;

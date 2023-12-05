@@ -23,7 +23,7 @@ main {
     transition: color 0.3s;
 }
 
-.star.active {
+.star.active,#writeRating.star:hover{
     color: #DC582A;
 }
 #avgRating, .save-container{
@@ -38,4 +38,150 @@ main {
 }
 #recipe_fig img{
     width: 50%;
+}
+.recipe-details{
+    width: 50%;
+    background: #eaf9de;
+    padding: 1rem;
+}
+.short-details{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.item-head{
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+.item-value{
+    font-size: small;
+}
+.nutrition-container{
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+#nutrition_title, #review_section h2{
+    text-decoration: underline;
+    text-decoration-color: #DC582A;
+}
+#nutrition_title, #writeRating{
+    cursor: pointer;
+}
+#nutrition_facts {
+    width: 60%;
+    margin: 2rem auto;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: height 0.5s ease, visibility 0.5s ease;
+    visibility: visible;
+}
+.closed {
+    height: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden;
+}
+#nutrition_facts h2 {
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    margin: 0;
+}
+#nutrition_facts p{
+    font-size: smaller;
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+    text-align: center;
+}
+.calories{
+    padding: 1rem 0;
+    border-top: 10px solid;
+    border-bottom: 3px solid;
+}
+.fact {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+h3{
+    margin: 0;
+}
+.label, .vit-label{
+    font-size: small;
+    color: #555;
+}
+.label{
+    font-weight: bold;
+}
+.value{
+    color: #555;
+    font-size: small;
+}
+.quantity{
+    margin-left: 0.5rem;
+}
+.vitamin-facts{
+    border-top: 4px solid;
+    padding-top: 1rem;
+}
+#write_review{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid rgba(0,0,0,0.15);
+    width: 50%;
+}
+
+.ingredients table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.ingredients th, td {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    text-align: left;
+}
+
+.ingredients th {
+    background-color: #f2f2f2;
+}
+.table-figure img{
+    width: 30%;
+}
+.table-figure{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+#comment{
+    border: 2px solid #BFBFBF;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+.submit-btn{
+    margin-top: 1rem;
+    text-align: center;
+}
+.user-rating{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid #F2F2F2;
+    border-radius: 4px;
+    padding: 1rem;
+    width: 50%;
+    margin-top: 1rem;
+    gap: 0.25rem;
+}
+.review-name{
+    color: #555;
 }

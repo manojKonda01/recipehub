@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const { connectToMongoDB, loginUser, signupUser, unSaveRecipe, saveRecipe, updatePreferences, changePassword, updateUser, getUserDetails} = require('./database')
+const { connectToMongoDB, loginUser, signupUser, unSaveRecipe, saveRecipe, updatePreferences, changePassword, updateUser, getUserDetails, getReviews, review} = require('./database')
 require('dotenv').config();
 
 
@@ -116,6 +116,7 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
+// API to logout 
 app.get('/api/logout', (req, res) => {
     // Destroy the session on logout
     req.session.destroy(err => {
@@ -147,6 +148,7 @@ app.post('/api/signup', async (req, res) => {
     }
 })
 
+// API to check user session
 app.get('/api/sessionVerify', async (req, res) => {
     if (req.session.user) {
         res.json({ status: 200, user: req.session.user });
@@ -156,6 +158,7 @@ app.get('/api/sessionVerify', async (req, res) => {
     }
 })
 
+// API to update preferences
 app.post('/api/updatePreferences', async (req, res) => {
     try {
         const { email, updatedPreferences } = req.body;
@@ -176,6 +179,7 @@ app.post('/api/updatePreferences', async (req, res) => {
     }
 })
 
+// API to save a recipe to user account
 app.post('/api/saveRecipe', async (req, res) => {
     try {
         const { email, jsonData } = req.body;
@@ -205,6 +209,7 @@ app.post('/api/saveRecipe', async (req, res) => {
     }
 });
 
+// API to unsave a recipe from user account
 app.post('/api/unSaveRecipe', async (req, res) => {
     try {
         const { email, jsonData } = req.body;
@@ -236,7 +241,6 @@ app.post('/api/unSaveRecipe', async (req, res) => {
 });
 
 // change password api
-
 app.post('/api/changePassword', async (req, res) => {
     try {
         const { email, oldPassword, newPassword } = req.body;
@@ -267,7 +271,7 @@ app.post('/api/updateUser', async (req, res) => {
 
             res.status(200).json({ status: 200, message: result.message});
         } else {
-            res.status(401).json({ status: 401, message: result.message });
+            res.status(500).json({ status: 401, message: result.message });
         }
     }
     catch (error) {
@@ -276,6 +280,7 @@ app.post('/api/updateUser', async (req, res) => {
     }
 })
 
+// API to get user details
 app.post('/api/get-user-details', async (req, res) => {
     try{
         const {email} = req.body;
@@ -284,7 +289,7 @@ app.post('/api/get-user-details', async (req, res) => {
             res.status(200).json({ status: 200, user: user});
         }
         else{
-            res.status(401).json({ status: 401, message:'No Such User'});
+            res.status(500).json({ status: 401, message:'No Such User'});
         }
     }
     catch(error){
@@ -293,6 +298,41 @@ app.post('/api/get-user-details', async (req, res) => {
     }
 })
 
+// API to fetch Review of recipe
+app.post('/api/getReviews', async (req, res) => {
+    try{
+        const {recipeID} = req.body;
+        const result = await getReviews(recipeID);
+        if(result.success){
+            res.status(200).json({ status: 200, message: result.message, data: result.data});
+        }
+        else{
+            res.status(500).json({ status: 401, message: result.message});
+        }
+    }
+    catch(error){
+        res.status(500).json({message: error.message});
+
+    }
+})
+
+// APi to add review
+app.post('/api/review', async (req, res) => {
+    try{
+        const {recipeID, userReview} = req.body;
+        const result = await review(recipeID, userReview);
+        if(result.success){
+            res.status(200).json({ status: 200, message: result.message});
+        }
+        else{
+            res.status(500).json({ status: 401, message: result.message});
+        }
+    }
+    catch(error){
+        res.status(500).json({message: error.message});
+
+    }
+})
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
