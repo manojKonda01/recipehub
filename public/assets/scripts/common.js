@@ -4,9 +4,10 @@ const username = document.getElementById('username');
 let session = false;
 
 
-const userSession = JSON.parse(localStorage.getItem('user'));
+let userSession = JSON.parse(localStorage.getItem('user'));
 if (userSession) {
   session = true;
+  userSession =  getUserDetails(userSession.email);
   // Display modals with diff msgs when login signup and logout success
   loginUser.innerHTML = 'My Account';
   username.innerHTML = 'Hi, ' + userSession.name;
@@ -58,7 +59,7 @@ async function sessionVerify() {
       loginUser.innerHTML = 'My Account';
       username.innerHTML = 'Hi, ' + sessionData.user.name;
       // store user data in local cache
-      sessionStorage.setItem('user', JSON.stringify(sessionData.user));
+      localStorage.setItem('user', JSON.stringify(sessionData.user));
     }
     else if (sessionData.status === 404) {
       loginUser.innerHTML = 'Login';
@@ -66,6 +67,25 @@ async function sessionVerify() {
     }
   }
 }
+
+// function to get user details
+async function getUserDetails(email) {
+  const response = await fetch('/api/get-user-details',
+      {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email })
+      }
+  );
+  if (response.ok) {
+    const data = await response.json();
+    localStorage.setItem('user', JSON.stringify(data.user));
+    return data;
+  }
+}
+
 // Login Icon
 const loginIcon = document.getElementById('loginIcon');
 
@@ -266,7 +286,7 @@ function saveRecipe(user, jsonData) {
           // If the value doesn't exist, add a new object to the array
           if (!exists) {
             user.savedRecipes.push(jsonData);
-            sessionStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(user));
           }
         }
         console.log(data.message)
@@ -294,7 +314,7 @@ function unSaveRecipe(user, jsonData) {
           // If the value exists, remove the object from the array
           if (index !== -1) {
             user.savedRecipes.splice(index, 1);
-            sessionStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(user));
           }
         }
         console.log(data.message)

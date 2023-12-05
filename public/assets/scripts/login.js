@@ -113,7 +113,7 @@ async function getUserDetails(email) {
     );
     if (response.ok) {
       const data = await response.json();
-      sessionStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('user', JSON.stringify(data.user));
       return data;
     }
 }
@@ -167,7 +167,7 @@ function login() {
                             passwordInput.style.borderColor = '#ced4da';
                             emailInput.style.borderColor = '#ced4da';
                             sessionStorage.setItem('modal', 'login');
-                            sessionStorage.setItem('user', JSON.stringify(data.user));
+                            localStorage.setItem('user', JSON.stringify(data.user));
                             window.location.href = '/';
                         }
                         else if (data.status === 401) {

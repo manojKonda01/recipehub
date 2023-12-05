@@ -1,6 +1,41 @@
-#recipe_section{
+#recipe_section {
     flex-direction: column;
 }
-main{
+
+main {
     margin: 2rem 10rem;
+}
+
+.recipe-tags, #avgRating {
+    font-size: small;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.rating-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.25rem;
+    align-items: center;
+}
+
+.star {
+    color: rgba(0, 0, 0, 0.25);
+    transition: color 0.3s;
+}
+
+.star.active {
+    color: #DC582A;
+}
+#avgRating, .save-container{
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.25);
+}
+.rating-save{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#recipe_fig img{
+    width: 50%;
 }

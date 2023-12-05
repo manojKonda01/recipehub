@@ -143,7 +143,7 @@ function unSaveRecipe(user, jsonData) {
                     // If the value exists, remove the object from the array
                     if (index !== -1) {
                         user.savedRecipes.splice(index, 1);
-                        sessionStorage.setItem('user', JSON.stringify(user));
+                        localStorage.setItem('user', JSON.stringify(user));
                     }
                 }
                 console.log(data.message)
@@ -323,7 +323,7 @@ function updatePreferences() {
         .then(response => response.json())
         .then(data => {
             userSession.userPreferences = updatedPreferences;
-            sessionStorage.setItem('user', JSON.stringify(userSession));
+            localStorage.setItem('user', JSON.stringify(userSession));
             alert(data.message);
         })
         .catch(error => console.error('Error during Saving Preferences:', error));
@@ -364,7 +364,7 @@ function savePersonalDetails() {
                     userSession.name = name;
                     userSession.email = email;
                     // Updating user session details
-                    sessionStorage.setItem('user', JSON.stringify(userSession));
+                    localStorage.setItem('user', JSON.stringify(userSession));
                     userName.innerHTML = 'Hi, ' + userSession.name;
                     // Updating placeholders
                     if (email.length > 0) {
