@@ -371,11 +371,13 @@ async function loadReviews() {
             const userRatingElement = createUserRatingElement(review);
             userRatingsContainer.appendChild(userRatingElement);
         })
-        const userEmail = JSON.parse(localStorage.getItem('user')).email;
-        const result = reviews.some(obj => obj.email === userEmail);
-        if(result){
-            const toggleReview = document.getElementById('toggleReview');
-            toggleReview.classList.add('hide');
+        if(localStorage.getItem('user')){
+            const userEmail = JSON.parse(localStorage.getItem('user')).email;
+            const result = reviews.some(obj => obj.email === userEmail);
+            if(result){
+                const toggleReview = document.getElementById('toggleReview');
+                toggleReview.classList.add('hide');
+            }
         }
         // Display More Review button
         if(reviews.length > 3){
