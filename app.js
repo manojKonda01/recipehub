@@ -35,19 +35,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
-// const allowedURLs = ['/recipe', '/category', '/login', '/api/login', '/api/logout', '/api/signup', '/api/sessionVerify'];
-
-// app.use((req, res, next) => {
-//     const requestedURL = req.url.split('?')[0];
-//     if (allowedURLs.includes(requestedURL)) {
-//         // Do nothing, allow access to login and signup pages
-//         next();
-//     }else {
-//         // Redirect to the home page
-//         res.redirect('/');
-//     }
-// });
-
 //route to handle requests for the home page
 app.get('/', (req, res) => {
     // Send the HTML file as the response
