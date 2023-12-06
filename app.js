@@ -74,12 +74,7 @@ app.get('/recipe', (req, res) => {
 })
 app.get('/login', (req, res) => {
     try {
-        // if (req.session.user) {
-        //     res.redirect('/')
-        // }
-        // else {
-            res.sendFile(path.join(__dirname, 'public', '/assets/templates/login.html'));
-        // }
+        res.sendFile(path.join(__dirname, 'public', '/assets/templates/login.html'));
     }
     finally {
 
