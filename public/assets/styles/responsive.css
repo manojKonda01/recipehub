@@ -284,7 +284,6 @@
         padding-top: 1rem;
         top: 0;
         left: 0;
-        width: 75%;
         justify-content: flex-start !important;
     }
 
@@ -355,7 +354,6 @@
         top: 0;
         left: 0;
         width: 0;
-        height: 100vh;
         justify-content: flex-start !important;
         background: black;
         z-index: 2000;

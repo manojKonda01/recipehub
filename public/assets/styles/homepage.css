@@ -636,3 +636,8 @@ main {
     text-decoration-color: #DC582A;
     cursor: pointer;
 }
+@media (max-width: 767px) {
+    .menu-bar-list {
+        height: 100vh !important;
+    }
+}
