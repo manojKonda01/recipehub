@@ -3,7 +3,6 @@ const loginUser = document.getElementById('signin_image_caption');
 const username = document.getElementById('username');
 let session = false;
 
-// check user session
 if (
   localStorage.getItem('user') !== 'undefined' ||
   localStorage.getItem('user')
@@ -69,22 +68,20 @@ async function sessionVerify() {
   }
 }
 
-// function to toggle Menu
 function toggleMenu() {
   const menu = document.querySelector('.menu-bar-list');
+  const body = document.body;
+
   menu.classList.toggle('show');
+  body.classList.toggle('no-scroll');
 }
-// toggle menu on click menu icon 
+// toggle menu
 const menuBtn = document.getElementById('menu_btn');
-menuBtn.addEventListener('click', function () {
-  toggleMenu();
-});
+menuBtn.addEventListener('click', toggleMenu);
 
 // close menu on click close icon
 const closeBtn = document.getElementById('close_menu');
-closeBtn.addEventListener('click', function () {
-  toggleMenu();
-});
+closeBtn.addEventListener('click', toggleMenu);
 
 // function to get user details
 function getUserDetails(email) {

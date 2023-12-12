@@ -302,5 +302,8 @@ nextButton.addEventListener('click', function () {
 // funtion to toggle filter for mobile screens
 function filterToggle() {
   const aside = document.getElementById('filters');
+  const body = document.body;
+
   aside.classList.toggle('show');
+  body.classList.toggle('no-scroll');
 }
