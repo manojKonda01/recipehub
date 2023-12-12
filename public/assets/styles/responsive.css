@@ -375,6 +375,7 @@
         width: 60%;
         padding-top: 1rem;
         padding-left: 2rem;
+        overflow-y: clip !important;
     }
 
     #menu_bar #menu_btn {
