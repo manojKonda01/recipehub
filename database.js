@@ -98,6 +98,7 @@ async function signupUser(user) {
   }
 }
 
+// function to insert user
 async function insertUser(user) {
   let success = false;
   try {
@@ -119,6 +120,7 @@ async function insertUser(user) {
   return success;
 }
 
+// function to update preferences of a user
 async function updatePreferences(userEmail, preferences) {
   try {
     await connectToMongoDB();
@@ -145,6 +147,7 @@ async function updatePreferences(userEmail, preferences) {
   }
 }
 
+// function to save a recipe in user collections
 async function saveRecipe(userEmail, recipejsonData) {
   try {
     await connectToMongoDB();
@@ -170,6 +173,7 @@ async function saveRecipe(userEmail, recipejsonData) {
   }
 }
 
+// function to save a recipe from user collections
 async function unSaveRecipe(userEmail, recipejsonData) {
   try {
     await connectToMongoDB();
@@ -199,6 +203,7 @@ async function unSaveRecipe(userEmail, recipejsonData) {
   }
 }
 
+// function to change password
 async function changePassword(email, oldPassword, newPassword) {
   try {
     await connectToMongoDB();

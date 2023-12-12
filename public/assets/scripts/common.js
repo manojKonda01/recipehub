@@ -3,6 +3,7 @@ const loginUser = document.getElementById('signin_image_caption');
 const username = document.getElementById('username');
 let session = false;
 
+// check user session
 if (
   localStorage.getItem('user') !== 'undefined' ||
   localStorage.getItem('user')
@@ -68,11 +69,12 @@ async function sessionVerify() {
   }
 }
 
+// function to toggle Menu
 function toggleMenu() {
   const menu = document.querySelector('.menu-bar-list');
   menu.classList.toggle('show');
 }
-// toggle menu
+// toggle menu on click menu icon 
 const menuBtn = document.getElementById('menu_btn');
 menuBtn.addEventListener('click', function () {
   toggleMenu();
