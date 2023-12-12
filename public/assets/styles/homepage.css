@@ -639,6 +639,8 @@ main {
 @media (max-width: 767px) {
     .menu-bar-list {
         height: 100vh !important;
+    }
+    .menu-bar-list.show{
         overflow-y: clip !important;
     }
 }
