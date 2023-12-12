@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="media/image/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="media/image/favicon/favicon-32x32.png">
@@ -44,10 +44,10 @@
 
     <div class="overlay"></div>
     <!-- Begin: Header -->
-    <header id='website_header' class="rh-header padding-y-1">
+    <header id='website_header' class="rh-header">
       <div id="header_container" class="position-relative">
         <!--Begin: Logo & Website Name -->
-        <a href="/">
+        <a href="/" class="home-link">
           <figure id="website_logo" class="margin-0 display-flex">
             <img src="media/image/logo.png" alt="Website Logo" class="header-item website-logo">
             <figcaption>
@@ -57,10 +57,15 @@
         </a>
         <!-- End:  Logo & Website Name-->
 
-        <div class="float-right display-flex margin-1 menu-header-wrapper">
+        <div class="display-flex menu-header-wrapper">
           <!-- Responsive Bar Menu Bar -->
           <div id="menu_bar">
-            <ul class="display-flex padding-0 margin-x-2 menu-bar-list">
+            <figure class="margin-0 hide" id="menu_btn">
+              <img id="menu_toggle_btn" src="media/image/menu.svg"
+                class="header-item menu-button menu-image margin-x-1" alt="Menu Icon">
+            </figure>
+            <ul class="display-flex menu-bar-list">
+              <li class="menu-item hide" id="close_menu"><i class="far fa-window-close"></i></li>
               <li class="menu-item display-flex justify-content-centre align-items-centre drop-menu" id="loginIcon">
                 <figure class="margin-0 display-flex">
                   <img class="signin-image"
@@ -78,8 +83,7 @@
                   </div>
                 </div>
               </li>
-              <!-- Begin: Menu Bar -->
-              <li class="menu-item responsive-menu-bar-show drop-menu">
+              <li class="menu-item drop-menu">
                 <span>Recipes</span><i class="fa fa-caret-down"></i>
                 <div class="display-none drop-down-menu-list">
                   <div class="display-flex position-absolute drop-down-container">
@@ -127,18 +131,11 @@
                   </div>
                 </div>
               </li>
-              <!-- End: Menu Bar -->
-              <li class="menu-item responsive-menu-bar-show">
+              <li class="menu-item">
                 <a href="#"><span>About Us</span></a>
               </li>
-              <li class="menu-item responsive-menu-bar-show">
+              <li class="menu-item">
                 <a href="#"><span>Contact Us</span></a>
-              </li>
-              <li class="menu-item responsive-menu-bar-hide">
-                <figure class="margin-0">
-                  <img id="menu_toggle_btn" src="media/image/menu.svg"
-                    class="header-item menu-button menu-image margin-x-1" alt="Menu Icon">
-                </figure>
               </li>
             </ul>
           </div>
@@ -150,7 +147,7 @@
     <!-- Begin: Card Wrap -->
     <section id="card_wrap" class="position-absolute display-flex">
       <!-- Begin:  Search Button-->
-      <div class="search-box position-relative margin-3">
+      <div class="search-box position-relative">
         <div id='search_recipe_form' class="header-item search-form margin-0 display-flex">
           <input id="search_recipes" class="search-input text-white padding-1" type="search" placeholder="Search"
             onkeydown="handleKeyPress(event)" />
@@ -162,16 +159,15 @@
 
       <!-- Begin: Tag Line for the Website -->
       <div class="handwriting-animation  margin-1">
-        <h1 class="margin-0">Explore, Cook & Eat</h1>
+        <h1 class="margin-1">Explore, Cook & Eat</h1>
       </div>
       <!-- End: Tag Line for the Website -->
     </section>
-    <!-- Pause button to pause the video -->
-    <div class="position-absolute margin-3" id="pause_button">
+    <div class="position-absolute" id="pause_button">
       <img class="pause-image"
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPklEQVR4nO2UwQkAMAgDM1pHc/MrXcCPtPRx940QEZNEvgZYQDV6nZmJQQE0Ot0CGsQTxS8yBzEHuV7X8oQNGADsJRKs9PMAAAAASUVORK5CYII=">
     </div>
-    <div id="play_button" class="margin-3 position-absolute">
+    <div id="play_button" class="position-absolute">
       <img class="play-image"
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAdElEQVR4nO3UvQnCYBSF4ZBGbCK4hlM4jps4h7tkioBZIXWKPHKLQAbIaeR74bT3hfvXdY0GbpVYJzBjwQt9QnBkxCMpKFa8cUkJdiY8k4Jiwwf3lGCnFuGaFHxTgi3Zoik15DW5pmPi0Ob0qxgqpxdu/A8/IUNjxxZAC7EAAAAASUVORK5CYII=">
     </div>
@@ -370,7 +366,6 @@
             <button class="subscribe-button">GO</button>
           </div>
           <div>
-            <!-- Begin: Social Media Link -->
             <ul class="social-media-list display-flex padding-0 margin-0">
               <li class="facebook-icon">
                 <a href="#">
@@ -431,7 +426,6 @@
             </ul>
           </div>
         </div>
-        <!-- End: Social Media Link -->
       </section>
       <section class="bottom-footer display-flex align-items-centre margin-x-1">
         <div>
@@ -447,8 +441,6 @@
     </section>
   </footer>
   <!-- End : Footer -->
-
-  <!-- Modal which shows Login Success -->
   <div id="alertModal" class="modal">
     <div class="modal-content">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256"

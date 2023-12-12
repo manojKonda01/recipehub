@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 let client;
 
@@ -15,21 +15,19 @@ async function connectToMongoDB() {
   }
 }
 
-// Get User Details 
+// Get User Details
 async function getUserDetails(email) {
   try {
     await connectToMongoDB();
     const db = client.db('recipehub');
     const user = await db.collection('users').findOne({ email });
     if (user) {
-      const {email, name, savedRecipes, userPreferences} = user;
-      return {email, name, savedRecipes, userPreferences};
-    }
-    else {
+      const { email, name, savedRecipes, userPreferences } = user;
+      return { email, name, savedRecipes, userPreferences };
+    } else {
       return false;
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error.message);
   }
 }
@@ -46,24 +44,24 @@ async function loginUser(email, password) {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (passwordMatch) {
         console.log('User authenticated:', user._id);
-        const {email, name, savedRecipes, userPreferences} = user;
-        return { success: true, message: 'Login successful', user: {email, name, savedRecipes, userPreferences} }
-      }
-      else {
+        const { email, name, savedRecipes, userPreferences } = user;
+        return {
+          success: true,
+          message: 'Login successful',
+          user: { email, name, savedRecipes, userPreferences },
+        };
+      } else {
         console.log('Incorrect password for user:', user._id);
-        return { success: false, message: 'Incorrect Password' }
+        return { success: false, message: 'Incorrect Password' };
       }
-    }
-    else {
+    } else {
       console.log('User not found with email:', email);
-      return { success: false, message: 'Email Not Found' }
+      return { success: false, message: 'Email Not Found' };
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.error('Error during login:', error.message);
-    return { success: false, message: 'Error during login: ' + error.message }
-  }
-  finally {
+    return { success: false, message: 'Error during login: ' + error.message };
+  } finally {
     // Close the MongoDB connection when done, even if an error occurred
     await client.close();
   }
@@ -86,14 +84,16 @@ async function signupUser(user) {
     await insertUser(user);
     console.log('User successfully registered!');
     const newUser = await db.collection('users').findOne({ email });
-    const {newemail, name, savedRecipes, userPreferences} = newUser;
-    return { success: true, message: 'Registered Successfully', user: {newemail, name, savedRecipes, userPreferences} };
-  }
-  catch (error) {
+    const { newemail, name, savedRecipes, userPreferences } = newUser;
+    return {
+      success: true,
+      message: 'Registered Successfully',
+      user: { newemail, name, savedRecipes, userPreferences },
+    };
+  } catch (error) {
     console.error('Error during signup:', error.message);
     return { success: false, message: 'Error During SignUp' };
-  }
-  finally {
+  } finally {
     await client.close();
   }
 }
@@ -109,12 +109,11 @@ async function insertUser(user) {
       password: hashedPassword,
       name: user.name,
       createdAt: new Date(),
-      savedRecipes: []
+      savedRecipes: [],
     });
     success = result.insertedCount === 1;
     console.log('User inserted:', result.insertedId);
-  }
-  catch (error) {
+  } catch (error) {
     console.error('Error inserting user:', error.message);
   }
   return success;
@@ -128,8 +127,8 @@ async function updatePreferences(userEmail, preferences) {
     const updateQuery = { email: userEmail };
     const update = {
       $set: {
-        userPreferences: preferences
-      }
+        userPreferences: preferences,
+      },
     };
     userCollection.updateOne(updateQuery, update, (updateErr) => {
       if (updateErr) {
@@ -140,8 +139,7 @@ async function updatePreferences(userEmail, preferences) {
       client.close();
     });
     return { success: true, message: 'User preferences updated successfully' };
-  }
-  catch (error) {
+  } catch (error) {
     console.error('Error Updating Preferences: ', error.message);
     return { success: false, message: error.message };
   }
@@ -158,16 +156,17 @@ async function saveRecipe(userEmail, recipejsonData) {
     );
     if (result.modifiedCount > 0) {
       console.log('Recipe saved successfully!');
-      return { success: true, message: 'Recipe saved successfully!' }
+      return { success: true, message: 'Recipe saved successfully!' };
     } else {
       console.log('User not found or recipe not saved.');
-      return { success: false, message: 'User not found or recipe not saved.' }
+      return { success: false, message: 'User not found or recipe not saved.' };
     }
-
-  }
-  catch (error) {
+  } catch (error) {
     console.log('Error while saving recipe:', error.message);
-    return { success: false, message: 'Error while saving recipe: ' + error.message }
+    return {
+      success: false,
+      message: 'Error while saving recipe: ' + error.message,
+    };
   }
 }
 
@@ -180,14 +179,23 @@ async function unSaveRecipe(userEmail, recipejsonData) {
     if (uri) {
       const userFilter = { email: userEmail };
       const updateOperation = { $pull: { savedRecipes: { uri: uri } } };
-      const result = await userCollection.updateOne(userFilter, updateOperation);
+      const result = await userCollection.updateOne(
+        userFilter,
+        updateOperation
+      );
       await client.close();
-      return ({ success: true, message: 'Recipe unsaved successfully', user: result.value });
+      return {
+        success: true,
+        message: 'Recipe unsaved successfully',
+        user: result.value,
+      };
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.log('Error while saving recipe:', error.message);
-    return { success: false, message: 'Error while saving recipe: ' + error.message }
+    return {
+      success: false,
+      message: 'Error while saving recipe: ' + error.message,
+    };
   }
 }
 
@@ -209,22 +217,18 @@ async function changePassword(email, oldPassword, newPassword) {
           { email: email },
           { $set: { password: hashedNewPassword } }
         );
-        return { success: true, message: 'Password Changed Succesfully' }
-      }
-      else {
+        return { success: true, message: 'Password Changed Succesfully' };
+      } else {
         console.log('Incorrect password for user:', user._id);
-        return { success: false, message: 'Old password is incorrect' }
+        return { success: false, message: 'Old password is incorrect' };
       }
-    }
-    else {
+    } else {
       console.log('User not found with email:', email);
-      return { success: false, message: 'Email Not Found' }
+      return { success: false, message: 'Email Not Found' };
     }
-
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error.message);
-    return { success: false, message: error.message }
+    return { success: false, message: error.message };
   }
 }
 
@@ -239,47 +243,49 @@ async function updateUser(oldEmail, email, name) {
       let update = {};
       if (email.length > 0 && name.length > 0) {
         update = { email: email, name: name };
-      }
-      else if (email.length === 0) {
+      } else if (email.length === 0) {
         update = { name: name };
-      }
-      else if (name.length === 0) {
+      } else if (name.length === 0) {
         update = { email: email };
       }
-      await userCollection.updateOne(
-        { email: oldEmail },
-        { $set: update }
-      );
-      return { success: true, message: 'Personal Info Updated' }
-    }
-    else {
+      await userCollection.updateOne({ email: oldEmail }, { $set: update });
+      return { success: true, message: 'Personal Info Updated' };
+    } else {
       return { success: false, message: 'Invalid User' };
-
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error.message);
-    return { success: false, message: error.message }
+    return { success: false, message: error.message };
   }
 }
 
 // Funciton to get reviews of a recipe
-async function getReviews(recipeID){
-  try{
+async function getReviews(recipeID) {
+  try {
     await connectToMongoDB();
     const db = client.db('recipehub');
     const reviewCollection = db.collection('review');
-    const existingRecipe = await reviewCollection.findOne({ recipeID: recipeID });
-    if(existingRecipe){
-      const sortedReviews = existingRecipe.reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      return {success: true, data: sortedReviews, message: 'Recipe Review Data'};
+    const existingRecipe = await reviewCollection.findOne({
+      recipeID: recipeID,
+    });
+    if (existingRecipe) {
+      const sortedReviews = existingRecipe.reviews.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      return {
+        success: true,
+        data: sortedReviews,
+        message: 'Recipe Review Data',
+      };
+    } else {
+      console.log('No review Data for such Recipe ID :' + recipeID);
+      return {
+        success: true,
+        message: 'No review Data for such Recipe ID :' + recipeID,
+        data: '',
+      };
     }
-    else{
-      console.log('No review Data for such Recipe ID :' + recipeID)
-      return {success: true, message: 'No review Data for such Recipe ID :' + recipeID, data: ''};
-    }
-  }
-  catch(error){
+  } catch (error) {
     console.log(error.message);
   }
 }
@@ -290,15 +296,18 @@ async function review(recipeID, userReview) {
     await connectToMongoDB();
     const db = client.db('recipehub');
     const reviewCollection = db.collection('review');
-    const existingRecipe = await reviewCollection.findOne({ recipeID: recipeID });
+    const existingRecipe = await reviewCollection.findOne({
+      recipeID: recipeID,
+    });
     if (existingRecipe) {
-      console.log('Recipe Review Data do not exist.')
+      console.log('Recipe Review Data do not exist.');
       // Calculate new average rating
       const totalRatings = existingRecipe.reviews.length;
       const newTotalRatings = totalRatings + 1;
 
       const newAverageRating =
-        (existingRecipe.averageRating * totalRatings + userReview.rating) / newTotalRatings;
+        (existingRecipe.averageRating * totalRatings + userReview.rating) /
+        newTotalRatings;
 
       // Create new review object
       const newReview = {
@@ -306,7 +315,7 @@ async function review(recipeID, userReview) {
         name: userReview.name,
         rating: userReview.rating,
         review: userReview.review,
-        createdAt: new Date()
+        createdAt: new Date(),
       };
 
       // Update the recipe document with new averageRating and reviews
@@ -321,10 +330,9 @@ async function review(recipeID, userReview) {
           },
         }
       );
-      return {success: true, message: 'Review added to existing recipe'};
-    }
-    else {
-      console.log('Creating new Recipe Review Data')
+      return { success: true, message: 'Review added to existing recipe' };
+    } else {
+      console.log('Creating new Recipe Review Data');
       // Create new review db for recipe
       const newRecipe = {
         recipeID: recipeID,
@@ -335,21 +343,32 @@ async function review(recipeID, userReview) {
             name: userReview.name,
             rating: userReview.rating,
             review: userReview.review,
-            createdAt: new Date()
+            createdAt: new Date(),
           },
         ],
       };
 
       const result = await reviewCollection.insertOne(newRecipe);
-      return {success: true, message: 'Review added to new recipe'};
+      return { success: true, message: 'Review added to new recipe' };
     }
-  }
-  catch (error) {
-    console.log(error.message)
+  } catch (error) {
+    console.log(error.message);
     return { success: false, message: error.message };
-  }
-  finally {
+  } finally {
     await client.close();
   }
 }
-module.exports = { connectToMongoDB, loginUser, signupUser, saveRecipe, unSaveRecipe, updatePreferences, changePassword, updateUser, getUserDetails, getReviews, review, getClient: () => client };
+module.exports = {
+  connectToMongoDB,
+  loginUser,
+  signupUser,
+  saveRecipe,
+  unSaveRecipe,
+  updatePreferences,
+  changePassword,
+  updateUser,
+  getUserDetails,
+  getReviews,
+  review,
+  getClient: () => client,
+};

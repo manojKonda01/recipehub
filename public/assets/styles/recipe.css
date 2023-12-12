@@ -3,7 +3,7 @@
 }
 
 main {
-    margin: 2rem 10rem;
+    margin: auto;
 }
 
 .recipe-tags, #avgRating {
@@ -137,7 +137,9 @@ h3{
     border: 1px solid rgba(0,0,0,0.15);
     width: 50%;
 }
-
+.ingredients{
+    overflow-x: auto;
+}
 .ingredients table {
     width: 80%;
     border-collapse: collapse;
@@ -188,4 +190,17 @@ h3{
 }
 .more-reviews-btn{
     margin-top: 1rem;
+}
+.ingredient-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+@media (max-width: 767px){
+    .menu-bar-list{
+        color: white;
+    }
+    #header_container{
+        flex-direction: row-reverse;
+    }
 }

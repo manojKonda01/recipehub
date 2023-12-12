@@ -61,9 +61,6 @@
     border-radius: 0.25rem;
     padding: 0.5rem 1rem;
 }
-#email_id{
-    width: 300px;
-}
 .subscribe-button{
     background: rgba(234, 170, 0, 0.8);
 }
@@ -73,9 +70,4 @@
 .top-footer, .top-footer figure, .list-category, .scroll-x-card, .menu-header-wrapper, .top-footer-primary, .subscribe, .scroll-buttons{
     align-items: center;
     justify-content: center;
-}
-.website-logo{
-    height: 100px;
-    width: 100px;
-    margin: 0 1rem;
 }

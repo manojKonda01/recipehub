@@ -72,6 +72,9 @@
     display: inline;
     font-size: 56px;
 }
+#header_container{
+    align-items: center;
+}
 #header_container a{
     text-decoration: none;
 }
@@ -101,15 +104,11 @@ li.nested-submenu-item:hover{
 }
 
 .menu-header-wrapper{
-    margin: 1rem 1rem 1rem auto;
+    right: 0;
+    margin-left: auto;
 }
+
 /* new menu bar */
-.responsive-menu-bar-hide{
-    display: none;
-}
-.responsive-menu-bar-show{
-    display: block;
-}
 .menu-bar-list{
     gap: 2rem;
     align-items: center;

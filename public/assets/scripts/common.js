@@ -1,9 +1,12 @@
-// Check Session 
+// Check Session
 const loginUser = document.getElementById('signin_image_caption');
 const username = document.getElementById('username');
 let session = false;
 
-if(localStorage.getItem('user') !== 'undefined' || localStorage.getItem('user')){
+if (
+  localStorage.getItem('user') !== 'undefined' ||
+  localStorage.getItem('user')
+) {
   let userSession = JSON.parse(localStorage.getItem('user'));
   if (userSession) {
     session = true;
@@ -14,21 +17,18 @@ if(localStorage.getItem('user') !== 'undefined' || localStorage.getItem('user'))
     username.innerHTML = 'Hi, ' + userSession.name;
     if (sessionStorage.getItem('modal') === 'login') {
       openModal('Logged in. Welcome Back ' + userSession.name + ' !');
-    }
-    else if (sessionStorage.getItem('modal') === 'signup') {
+    } else if (sessionStorage.getItem('modal') === 'signup') {
       openModal('Welcome ' + userSession.name + ' !');
     }
     sessionStorage.setItem('modal', '');
     sessionStorage.setItem('username', '');
-  }
-  else {
+  } else {
     loginUser.innerHTML = 'Login';
     if (sessionStorage.getItem('modal') === 'logout') {
       openModal('Logged Out Successfully');
     }
   }
 }
-
 
 // Fetch Api
 const fetchReturnDataJson = async (url, request) => {
@@ -38,8 +38,7 @@ const fetchReturnDataJson = async (url, request) => {
     // If cached data is available, parse and return it
     console.log('data is from cache');
     return JSON.parse(cachedData);
-  }
-  else {
+  } else {
     console.log('api data');
     const response = await fetch(url + request);
     if (response.ok) {
@@ -62,31 +61,45 @@ async function sessionVerify() {
       username.innerHTML = 'Hi, ' + sessionData.user.name;
       // store user data in local cache
       localStorage.setItem('user', JSON.stringify(sessionData.user));
-    }
-    else if (sessionData.status === 404) {
+    } else if (sessionData.status === 404) {
       loginUser.innerHTML = 'Login';
       sessionStorage.removeItem('user');
     }
   }
 }
 
+function toggleMenu() {
+  const menu = document.querySelector('.menu-bar-list');
+  menu.classList.toggle('show');
+}
+// toggle menu
+const menuBtn = document.getElementById('menu_btn');
+menuBtn.addEventListener('click', function () {
+  toggleMenu();
+});
+
+// close menu on click close icon
+const closeBtn = document.getElementById('close_menu');
+closeBtn.addEventListener('click', function () {
+  toggleMenu();
+});
+
 // function to get user details
 function getUserDetails(email) {
-  fetch('/api/get-user-details',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email })
+  fetch('/api/get-user-details', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === 200) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+      }
     })
-    .then(response => response.json())
-      .then(data => {
-        if(data.status === 200){
-          localStorage.setItem('user', JSON.stringify(data.user));
-        }
-      })
-      .catch(error => console.error('Error:', error));
+    .catch((error) => console.error('Error:', error));
 }
 
 // Login Icon
@@ -98,7 +111,7 @@ loginIcon.addEventListener('click', function () {
   if (!session) {
     window.location.href = '/login';
   }
-})
+});
 const myaccount = document.getElementById('loginIcon');
 const showAccount = document.getElementById('account_drop_down');
 myaccount.addEventListener('mouseenter', function () {
@@ -112,7 +125,7 @@ myaccount.addEventListener('mouseleave', function () {
   }
 });
 
-// Edamam API ID and Key 
+// Edamam API ID and Key
 const edamamID = '6d7cac0d';
 const edamamKey = 'b1976c96297a0b1dfd3715d8497f59a6';
 
@@ -221,15 +234,20 @@ function utf8_to_b64(str) {
 }
 const createRecipeCard = (saved, jsonData) => {
   const encodedData = utf8_to_b64(JSON.stringify(jsonData));
-  let iconClass = 'far fa-heart', dataAttribute = false;
+  let iconClass = 'far fa-heart',
+    dataAttribute = false;
   if (saved) {
     iconClass = 'fa fa-heart activeIcon';
     dataAttribute = true;
   }
   return `<figure class="margin-0 display-grid">
-        <a href="recipe?id=${jsonData.uri.split('_')[1]}" id="${jsonData.uri.split('_')[1]}"><img src="${jsonData.image}" alt="${jsonData.label}"><a>
+        <a href="recipe?id=${jsonData.uri.split('_')[1]}" id="${
+    jsonData.uri.split('_')[1]
+  }"><img src="${jsonData.image}" alt="${jsonData.label}"><a>
         <figcaption class="padding-x-1">
-        <p class="recipe-image-category-name display-inline-flex">${jsonData.dishType ? jsonData.dishType[0] : ''}</p>
+        <p class="recipe-image-category-name display-inline-flex">${
+          jsonData.dishType ? jsonData.dishType[0] : ''
+        }</p>
         <span class="save_recipes" onclick="callSaveRecipe(this.getAttribute('id'))" id="${encodedData}" data-saved='${dataAttribute}'>
           <i class="${iconClass} float-right"></i>
         </span>
@@ -244,25 +262,23 @@ function callSaveRecipe(encodedData) {
   const user = JSON.parse(localStorage.getItem('user'));
   // Decode Base64 and parse JSON
   if (user) {
-    const saveIconContainer = document.getElementById(encodedData)
+    const saveIconContainer = document.getElementById(encodedData);
     const saveIcon = saveIconContainer.querySelector('i');
     if (saveIconContainer.getAttribute('data-saved') === 'false') {
       // Save Recipe
       saveRecipe(user, JSON.parse(atob(encodedData)));
-      saveIconContainer.setAttribute('data-saved', 'true')
+      saveIconContainer.setAttribute('data-saved', 'true');
       saveIcon.classList.remove('far');
       saveIcon.classList.add('fa');
-    }
-    else if (saveIconContainer.getAttribute('data-saved') === 'true') {
+    } else if (saveIconContainer.getAttribute('data-saved') === 'true') {
       // unsave Recipe
       unSaveRecipe(user, JSON.parse(atob(encodedData)));
-      saveIconContainer.setAttribute('data-saved', 'false')
+      saveIconContainer.setAttribute('data-saved', 'false');
       saveIcon.classList.add('far');
       saveIcon.classList.remove('fa');
     }
-    saveIcon.classList.toggle('activeIcon')
-  }
-  else {
+    saveIcon.classList.toggle('activeIcon');
+  } else {
     window.location.href = '/login';
     return;
   }
@@ -279,20 +295,24 @@ function saveRecipe(user, jsonData) {
       },
       body: JSON.stringify({ email, jsonData }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (user.savedRecipes) {
           // Check if the recipe exists within the user session
-          const exists = user.savedRecipes.some(obj => obj.uri === jsonData.uri);
+          const exists = user.savedRecipes.some(
+            (obj) => obj.uri === jsonData.uri
+          );
           // If the value doesn't exist, add a new object to the array
           if (!exists) {
             user.savedRecipes.push(jsonData);
             localStorage.setItem('user', JSON.stringify(user));
           }
         }
-        console.log(data.message)
+        console.log(data.message);
       })
-      .catch(error => console.error('Error during Saving Recipe Data:', error));
+      .catch((error) =>
+        console.error('Error during Saving Recipe Data:', error)
+      );
   }
 }
 
@@ -307,24 +327,30 @@ function unSaveRecipe(user, jsonData) {
       },
       body: JSON.stringify({ email, jsonData }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (user.savedRecipes) {
           // Find the index of the recipe to remove from user session;
-          const index = user.savedRecipes.findIndex(obj => obj.uri === jsonData.uri);
+          const index = user.savedRecipes.findIndex(
+            (obj) => obj.uri === jsonData.uri
+          );
           // If the value exists, remove the object from the array
           if (index !== -1) {
             user.savedRecipes.splice(index, 1);
             localStorage.setItem('user', JSON.stringify(user));
           }
         }
-        console.log(data.message)
+        console.log(data.message);
       })
-      .catch(error => console.error('Error during Unsaving Recipe Data:', error));
+      .catch((error) =>
+        console.error('Error during Unsaving Recipe Data:', error)
+      );
   }
 }
 // Click on list category
-const mealList = document.querySelectorAll('.list-category, .submenu-item, .category-click');
+const mealList = document.querySelectorAll(
+  '.list-category, .submenu-item, .category-click'
+);
 for (let i = 0; i < mealList.length; i++) {
   mealList[i].addEventListener('click', function (event) {
     const type = mealList[i].getAttribute('data-category');
@@ -411,18 +437,18 @@ function getRandomDishTypeSubarrays(array, count) {
 }
 
 function logout() {
-  fetch('/api/logout').then(response => response.json())
-    .then(data => {
+  fetch('/api/logout')
+    .then((response) => response.json())
+    .then((data) => {
       if (data.status === 200) {
         localStorage.removeItem('user');
         sessionStorage.setItem('modal', 'logout');
         sessionStorage.clear();
         window.location.href = '/';
-      }
-      else {
+      } else {
         alert('LogOut Failed');
       }
-    })
+    });
 }
 
 // Function to open the modal with a specific message

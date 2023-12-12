@@ -626,3 +626,6 @@ body.modal-open {
 .activeIcon{
     color: red;
 }
+.color-white{
+    color: white;
+}

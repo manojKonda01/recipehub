@@ -98,9 +98,16 @@
 }
 
 /* Menu and Header Wrapper CSS */
+#website_logo{
+    position: relative;
+}
 .menu-header-wrapper {
-    position: absolute;
     right: 0;
+    position: absolute;
+}
+#header_container{
+    display: flex;
+    align-items: center;
 }
 
 /* Menu List Headings CSS */
@@ -132,14 +139,6 @@ li.nested-submenu-item:hover {
 }
 
 /* new menu bar */
-.responsive-menu-bar-hide {
-    display: none;
-}
-
-.responsive-menu-bar-show {
-    display: block;
-}
-
 .menu-bar-list {
     gap: 2rem;
     align-items: center;
@@ -283,7 +282,7 @@ main {
 }
 
 #search_recipes {
-    width: 36rem;
+    width: 50%;
     border-right: none;
 }
 
@@ -303,10 +302,8 @@ main {
 
 /* Card Wrapper for Most popular Recipe Cards and the tag line */
 #card_wrap {
-    align-items: center;
+    width: 75%;
     justify-content: center;
-    height: 80%;
-    bottom: 0;
     text-align: center;
     flex-direction: column;
 }
@@ -441,6 +438,7 @@ main {
 
 #pause_button,
 #play_button {
+    margin: 3rem;
     bottom: 0;
     right: 0;
 }

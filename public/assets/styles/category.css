@@ -129,3 +129,17 @@ aside{
     gap: 1rem;
     margin-bottom: 1rem;
 }
+.down-arrow{
+    display: block;
+}
+#closeFilter{
+    display: none;
+}
+@media (max-width: 767px){
+    .menu-bar-list{
+        color: white !important;
+    }
+    #header_container{
+        flex-direction: row-reverse;
+    }
+}
