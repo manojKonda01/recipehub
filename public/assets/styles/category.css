@@ -142,4 +142,8 @@ aside{
     #header_container{
         flex-direction: row-reverse;
     }
+    .menu-header-wrapper{
+        margin: 0.5rem !important;
+        padding: 0 !important;
+    }
 }
