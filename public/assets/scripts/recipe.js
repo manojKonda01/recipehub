@@ -449,6 +449,10 @@ const loadRecipeDetails = async () => {
                     ${directionsDOM}
                 </ul>
             </div>
+            <div class='external-container'>
+                <h2>Links :</h2>
+                <span>External Link to </span><a href="${recipeDetails.recipe['url']}" target="_blank">${recipeDetails.recipe['label']}</a>
+            </div>
         </div>
     `;
   const stars = document.querySelectorAll('#ratingStars .star');

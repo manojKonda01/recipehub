@@ -62,7 +62,7 @@ body.no-scroll {
     flex-basis: 100%;
 }
 
-#menu_bar .menu-item:hover {
+#menu_bar .menu-item:hover, .external-container a:hover{
     cursor: pointer;
     text-decoration: underline;
     text-decoration-color: #DC582A;
@@ -533,7 +533,7 @@ body.modal-open {
 }
 
 .close:hover,
-.close:focus {
+.close:focus, .external-container a{
     color: black;
     text-decoration: none;
     cursor: pointer;
